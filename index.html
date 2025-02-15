@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SEC LIST</title>
+  <!-- Example font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    /* Container for the grid */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Grid layout */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    /* Project card styles */
+    .project-card {
+      position: relative;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Image styles */
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover .project-image {
+      transform: scale(1.1);
+    }
+    
+    /* Info section */
+    .project-info {
+      padding: 15px;
+    }
+    .project-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .project-description {
+      font-size: 1rem;
+      color: #666;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .project-title {
+        font-size: 1.3rem;
+      }
+      .project-description {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SECRETARIAT 2025</h1>
+    <div class="projects-grid">
+      
+      <!-- Project Card 1 -->
+      <div class="project-card">
+        <img class="project-image" src="/Users/abdulkabeersheikh/Downloads/WhatsApp Image 2025-02-15 at 23.39.34.jpeg" />
+        <div>
+          <h2 class="project-title">Genda </h2>
+          <p class="project-description">
+           aadi is tunu nunu lassi oee pappaji
+          </p>
+        </div>
+      </div>
+      
+      <!-- Project Card 2 (Diplomatic Central Summit image) -->
+      <div class="project-card">
+        <!-- 
+          If you have the image file locally, 
+          replace the src with the path to your file, e.g. src="images/diplomatic_central_summit.jpg"
+          or if it's hosted online, paste the direct image URL.
+        -->
+        <img class="project-image" src="/Users/abdulkabeersheikh/Desktop/Screenshot 2025-01-02 at 11.45.50 PM 1.png" 
+             alt="chini mini ching chong" />
+        <div class="project-info">
+          <h2 class="project-title">Diplomatic Central Summit</h2>
+          <p class="project-description">
+           momo raja
+          </p>
+        </div>
+      </div>
+      
+      <!-- Project Card 3 -->
+      <div class="project-card">
+        <img class="project-image" src="/Users/abdulkabeersheikh/Desktop/Screenshot 2025-02-15 at 11.45.44 PM.png" alt="Project 3" />
+        <div class="project-info">
+          <h2 class="project-title">Kabeer mudgal</h2>
+          <p class="project-description">
+          Kabeer is a Nigger that lives on sarkari kakad on maglia
+          </p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Optional JavaScript for further interactivity -->
+  <script>
+    // Example: Add click event to each project card (if needed)
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', () => {
+        alert('Project clicked!');
+      });
+    });
+  </script>
+</body>
+</html>
