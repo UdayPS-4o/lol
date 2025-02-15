@@ -3,46 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SEC LIST</title>
-  <!-- Example font -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <title>DCS SEC REVEAL with Project Cards</title>
   <style>
-    /* Reset and basic styles */
+    /* Basic resets */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
+    html, body {
+      /* Total height allows scrolling beyond header animation */
+      height: 300vh;
+      overflow-y: scroll;
+      font-family: sans-serif;
+      background: #000; /* Black background for the page */
+      color: white;
+    }
+    /* Fixed overlay for animated header text */
+    .fixed-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 10;
+    }
+    /* Header text styling */
+    .header-text {
+      font-size: 4rem; /* Base size */
+      font-weight: bold;
+      color: white;    /* White text */
+      white-space: nowrap;
+    }
+    .letter {
+      display: inline-block;
+      transition: transform 0.1s linear, opacity 0.1s linear;
+    }
+    /* For spacing between words */
+    .space {
+      display: inline-block;
+      width: 0.5em;
+    }
+    /* Boxes container: positioned after the fixed overlay */
+    .boxes-container {
+      margin-top: 100vh; /* Start after one viewport height */
       padding: 20px;
+      /* Removed white background here so the page background (black) shows */
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    /* Container for the grid */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* Grid layout */
+    /* Grid layout for project cards */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    
-    /* Project card styles */
+    /* Project card styling */
     .project-card {
       position: relative;
-      background-color: #fff;
+      background-color: #fff; /* White card background */
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -53,8 +76,6 @@
       transform: scale(1.02);
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
-    
-    /* Image styles */
     .project-image {
       width: 100%;
       height: 200px;
@@ -64,84 +85,167 @@
     .project-card:hover .project-image {
       transform: scale(1.1);
     }
-    
-    /* Info section */
     .project-info {
       padding: 15px;
     }
     .project-title {
       font-size: 1.5rem;
       margin-bottom: 10px;
+      color: #333;
     }
     .project-description {
       font-size: 1rem;
       color: #666;
     }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .project-title {
-        font-size: 1.3rem;
-      }
-      .project-description {
-        font-size: 0.9rem;
-      }
-    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>SECRETARIAT 2025</h1>
+  <!-- Fixed overlay with animated header text -->
+  <div class="fixed-overlay">
+    <h1 class="header-text">
+      <span class="letter">D</span>
+      <span class="letter">C</span>
+      <span class="letter">S</span>
+      <span class="letter space"></span>
+      <span class="letter">S</span>
+      <span class="letter">E</span>
+      <span class="letter">C</span>
+      <span class="letter space"></span>
+      <span class="letter">R</span>
+      <span class="letter">E</span>
+      <span class="letter">V</span>
+      <span class="letter">E</span>
+      <span class="letter">A</span>
+      <span class="letter">L</span>
+    </h1>
+  </div>
+  
+  <!-- Boxes container with project cards -->
+  <div class="boxes-container">
     <div class="projects-grid">
-      
-      <!-- Project Card 1 -->
+      <!-- 12 Project Cards -->
       <div class="project-card">
-        <img class="project-image" src="image.jpeg" />
-        <div>
-          <h2 class="project-title">AADITYA BAJAJ </h2>
-          <p class="project-description">
-       Aaditya baja is tunu nunu
-          </p>
-        </div>
-      </div>
-      
-      <!-- Project Card 2 (Diplomatic Central Summit image) -->
-      <div class="project-card">
-        <!-- 
-          If you have the image file locally, 
-          replace the src with the path to your file, e.g. src="me.jpeg"
-          or if it's hosted online, paste the direct image URL.
-        -->
-        <img class="project-image" src="me.jpeg" 
-             alt="Abdul kabeer sheikh" />
+        <img class="project-image" src="me.jpeg">
         <div class="project-info">
-          <h2 class="project-title">Diplomatic Central Summit</h2>
-          <p class="project-description">
-          Nirmala sitharam of dcs (i steal ur money u just dont know it)
-          </p>
+          <h2 class="Abdul Kabeer Sheikh">Project 1</h2>
+          <p class="project-description">He is a entrepreneur with a passion for finance and coding</p>
         </div>
       </div>
-      
-      <!-- Project Card 3 -->
       <div class="project-card">
-        <img class="project-image" src="kabeer.jpeg" />
+        <img class="project-image" src="Kabeer.jpeg">
         <div class="project-info">
-          <h2 class="project-title">Kabeer mudgal</h2>
-          <p class="project-description">
-          Kabeer is a Nigger that lives on sarkari kakad on maglia
-          </p>
+          <h2 class="project-title">Kabeer Mudgal</h2>
+          <p class="project-description">Kabeer is a great public speaker and a very talented orator</p>
         </div>
       </div>
-      
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+3" alt="Project 3">
+        <div class="project-info">
+          <h2 class="project-title">Project 3</h2>
+          <p class="project-description">Short description about Project 3.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+4" alt="Project 4">
+        <div class="project-info">
+          <h2 class="project-title">Project 4</h2>
+          <p class="project-description">Short description about Project 4.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+5" alt="Project 5">
+        <div class="project-info">
+          <h2 class="project-title">Project 5</h2>
+          <p class="project-description">Short description about Project 5.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+6" alt="Project 6">
+        <div class="project-info">
+          <h2 class="project-title">Project 6</h2>
+          <p class="project-description">Short description about Project 6.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+7" alt="Project 7">
+        <div class="project-info">
+          <h2 class="project-title">Project 7</h2>
+          <p class="project-description">Short description about Project 7.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+8" alt="Project 8">
+        <div class="project-info">
+          <h2 class="project-title">Project 8</h2>
+          <p class="project-description">Short description about Project 8.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+9" alt="Project 9">
+        <div class="project-info">
+          <h2 class="project-title">Project 9</h2>
+          <p class="project-description">Short description about Project 9.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+10" alt="Project 10">
+        <div class="project-info">
+          <h2 class="project-title">Project 10</h2>
+          <p class="project-description">Short description about Project 10.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+11" alt="Project 11">
+        <div class="project-info">
+          <h2 class="project-title">Project 11</h2>
+          <p class="project-description">Short description about Project 11.</p>
+        </div>
+      </div>
+      <div class="project-card">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+12" alt="Project 12">
+        <div class="project-info">
+          <h2 class="project-title">Project 12</h2>
+          <p class="project-description">Short description about Project 12.</p>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Optional JavaScript for further interactivity -->
+  
   <script>
-    // Example: Add click event to each project card (if needed)
-    document.querySelectorAll('.project-card').forEach(card => {
-      card.addEventListener('click', () => {
-        alert('Project clicked!');
+    window.addEventListener('scroll', () => {
+      const maxScroll = 600; // Scroll distance for header animation
+      const progress = Math.min(window.scrollY / maxScroll, 1); // Clamped progress 0 to 1
+      
+      // Get all letter elements
+      const letters = document.querySelectorAll('.letter');
+      // Filter non-space letters for center calculation
+      const nonSpaceLetters = [];
+      letters.forEach(letter => {
+        if(letter.textContent.trim() !== '') {
+          nonSpaceLetters.push(letter);
+        }
+      });
+      // Center index among non-space letters
+      const centerIndex = (nonSpaceLetters.length - 1) / 2;
+      
+      let letterIndex = 0;
+      letters.forEach(letter => {
+        if(letter.textContent.trim() === '') {
+          return; // Skip spaces
+        }
+        // Calculate offset from center
+        const offset = letterIndex - centerIndex;
+        // Horizontal translation: letters move away from center
+        const translateX = offset * progress * 300; // Adjust max horizontal movement
+        // Vertical translation: all letters move upward
+        const translateY = -progress * 100; // Adjust max upward movement
+        // Scaling: scale from 1 to 10 times
+        const scale = 1 + progress * 9;
+        // Opacity: fade out from 1 to 0
+        const opacity = 1 - progress;
+        letter.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        letter.style.opacity = opacity;
+        letterIndex++;
       });
     });
   </script>
