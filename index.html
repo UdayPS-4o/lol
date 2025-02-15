@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DCS SEC 2025</title>
+  <title>DCS SEC 2025 - Grouped Animation</title>
   <style>
     /* Basic resets */
     * {
@@ -12,14 +12,13 @@
       box-sizing: border-box;
     }
     html, body {
-      /* Total height allows scrolling beyond header animation */
-      height: 300vh;
+      height: 300vh; /* Enough height for scroll animation */
       overflow-y: scroll;
       font-family: sans-serif;
-      background: #000; /* Black background for the page */
+      background: #000; /* Black background */
       color: white;
     }
-    /* Fixed overlay for animated header text */
+    /* Fixed overlay for header text */
     .fixed-overlay {
       position: fixed;
       top: 0;
@@ -31,30 +30,32 @@
       justify-content: center;
       pointer-events: none;
       z-index: 10;
+      padding: 0 5vw; /* Horizontal padding to avoid edge clipping */
+      text-align: center;
     }
     /* Header text styling */
     .header-text {
-      font-size: 4rem; /* Base size */
+      font-size: clamp(1.5rem, 10vw, 3.5rem);
       font-weight: bold;
-      color: white;    /* White text */
-      white-space: nowrap;
+      max-width: 90vw;
+      white-space: normal;
+      line-height: 1.2;
+      display: inline-block;
     }
-    .letter {
+    /* Group styling for separate animation */
+    .group {
       display: inline-block;
       transition: transform 0.1s linear, opacity 0.1s linear;
     }
-    /* For spacing between words */
     .space {
       display: inline-block;
       width: 0.5em;
     }
-    /* Boxes container: positioned after the fixed overlay */
+    /* Boxes container with project cards */
     .boxes-container {
-      margin-top: 100vh; /* Start after one viewport height */
+      margin-top: 100vh;
       padding: 20px;
-      /* Removed white background here so the page background (black) shows */
     }
-    /* Grid layout for project cards */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -62,19 +63,17 @@
       max-width: 1200px;
       margin: 0 auto;
     }
-    /* Project card styling */
     .project-card {
-      position: relative;
-      background-color: #fff; /* White card background */
+      background-color: #fff;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
     .project-card:hover {
       transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     .project-image {
       width: 100%;
@@ -97,26 +96,47 @@
       font-size: 1rem;
       color: #666;
     }
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+      .header-text {
+        font-size: clamp(1.5rem, 10vw, 3rem);
+      }
+      .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Fixed overlay with animated header text -->
+  <!-- Fixed overlay with grouped header text -->
   <div class="fixed-overlay">
     <h1 class="header-text">
-      <span class="letter">D</span>
-      <span class="letter">C</span>
-      <span class="letter">S</span>
-      <span class="letter space"></span>
-      <span class="letter">S</span>
-      <span class="letter">E</span>
-      <span class="letter">C</span>
-      <span class="letter space"></span>
-      <span class="letter">R</span>
-      <span class="letter">E</span>
-      <span class="letter">V</span>
-      <span class="letter">E</span>
-      <span class="letter">A</span>
-      <span class="letter">L</span>
+      <span class="group group-left">
+        <span class="letter">D</span>
+        <span class="letter">C</span>
+        <span class="letter">S</span>
+      </span>
+      <span class="space"></span>
+      <span class="group group-right">
+        <span class="letter">S</span>
+        <span class="letter">E</span>
+        <span class="letter">C</span>
+        <span class="letter">R</span>
+        <span class="letter">E</span>
+        <span class="letter">T</span>
+        <span class="letter">A</span>
+        <span class="letter">R</span>
+        <span class="letter">I</span>
+        <span class="letter">A</span>
+        <span class="letter">T</span>
+      </span>
+      <br>
+      <span class="group group-down">
+        <span class="letter">2</span>
+        <span class="letter">0</span>
+        <span class="letter">2</span>
+        <span class="letter">5</span>
+      </span>
     </h1>
   </div>
   
@@ -125,17 +145,18 @@
     <div class="projects-grid">
       <!-- 12 Project Cards -->
       <div class="project-card">
-        <img class="project-image" src="me.jpeg">
+        <img class="project-image" src="me.jpeg" alt="Project 1">
         <div class="project-info">
           <h2 class="project-title">Abdul Kabeer Sheikh</h2>
-          <p class="project-description">He is a entrepreneur with a passion for finance and coding</p>
+          <p class="project-description">Co-Founder & CFO | DiploVision | Entrepreneur | Learning about Business & Technology</p>
         </div>
       </div>
+      <!-- Repeat similarly for Projects 2 through 12 -->
       <div class="project-card">
-        <img class="project-image" src="kabeer.jpeg">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+2" alt="Project 2">
         <div class="project-info">
-          <h2 class="project-title">Kabeer Mudgal</h2>
-          <p class="project-description">Kabeer is a great public speaker and a very talented orator</p>
+          <h2 class="project-title">Project 2</h2>
+          <p class="project-description">Short description about Project 2.</p>
         </div>
       </div>
       <div class="project-card">
@@ -145,6 +166,7 @@
           <p class="project-description">Short description about Project 3.</p>
         </div>
       </div>
+      <!-- ... add remaining cards for Projects 4 through 12 ... -->
       <div class="project-card">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+4" alt="Project 4">
         <div class="project-info">
@@ -213,40 +235,34 @@
   
   <script>
     window.addEventListener('scroll', () => {
-      const maxScroll = 600; // Scroll distance for header animation
-      const progress = Math.min(window.scrollY / maxScroll, 1); // Clamped progress 0 to 1
+      const isMobile = window.innerWidth < 768;
+      const maxScroll = isMobile ? 300 : 600;
+      const leftTranslateFactor = isMobile ? 150 : 300;
+      const rightTranslateFactor = isMobile ? 150 : 300;
+      const downTranslateFactor = isMobile ? 150 : 300;
+      const scaleMultiplier = isMobile ? 3 : 9;
+      const progress = Math.min(window.scrollY / maxScroll, 1);
       
-      // Get all letter elements
-      const letters = document.querySelectorAll('.letter');
-      // Filter non-space letters for center calculation
-      const nonSpaceLetters = [];
-      letters.forEach(letter => {
-        if(letter.textContent.trim() !== '') {
-          nonSpaceLetters.push(letter);
-        }
-      });
-      // Center index among non-space letters
-      const centerIndex = (nonSpaceLetters.length - 1) / 2;
+      // Animate left group ("DCS"): move left
+      const leftGroup = document.querySelector('.group-left');
+      const leftTranslateX = -progress * leftTranslateFactor;
+      const leftScale = 1 + progress * scaleMultiplier;
+      leftGroup.style.transform = `translateX(${leftTranslateX}px) scale(${leftScale})`;
+      leftGroup.style.opacity = 1 - progress;
       
-      let letterIndex = 0;
-      letters.forEach(letter => {
-        if(letter.textContent.trim() === '') {
-          return; // Skip spaces
-        }
-        // Calculate offset from center
-        const offset = letterIndex - centerIndex;
-        // Horizontal translation: letters move away from center
-        const translateX = offset * progress * 300; // Adjust max horizontal movement
-        // Vertical translation: all letters move upward
-        const translateY = -progress * 100; // Adjust max upward movement
-        // Scaling: scale from 1 to 10 times
-        const scale = 1 + progress * 9;
-        // Opacity: fade out from 1 to 0
-        const opacity = 1 - progress;
-        letter.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-        letter.style.opacity = opacity;
-        letterIndex++;
-      });
+      // Animate right group ("SECRETATRIA"): move right
+      const rightGroup = document.querySelector('.group-right');
+      const rightTranslateX = progress * rightTranslateFactor;
+      const rightScale = 1 + progress * scaleMultiplier;
+      rightGroup.style.transform = `translateX(${rightTranslateX}px) scale(${rightScale})`;
+      rightGroup.style.opacity = 1 - progress;
+      
+      // Animate down group ("2025"): move down
+      const downGroup = document.querySelector('.group-down');
+      const downTranslateY = progress * downTranslateFactor;
+      const downScale = 1 + progress * scaleMultiplier;
+      downGroup.style.transform = `translateY(${downTranslateY}px) scale(${downScale})`;
+      downGroup.style.opacity = 1 - progress;
     });
   </script>
 </body>
