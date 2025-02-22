@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DCS SEC 2025 - Grouped Animation & Modal</title>
+  <title>DCS SEC 2025 - Full Page with 21 Project Cards & Cool Side Pillars</title>
   <style>
     /* Basic resets */
     * {
@@ -12,13 +12,91 @@
       box-sizing: border-box;
     }
     html, body {
-      height: 300vh; /* Enough height for scroll animation */
+      height: 300vh; /* Enough height for scrolling and content */
       overflow-y: scroll;
-      font-family: sans-serif;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
       background: #000; /* Black background */
-      color: white;
+      color: #fff;
     }
-    /* Fixed overlay for header text */
+    /* --- Side Pillars --- */
+    .pillar {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 60px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* Only left/right borders with a subtle glow */
+      border-left: 2px solid #fff;
+      border-right: 2px solid #fff;
+      box-shadow: 2px 0 15px rgba(255,255,255,0.3), -2px 0 15px rgba(255,255,255,0.3);
+    }
+    .pillar.left {
+      left: 0;
+    }
+    .pillar.right {
+      right: 0;
+    }
+    .pillar-text {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      padding: 5px;
+    }
+    /* --- Header (Animated Text & Navigation) --- */
+    .header {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80px;
+      padding: 0 20px;
+    }
+    .logo {
+      position: absolute;
+      left: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .logo:hover {
+      opacity: 0.8;
+    }
+    .boxes {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .box {
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 15px;
+      background-color: #000;
+      border: 1px solid #fff;
+      color: #fff;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .box:hover {
+      background-color: #000e30;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px 2px rgba(255,255,255,0.7);
+    }
+    /* Fixed overlay for header animation */
     .fixed-overlay {
       position: fixed;
       top: 0;
@@ -41,7 +119,7 @@
       line-height: 1.2;
       display: inline-block;
     }
-    /* Group styling for separate animation */
+    /* Group styling for separate header animation */
     .group {
       display: inline-block;
       transition: transform 0.1s linear, opacity 0.1s linear;
@@ -50,7 +128,7 @@
       display: inline-block;
       width: 0.5em;
     }
-    /* Boxes container with project cards */
+    /* --- Content (Project Cards & Modal) --- */
     .boxes-container {
       margin-top: 100vh;
       padding: 20px;
@@ -96,15 +174,6 @@
       font-size: 1rem;
       color: #666;
     }
-    /* Responsive adjustments for mobile */
-    @media (max-width: 768px) {
-      .header-text {
-        font-size: clamp(1.5rem, 10vw, 3rem);
-      }
-      .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-    }
     /* Modal styles */
     .modal {
       position: fixed;
@@ -112,7 +181,7 @@
       left: 0;
       width: 100%;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0,0,0,0.8);
       display: none;
       align-items: center;
       justify-content: center;
@@ -151,9 +220,33 @@
       cursor: pointer;
       color: #fff;
     }
+    /* Responsive adjustments for mobile */
+    @media (max-width: 768px) {
+      .header-text {
+        font-size: clamp(1.5rem, 10vw, 3rem);
+      }
+      .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      .pillar {
+        width: 80px;
+      }
+      .pillar-text {
+        font-size: 0.9rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Left Pillar -->
+  <div class="pillar left">
+    <div class="pillar-text">SECRETARIAT 2025</div>
+  </div>
+  <!-- Right Pillar -->
+  <div class="pillar right">
+    <div class="pillar-text">SECRETARIAT 2025</div>
+  </div>
+  
   <!-- Fixed overlay with grouped header text -->
   <div class="fixed-overlay">
     <h1 class="header-text">
@@ -189,22 +282,23 @@
   <!-- Boxes container with project cards -->
   <div class="boxes-container">
     <div class="projects-grid">
-      <!-- Example Project Card (with data attributes for modal) -->
-      <div class="project-card" data-title="Abdul Kabeer Sheikh" data-description="Co-Founder & CFO | DiploVision | Entrepreneur | Learning about Business & Technology" data-image="me.jpeg">
-        <img class="project-image" src="me.jpeg" alt="Abdul Kabeer Sheikh">
+      <!-- Project Card 1 -->
+      <div class="project-card" data-title="Project 1" data-description="Short description about Project 1." data-image="https://via.placeholder.com/400x200?text=Project+1">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+1" alt="Project 1">
         <div class="project-info">
-          <h2 class="project-title">Abdul Kabeer Sheikh</h2>
-          <p class="project-description">Co-Founder & CFO | DiploVision | Entrepreneur | Learning about Business & Technology</p>
+          <h2 class="project-title">Project 1</h2>
+          <p class="project-description">Short description about Project 1.</p>
         </div>
       </div>
-      <!-- Additional project cards (you can add up to 12) -->
-      <div class="project-card" data-title="Project 2" data-description="thid one is a nigga" data-image="https://via.placeholder.com/400x200?text=Project+2">
+      <!-- Project Card 2 -->
+      <div class="project-card" data-title="Project 2" data-description="Short description about Project 2." data-image="https://via.placeholder.com/400x200?text=Project+2">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+2" alt="Project 2">
         <div class="project-info">
           <h2 class="project-title">Project 2</h2>
-          <p class="project-description">mehudon</p>
+          <p class="project-description">Short description about Project 2.</p>
         </div>
       </div>
+      <!-- Project Card 3 -->
       <div class="project-card" data-title="Project 3" data-description="Short description about Project 3." data-image="https://via.placeholder.com/400x200?text=Project+3">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+3" alt="Project 3">
         <div class="project-info">
@@ -212,7 +306,150 @@
           <p class="project-description">Short description about Project 3.</p>
         </div>
       </div>
-      <!-- You can continue adding more cards as needed -->
+      <!-- Project Card 4 -->
+      <div class="project-card" data-title="Project 4" data-description="Short description about Project 4." data-image="https://via.placeholder.com/400x200?text=Project+4">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+4" alt="Project 4">
+        <div class="project-info">
+          <h2 class="project-title">Project 4</h2>
+          <p class="project-description">Short description about Project 4.</p>
+        </div>
+      </div>
+      <!-- Project Card 5 -->
+      <div class="project-card" data-title="Project 5" data-description="Short description about Project 5." data-image="https://via.placeholder.com/400x200?text=Project+5">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+5" alt="Project 5">
+        <div class="project-info">
+          <h2 class="project-title">Project 5</h2>
+          <p class="project-description">Short description about Project 5.</p>
+        </div>
+      </div>
+      <!-- Project Card 6 -->
+      <div class="project-card" data-title="Project 6" data-description="Short description about Project 6." data-image="https://via.placeholder.com/400x200?text=Project+6">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+6" alt="Project 6">
+        <div class="project-info">
+          <h2 class="project-title">Project 6</h2>
+          <p class="project-description">Short description about Project 6.</p>
+        </div>
+      </div>
+      <!-- Project Card 7 -->
+      <div class="project-card" data-title="Project 7" data-description="Short description about Project 7." data-image="https://via.placeholder.com/400x200?text=Project+7">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+7" alt="Project 7">
+        <div class="project-info">
+          <h2 class="project-title">Project 7</h2>
+          <p class="project-description">Short description about Project 7.</p>
+        </div>
+      </div>
+      <!-- Project Card 8 -->
+      <div class="project-card" data-title="Project 8" data-description="Short description about Project 8." data-image="https://via.placeholder.com/400x200?text=Project+8">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+8" alt="Project 8">
+        <div class="project-info">
+          <h2 class="project-title">Project 8</h2>
+          <p class="project-description">Short description about Project 8.</p>
+        </div>
+      </div>
+      <!-- Project Card 9 -->
+      <div class="project-card" data-title="Project 9" data-description="Short description about Project 9." data-image="https://via.placeholder.com/400x200?text=Project+9">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+9" alt="Project 9">
+        <div class="project-info">
+          <h2 class="project-title">Project 9</h2>
+          <p class="project-description">Short description about Project 9.</p>
+        </div>
+      </div>
+      <!-- Project Card 10 -->
+      <div class="project-card" data-title="Project 10" data-description="Short description about Project 10." data-image="https://via.placeholder.com/400x200?text=Project+10">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+10" alt="Project 10">
+        <div class="project-info">
+          <h2 class="project-title">Project 10</h2>
+          <p class="project-description">Short description about Project 10.</p>
+        </div>
+      </div>
+      <!-- Project Card 11 -->
+      <div class="project-card" data-title="Project 11" data-description="Short description about Project 11." data-image="https://via.placeholder.com/400x200?text=Project+11">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+11" alt="Project 11">
+        <div class="project-info">
+          <h2 class="project-title">Project 11</h2>
+          <p class="project-description">Short description about Project 11.</p>
+        </div>
+      </div>
+      <!-- Project Card 12 -->
+      <div class="project-card" data-title="Project 12" data-description="Short description about Project 12." data-image="https://via.placeholder.com/400x200?text=Project+12">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+12" alt="Project 12">
+        <div class="project-info">
+          <h2 class="project-title">Project 12</h2>
+          <p class="project-description">Short description about Project 12.</p>
+        </div>
+      </div>
+      <!-- Project Card 13 -->
+      <div class="project-card" data-title="Project 13" data-description="Short description about Project 13." data-image="https://via.placeholder.com/400x200?text=Project+13">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+13" alt="Project 13">
+        <div class="project-info">
+          <h2 class="project-title">Project 13</h2>
+          <p class="project-description">Short description about Project 13.</p>
+        </div>
+      </div>
+      <!-- Project Card 14 -->
+      <div class="project-card" data-title="Project 14" data-description="Short description about Project 14." data-image="https://via.placeholder.com/400x200?text=Project+14">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+14" alt="Project 14">
+        <div class="project-info">
+          <h2 class="project-title">Project 14</h2>
+          <p class="project-description">Short description about Project 14.</p>
+        </div>
+      </div>
+      <!-- Project Card 15 -->
+      <div class="project-card" data-title="Project 15" data-description="Short description about Project 15." data-image="https://via.placeholder.com/400x200?text=Project+15">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+15" alt="Project 15">
+        <div class="project-info">
+          <h2 class="project-title">Project 15</h2>
+          <p class="project-description">Short description about Project 15.</p>
+        </div>
+      </div>
+      <!-- Project Card 16 -->
+      <div class="project-card" data-title="Project 16" data-description="Short description about Project 16." data-image="https://via.placeholder.com/400x200?text=Project+16">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+16" alt="Project 16">
+        <div class="project-info">
+          <h2 class="project-title">Project 16</h2>
+          <p class="project-description">Short description about Project 16.</p>
+        </div>
+      </div>
+      <!-- Project Card 17 -->
+      <div class="project-card" data-title="Project 17" data-description="Short description about Project 17." data-image="https://via.placeholder.com/400x200?text=Project+17">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+17" alt="Project 17">
+        <div class="project-info">
+          <h2 class="project-title">Project 17</h2>
+          <p class="project-description">Short description about Project 17.</p>
+        </div>
+      </div>
+      <!-- Project Card 18 -->
+      <div class="project-card" data-title="Project 18" data-description="Short description about Project 18." data-image="https://via.placeholder.com/400x200?text=Project+18">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+18" alt="Project 18">
+        <div class="project-info">
+          <h2 class="project-title">Project 18</h2>
+          <p class="project-description">Short description about Project 18.</p>
+        </div>
+      </div>
+      <!-- Project Card 19 -->
+      <div class="project-card" data-title="Project 19" data-description="Short description about Project 19." data-image="https://via.placeholder.com/400x200?text=Project+19">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+19" alt="Project 19">
+        <div class="project-info">
+          <h2 class="project-title">Project 19</h2>
+          <p class="project-description">Short description about Project 19.</p>
+        </div>
+      </div>
+      <!-- Project Card 20 -->
+      <div class="project-card" data-title="Project 20" data-description="Short description about Project 20." data-image="https://via.placeholder.com/400x200?text=Project+20">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+20" alt="Project 20">
+        <div class="project-info">
+          <h2 class="project-title">Project 20</h2>
+          <p class="project-description">Short description about Project 20.</p>
+        </div>
+      </div>
+      <!-- Project Card 21 -->
+      <div class="project-card" data-title="Project 21" data-description="Short description about Project 21." data-image="https://via.placeholder.com/400x200?text=Project+21">
+        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+21" alt="Project 21">
+        <div class="project-info">
+          <h2 class="project-title">Project 21</h2>
+          <p class="project-description">Short description about Project 21.</p>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -261,7 +498,7 @@
       }
     });
     
-    // Scroll-based header animation (unchanged)
+    // Scroll-based header animation
     window.addEventListener('scroll', () => {
       const isMobile = window.innerWidth < 768;
       const maxScroll = isMobile ? 300 : 600;
