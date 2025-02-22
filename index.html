@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DCS SEC 2025 - Grouped Animation</title>
+  <title>DCS SEC 2025 - Grouped Animation & Modal</title>
   <style>
     /* Basic resets */
     * {
@@ -30,10 +30,9 @@
       justify-content: center;
       pointer-events: none;
       z-index: 10;
-      padding: 0 5vw; /* Horizontal padding to avoid edge clipping */
+      padding: 0 5vw;
       text-align: center;
     }
-    /* Header text styling */
     .header-text {
       font-size: clamp(1.5rem, 10vw, 3.5rem);
       font-weight: bold;
@@ -70,6 +69,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
+      color: #000;
     }
     .project-card:hover {
       transform: scale(1.02);
@@ -104,6 +104,52 @@
       .projects-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       }
+    }
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal.active {
+      display: flex;
+    }
+    .modal-content {
+      background: #fff;
+      color: #000;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+    }
+    .modal-image {
+      flex: 1;
+      background-size: cover;
+      background-position: center;
+      min-height: 300px;
+    }
+    .modal-text {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
     }
   </style>
 </head>
@@ -143,97 +189,79 @@
   <!-- Boxes container with project cards -->
   <div class="boxes-container">
     <div class="projects-grid">
-      <!-- 12 Project Cards -->
-      <div class="project-card">
-        <img class="project-image" src="me.jpeg" alt="Project 1">
+      <!-- Example Project Card (with data attributes for modal) -->
+      <div class="project-card" data-title="Abdul Kabeer Sheikh" data-description="Co-Founder & CFO | DiploVision | Entrepreneur | Learning about Business & Technology" data-image="me.jpeg">
+        <img class="project-image" src="me.jpeg" alt="Abdul Kabeer Sheikh">
         <div class="project-info">
           <h2 class="project-title">Abdul Kabeer Sheikh</h2>
           <p class="project-description">Co-Founder & CFO | DiploVision | Entrepreneur | Learning about Business & Technology</p>
         </div>
       </div>
-      <!-- Repeat similarly for Projects 2 through 12 -->
-      <div class="project-card">
+      <!-- Additional project cards (you can add up to 12) -->
+      <div class="project-card" data-title="Project 2" data-description="Short description about Project 2." data-image="https://via.placeholder.com/400x200?text=Project+2">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+2" alt="Project 2">
         <div class="project-info">
           <h2 class="project-title">Project 2</h2>
-          <p class="project-description">Short description about Project 2.</p>
+          <p class="project-description">mehudon</p>
         </div>
       </div>
-      <div class="project-card">
+      <div class="project-card" data-title="Project 3" data-description="Short description about Project 3." data-image="https://via.placeholder.com/400x200?text=Project+3">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+3" alt="Project 3">
         <div class="project-info">
           <h2 class="project-title">Project 3</h2>
           <p class="project-description">Short description about Project 3.</p>
         </div>
       </div>
-      <!-- ... add remaining cards for Projects 4 through 12 ... -->
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+4" alt="Project 4">
-        <div class="project-info">
-          <h2 class="project-title">Project 4</h2>
-          <p class="project-description">Short description about Project 4.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+5" alt="Project 5">
-        <div class="project-info">
-          <h2 class="project-title">Project 5</h2>
-          <p class="project-description">Short description about Project 5.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+6" alt="Project 6">
-        <div class="project-info">
-          <h2 class="project-title">Project 6</h2>
-          <p class="project-description">Short description about Project 6.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+7" alt="Project 7">
-        <div class="project-info">
-          <h2 class="project-title">Project 7</h2>
-          <p class="project-description">Short description about Project 7.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+8" alt="Project 8">
-        <div class="project-info">
-          <h2 class="project-title">Project 8</h2>
-          <p class="project-description">Short description about Project 8.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+9" alt="Project 9">
-        <div class="project-info">
-          <h2 class="project-title">Project 9</h2>
-          <p class="project-description">Short description about Project 9.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+10" alt="Project 10">
-        <div class="project-info">
-          <h2 class="project-title">Project 10</h2>
-          <p class="project-description">Short description about Project 10.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+11" alt="Project 11">
-        <div class="project-info">
-          <h2 class="project-title">Project 11</h2>
-          <p class="project-description">Short description about Project 11.</p>
-        </div>
-      </div>
-      <div class="project-card">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+12" alt="Project 12">
-        <div class="project-info">
-          <h2 class="project-title">Project 12</h2>
-          <p class="project-description">Short description about Project 12.</p>
-        </div>
-      </div>
+      <!-- You can continue adding more cards as needed -->
     </div>
   </div>
   
+  <!-- Modal for project details -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <div class="modal-image" id="modalImage" style="background-image: url('');"></div>
+      <div class="modal-text" id="modalText">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+      </div>
+    </div>
+    <div class="modal-close" id="modalClose">&times;</div>
+  </div>
+  
   <script>
+    // Modal functionality
+    const projectCards = document.querySelectorAll('.project-card');
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalClose = document.getElementById('modalClose');
+    
+    projectCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const title = card.getAttribute('data-title');
+        const description = card.getAttribute('data-description');
+        const image = card.getAttribute('data-image');
+        
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+        modalImage.style.backgroundImage = `url('${image}')`;
+        
+        modal.classList.add('active');
+      });
+    });
+    
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+    
+    modal.addEventListener('click', (e) => {
+      if(e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+    
+    // Scroll-based header animation (unchanged)
     window.addEventListener('scroll', () => {
       const isMobile = window.innerWidth < 768;
       const maxScroll = isMobile ? 300 : 600;
