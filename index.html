@@ -220,7 +220,46 @@
       cursor: pointer;
       color: #fff;
     }
-    /* Responsive adjustments for mobile */
+    /* --- Footer (Contact Information) --- */
+    .footer {
+      background: #000;
+      padding: 40px 5vw;
+      text-align: center;
+    }
+    .footer hr {
+      border: none;
+      border-top: 1px solid #fff;
+      margin-bottom: 20px;
+      opacity: 0.7;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .footer-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .footer-item:hover {
+      transform: translateY(-5px);
+    }
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+      stroke: #fff;
+    }
+    /* --- Scroll-based Header Zoom Effect --- */
+    window.addEventListener('scroll', () => {}); /* Placeholder for script block below */
+    /* --- Responsive adjustments for mobile --- */
     @media (max-width: 768px) {
       .header-text {
         font-size: clamp(1.5rem, 10vw, 3rem);
@@ -232,6 +271,10 @@
         width: 80px;
       }
       .pillar-text {
+        font-size: 0.9rem;
+      }
+      .footer-content {
+        gap: 20px;
         font-size: 0.9rem;
       }
     }
@@ -282,7 +325,7 @@
   <!-- Boxes container with project cards -->
   <div class="boxes-container">
     <div class="projects-grid">
-      <!-- Project Card 1 -->
+      <!-- 18 Project Cards -->
       <div class="project-card" data-title="Project 1" data-description="Short description about Project 1." data-image="https://via.placeholder.com/400x200?text=Project+1">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+1" alt="Project 1">
         <div class="project-info">
@@ -290,15 +333,13 @@
           <p class="project-description">Short description about Project 1.</p>
         </div>
       </div>
-      <!-- Project Card 2 -->
       <div class="project-card" data-title="Project 2" data-description="Short description about Project 2." data-image="https://via.placeholder.com/400x200?text=Project+2">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+2" alt="Project 2">
+        <img class="project-image" src="me.jpeg" alt="Project 2">
         <div class="project-info">
           <h2 class="project-title">Project 2</h2>
           <p class="project-description">Short description about Project 2.</p>
         </div>
       </div>
-      <!-- Project Card 3 -->
       <div class="project-card" data-title="Project 3" data-description="Short description about Project 3." data-image="https://via.placeholder.com/400x200?text=Project+3">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+3" alt="Project 3">
         <div class="project-info">
@@ -306,7 +347,6 @@
           <p class="project-description">Short description about Project 3.</p>
         </div>
       </div>
-      <!-- Project Card 4 -->
       <div class="project-card" data-title="Project 4" data-description="Short description about Project 4." data-image="https://via.placeholder.com/400x200?text=Project+4">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+4" alt="Project 4">
         <div class="project-info">
@@ -314,15 +354,13 @@
           <p class="project-description">Short description about Project 4.</p>
         </div>
       </div>
-      <!-- Project Card 5 -->
       <div class="project-card" data-title="Project 5" data-description="Short description about Project 5." data-image="https://via.placeholder.com/400x200?text=Project+5">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+5" alt="Project 5">
+        <img class="project-image" src="kabeer.jpeg" alt="Project 5">
         <div class="project-info">
           <h2 class="project-title">Project 5</h2>
           <p class="project-description">Short description about Project 5.</p>
         </div>
       </div>
-      <!-- Project Card 6 -->
       <div class="project-card" data-title="Project 6" data-description="Short description about Project 6." data-image="https://via.placeholder.com/400x200?text=Project+6">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+6" alt="Project 6">
         <div class="project-info">
@@ -330,7 +368,6 @@
           <p class="project-description">Short description about Project 6.</p>
         </div>
       </div>
-      <!-- Project Card 7 -->
       <div class="project-card" data-title="Project 7" data-description="Short description about Project 7." data-image="https://via.placeholder.com/400x200?text=Project+7">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+7" alt="Project 7">
         <div class="project-info">
@@ -338,15 +375,13 @@
           <p class="project-description">Short description about Project 7.</p>
         </div>
       </div>
-      <!-- Project Card 8 -->
       <div class="project-card" data-title="Project 8" data-description="Short description about Project 8." data-image="https://via.placeholder.com/400x200?text=Project+8">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+8" alt="Project 8">
+        <img class="project-image" src="image.jpeg" alt="Project 8">
         <div class="project-info">
           <h2 class="project-title">Project 8</h2>
           <p class="project-description">Short description about Project 8.</p>
         </div>
       </div>
-      <!-- Project Card 9 -->
       <div class="project-card" data-title="Project 9" data-description="Short description about Project 9." data-image="https://via.placeholder.com/400x200?text=Project+9">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+9" alt="Project 9">
         <div class="project-info">
@@ -354,7 +389,6 @@
           <p class="project-description">Short description about Project 9.</p>
         </div>
       </div>
-      <!-- Project Card 10 -->
       <div class="project-card" data-title="Project 10" data-description="Short description about Project 10." data-image="https://via.placeholder.com/400x200?text=Project+10">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+10" alt="Project 10">
         <div class="project-info">
@@ -362,7 +396,6 @@
           <p class="project-description">Short description about Project 10.</p>
         </div>
       </div>
-      <!-- Project Card 11 -->
       <div class="project-card" data-title="Project 11" data-description="Short description about Project 11." data-image="https://via.placeholder.com/400x200?text=Project+11">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+11" alt="Project 11">
         <div class="project-info">
@@ -370,7 +403,6 @@
           <p class="project-description">Short description about Project 11.</p>
         </div>
       </div>
-      <!-- Project Card 12 -->
       <div class="project-card" data-title="Project 12" data-description="Short description about Project 12." data-image="https://via.placeholder.com/400x200?text=Project+12">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+12" alt="Project 12">
         <div class="project-info">
@@ -378,7 +410,6 @@
           <p class="project-description">Short description about Project 12.</p>
         </div>
       </div>
-      <!-- Project Card 13 -->
       <div class="project-card" data-title="Project 13" data-description="Short description about Project 13." data-image="https://via.placeholder.com/400x200?text=Project+13">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+13" alt="Project 13">
         <div class="project-info">
@@ -386,7 +417,6 @@
           <p class="project-description">Short description about Project 13.</p>
         </div>
       </div>
-      <!-- Project Card 14 -->
       <div class="project-card" data-title="Project 14" data-description="Short description about Project 14." data-image="https://via.placeholder.com/400x200?text=Project+14">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+14" alt="Project 14">
         <div class="project-info">
@@ -394,7 +424,6 @@
           <p class="project-description">Short description about Project 14.</p>
         </div>
       </div>
-      <!-- Project Card 15 -->
       <div class="project-card" data-title="Project 15" data-description="Short description about Project 15." data-image="https://via.placeholder.com/400x200?text=Project+15">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+15" alt="Project 15">
         <div class="project-info">
@@ -402,7 +431,6 @@
           <p class="project-description">Short description about Project 15.</p>
         </div>
       </div>
-      <!-- Project Card 16 -->
       <div class="project-card" data-title="Project 16" data-description="Short description about Project 16." data-image="https://via.placeholder.com/400x200?text=Project+16">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+16" alt="Project 16">
         <div class="project-info">
@@ -410,7 +438,6 @@
           <p class="project-description">Short description about Project 16.</p>
         </div>
       </div>
-      <!-- Project Card 17 -->
       <div class="project-card" data-title="Project 17" data-description="Short description about Project 17." data-image="https://via.placeholder.com/400x200?text=Project+17">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+17" alt="Project 17">
         <div class="project-info">
@@ -418,7 +445,6 @@
           <p class="project-description">Short description about Project 17.</p>
         </div>
       </div>
-      <!-- Project Card 18 -->
       <div class="project-card" data-title="Project 18" data-description="Short description about Project 18." data-image="https://via.placeholder.com/400x200?text=Project+18">
         <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+18" alt="Project 18">
         <div class="project-info">
@@ -426,34 +452,10 @@
           <p class="project-description">Short description about Project 18.</p>
         </div>
       </div>
-      <!-- Project Card 19 -->
-      <div class="project-card" data-title="Project 19" data-description="Short description about Project 19." data-image="https://via.placeholder.com/400x200?text=Project+19">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+19" alt="Project 19">
-        <div class="project-info">
-          <h2 class="project-title">Project 19</h2>
-          <p class="project-description">Short description about Project 19.</p>
-        </div>
-      </div>
-      <!-- Project Card 20 -->
-      <div class="project-card" data-title="Project 20" data-description="Short description about Project 20." data-image="https://via.placeholder.com/400x200?text=Project+20">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+20" alt="Project 20">
-        <div class="project-info">
-          <h2 class="project-title">Project 20</h2>
-          <p class="project-description">Short description about Project 20.</p>
-        </div>
-      </div>
-      <!-- Project Card 21 -->
-      <div class="project-card" data-title="Project 21" data-description="Short description about Project 21." data-image="https://via.placeholder.com/400x200?text=Project+21">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+21" alt="Project 21">
-        <div class="project-info">
-          <h2 class="project-title">Project 21</h2>
-          <p class="project-description">Short description about Project 21.</p>
-        </div>
-      </div>
     </div>
   </div>
   
-  <!-- Modal for project details -->
+  <!-- Modal Popup -->
   <div class="modal" id="modal">
     <div class="modal-content">
       <div class="modal-image" id="modalImage" style="background-image: url('');"></div>
@@ -464,6 +466,34 @@
     </div>
     <div class="modal-close" id="modalClose">&times;</div>
   </div>
+  
+  <!-- Footer with Contact Information -->
+  <footer class="footer">
+    <hr>
+    <div class="footer-content">
+      <a href="https://www.instagram.com/diplomaticcentralsummit/" target="_blank" class="footer-item instagram">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+        </svg>
+        OUR INSTAGRAM
+      </a>
+      <div class="footer-item contact">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72 13 13 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 13 13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        9755401680
+      </div>
+      <div class="footer-item email">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        outreach@Diplovision.com
+      </div>
+    </div>
+  </footer>
   
   <script>
     // Modal functionality
@@ -498,37 +528,19 @@
       }
     });
     
-    // Scroll-based header animation
+    // Scroll-based header zoom effect
     window.addEventListener('scroll', () => {
       const isMobile = window.innerWidth < 768;
       const maxScroll = isMobile ? 300 : 600;
-      const leftTranslateFactor = isMobile ? 150 : 300;
-      const rightTranslateFactor = isMobile ? 150 : 300;
-      const downTranslateFactor = isMobile ? 150 : 300;
-      const scaleMultiplier = isMobile ? 3 : 9;
       const progress = Math.min(window.scrollY / maxScroll, 1);
-      
-      // Animate left group ("DCS"): move left
-      const leftGroup = document.querySelector('.group-left');
-      const leftTranslateX = -progress * leftTranslateFactor;
-      const leftScale = 1 + progress * scaleMultiplier;
-      leftGroup.style.transform = `translateX(${leftTranslateX}px) scale(${leftScale})`;
-      leftGroup.style.opacity = 1 - progress;
-      
-      // Animate right group ("SECRETATRIA"): move right
-      const rightGroup = document.querySelector('.group-right');
-      const rightTranslateX = progress * rightTranslateFactor;
-      const rightScale = 1 + progress * scaleMultiplier;
-      rightGroup.style.transform = `translateX(${rightTranslateX}px) scale(${rightScale})`;
-      rightGroup.style.opacity = 1 - progress;
-      
-      // Animate down group ("2025"): move down
-      const downGroup = document.querySelector('.group-down');
-      const downTranslateY = progress * downTranslateFactor;
-      const downScale = 1 + progress * scaleMultiplier;
-      downGroup.style.transform = `translateY(${downTranslateY}px) scale(${downScale})`;
-      downGroup.style.opacity = 1 - progress;
+      const scaleValue = 1 + progress * 9; // Scale from 1 to 10
+      const opacityValue = 1 - progress;
+      document.querySelectorAll('.group').forEach(group => {
+        group.style.transform = `scale(${scaleValue})`;
+        group.style.opacity = opacityValue;
+      });
     });
   </script>
 </body>
 </html>
+
