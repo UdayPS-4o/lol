@@ -548,7 +548,7 @@
         <div class="nav-links">
             <a href="#about">ABOUT US</a>
             <a href="#summit-iframe">SUMMIT 2024</a>
-            <a href="#">DCS 2025</a>
+            <a href="dcs2025.html">DCS 2025</a>
             <a href="secretariat.html">SECRETARIAT</a>
             <a href="#">REGISTER FOR DCS 2025 →</a>
         </div>
@@ -659,8 +659,10 @@
             .logo-slide {
                 display: flex;
                 animation: scroll 20s linear infinite;
-                gap: 3rem;
+                gap: 2rem;
                 padding: 0 1.5rem;
+                align-items: center;
+                justify-content: space-around;
             }
 
             .logo-slide:hover {
@@ -668,16 +670,18 @@
             }
 
             .logo-slide img {
-                height: 70px;
+                height: 60px;
+                width: auto;
+                max-width: 180px;
                 object-fit: contain;
-                filter: grayscale(100%) brightness(180%);
                 transition: all 0.4s ease;
                 transform: scale(0.95);
+                margin: 0 10px;
             }
 
             .logo-slide img:hover {
-                filter: grayscale(0%) brightness(100%);
                 transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
             }
 
             @keyframes scroll {
