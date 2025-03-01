@@ -1,546 +1,811 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DCS SEC 2025</title>
-  <style>
-    /* Basic resets */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html, body {
-      height: 300vh; /* Enough height for scrolling and content */
-      overflow-y: scroll;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      background: #000; /* Black background */
-      color: #fff;
-    }
-    /* --- Side Pillars --- */
-    .pillar {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 60px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(6px);
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      /* Only left/right borders with a subtle glow */
-      border-left: 2px solid #fff;
-      border-right: 2px solid #fff;
-      box-shadow: 2px 0 15px rgba(255,255,255,0.3), -2px 0 15px rgba(255,255,255,0.3);
-    }
-    .pillar.left {
-      left: 0;
-    }
-    .pillar.right {
-      right: 0;
-    }
-    .pillar-text {
-      writing-mode: vertical-rl;
-      text-orientation: upright;
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      text-align: center;
-      padding: 5px;
-    }
-    /* --- Header (Animated Text & Navigation) --- */
-    .header {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80px;
-      padding: 0 20px;
-    }
-    .logo {
-      position: absolute;
-      left: 20px;
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: opacity 0.2s ease;
-    }
-    .logo:hover {
-      opacity: 0.8;
-    }
-    .boxes {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-    }
-    .box {
-      padding: 0 10px;
-      height: 30px;
-      line-height: 30px;
-      border-radius: 15px;
-      background-color: #000;
-      border: 1px solid #fff;
-      color: #fff;
-      text-transform: uppercase;
-      font-size: 0.8rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .box:hover {
-      background-color: #000e30;
-      transform: scale(1.05);
-      box-shadow: 0 0 10px 2px rgba(255,255,255,0.7);
-    }
-    /* Fixed overlay for header animation */
-    .fixed-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-      z-index: 10;
-      padding: 0 5vw;
-      text-align: center;
-    }
-    .header-text {
-      font-size: clamp(1.5rem, 10vw, 3.5rem);
-      font-weight: bold;
-      max-width: 90vw;
-      white-space: normal;
-      line-height: 1.2;
-      display: inline-block;
-    }
-    /* Group styling for separate header animation */
-    .group {
-      display: inline-block;
-      transition: transform 0.1s linear, opacity 0.1s linear;
-    }
-    .space {
-      display: inline-block;
-      width: 0.5em;
-    }
-    /* --- Content (Project Cards & Modal) --- */
-    .boxes-container {
-      margin-top: 100vh;
-      padding: 20px;
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .project-card {
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      color: #000;
-    }
-    .project-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .project-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-    .project-card:hover .project-image {
-      transform: scale(1.1);
-    }
-    .project-info {
-      padding: 15px;
-    }
-    .project-title {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      color: #333;
-    }
-    .project-description {
-      font-size: 1rem;
-      color: #666;
-    }
-    /* Modal styles */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 100;
-      padding: 20px;
-    }
-    .modal.active {
-      display: flex;
-    }
-    .modal-content {
-      background: #fff;
-      color: #000;
-      width: 90%;
-      max-width: 800px;
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: row;
-    }
-    .modal-image {
-      flex: 1;
-      background-size: cover;
-      background-position: center;
-      min-height: 300px;
-    }
-    .modal-text {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      font-size: 2rem;
-      cursor: pointer;
-      color: #fff;
-    }
-    /* --- Footer (Contact Information) --- */
-    .footer {
-      background: #000;
-      padding: 40px 5vw;
-      text-align: center;
-    }
-    .footer hr {
-      border: none;
-      border-top: 1px solid #fff;
-      margin-bottom: 20px;
-      opacity: 0.7;
-    }
-    .footer-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .footer-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1rem;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .footer-item:hover {
-      transform: translateY(-5px);
-    }
-    .icon {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
-      stroke: #fff;
-    }
-    /* --- Scroll-based Header Zoom Effect --- */
-    window.addEventListener('scroll', () => {}); /* Placeholder for script block below */
-    /* --- Responsive adjustments for mobile --- */
-    @media (max-width: 768px) {
-      .header-text {
-        font-size: clamp(1.5rem, 10vw, 3rem);
-      }
-      .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
-      .pillar {
-        width: 80px;
-      }
-      .pillar-text {
-        font-size: 0.9rem;
-      }
-      .footer-content {
-        gap: 20px;
-        font-size: 0.9rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIPLOVISION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: #ffffff;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: block;
+                position: absolute;
+                right: 2rem;
+                top: 2rem;
+                z-index: 100;
+            }
+
+            .hamburger-menu.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger-menu.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger-menu.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+                position: fixed;
+                top: 6;
+                left: 0;
+                right: 0;
+                background: #0F0F0F;
+                padding: 10rem 2rem 2rem;
+                z-index: 99;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: all 0.3s ease;
+            }
+
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero {
+                padding: 2rem 1.5rem;
+            }
+
+            .main-heading {
+                font-size: clamp(1.8rem, 5vw, 2.5rem);
+            }
+
+            .founder {
+                display: none;
+            }
+
+            .giant-text {
+                font-size: clamp(2rem, 8vw, 4rem);
+                white-space: normal;
+                padding: 0 1rem;
+                text-align: center;
+                line-height: 1.2;
+            }
+        }
+
+        body {
+            background: #0F0F0F;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        nav {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex: 2;
+        }
+
+        .nav-links a {
+            color: #0F0F0F;
+            text-decoration: none;
+            font-size: 1rem;
+            background: #ffffff;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: block;
+                position: fixed;
+                right: 1.5rem;
+                top: 1.5rem;
+                z-index: 1000;
+                background: rgba(15, 15, 15, 0.9);
+                border-radius: 50%;
+                padding: 1rem;
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 80%;
+                max-width: 320px;
+                background: rgba(15, 15, 15, 0.98);
+                padding: 5rem 2rem 2rem;
+                z-index: 99;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: left;
+                font-size: 1.1rem;
+                padding: 1rem 1.2rem;
+                background: transparent;
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .nav-links a::after {
+                content: '→';
+                opacity: 0.5;
+            }
+
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.05);
+                transform: none;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                position: relative;
+                z-index: 1000;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 15, 0.95);
+                padding: 12rem 2rem 2rem; /* Increased from 8rem to 12rem to shift links down */
+                z-index: 99;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                font-size: 1.1rem;
+                padding: 1rem;
+                background: transparent;
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 1rem;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .nav-links::after {
+            display: none;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        nav {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .main-heading {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+
+        .location {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        .founder {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        .giant-text {
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out forwards;
+            animation-delay: 1s;
+        }
+        .hero {
+            padding: 3rem .75rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .main-heading {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 3rem;
+        }
+
+        .highlight {
+            color: #4ADE80;
+        }
+
+        .location-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            gap: 2rem;
+            opacity: 0.9;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .location {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            font-size: clamp(1.5rem, 4vw, 2.3rem);
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+        }
+
+        .location p {
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .location-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF4545;
+            border-radius: 50%;
+        }
+
+        .event-date {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: inherit;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .location-container {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .location, .event-date {
+                font-size: clamp(1.4rem, 4vw, 2rem);
+            }
+        }
+        .location p {
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            text-align: center;
+            margin: 0;
+        }
+
+        .location-dot {
+            width: 12px;
+            height: 12px;
+            background: #FF4545;
+            border-radius: 50%;
+            margin-top: 2px;
+        }
+
+        .event-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            font-size: inherit;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .location-dot {
+            width: 8px;
+            height: 8px;
+            background: #FF4545;
+            border-radius: 50%;
+        }
+
+        .founder {
+            position: absolute;
+            top: 8.5rem;
+            right: 2rem;
+            text-align: right;
+        }
+
+        .founder p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .founder a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        @keyframes giantTextReveal {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 100px);
+            }
+            to {
+                opacity: 0.3;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        .giant-text {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 500;
+            opacity: 0;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: -1;
+            width: 100%;
+            text-align: center;
+            line-height: 1.2;
+            animation: giantTextReveal 1.5s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        @media (max-width: 768px) {
+            .giant-text {
+                white-space: normal;
+                font-size: clamp(2rem, 8vw, 4rem);
+                padding: 0 1rem;
+                text-align: center;
+                line-height: 1.2;
+            }
+        }
+            .cta-button {
+            background: #ffffff;
+            color: #0F0F0F;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+        }
+          .nav-links a {
+            color: #0F0F0F;
+            text-decoration: none;
+            font-size: 0.9rem;
+            background: #ffffff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
-  <!-- Left Pillar -->
-  <div class="pillar left">
-    <div class="pillar-text">SECRETARIAT 2025</div>
-  </div>
-  <!-- Right Pillar -->
-  <div class="pillar right">
-    <div class="pillar-text">SECRETARIAT 2025</div>
-  </div>
-  
-  <!-- Fixed overlay with grouped header text -->
-  <div class="fixed-overlay">
-    <h1 class="header-text">
-      <span class="group group-left">
-        <span class="letter">D</span>
-        <span class="letter">C</span>
-        <span class="letter">S</span>
-      </span>
-      <span class="space"></span>
-      <span class="group group-right">
-        <span class="letter">S</span>
-        <span class="letter">E</span>
-        <span class="letter">C</span>
-        <span class="letter">R</span>
-        <span class="letter">E</span>
-        <span class="letter">T</span>
-        <span class="letter">A</span>
-        <span class="letter">R</span>
-        <span class="letter">I</span>
-        <span class="letter">A</span>
-        <span class="letter">T</span>
-      </span>
-      <br>
-      <span class="group group-down">
-        <span class="letter">2</span>
-        <span class="letter">0</span>
-        <span class="letter">2</span>
-        <span class="letter">5</span>
-      </span>
-    </h1>
-  </div>
-  
-  <!-- Boxes container with project cards -->
-  <div class="boxes-container">
-    <div class="projects-grid">
-      <!-- 18 Project Cards -->
-      <div class="project-card" data-title="Project 1" data-description="Short description about Project 1." data-image="https://via.placeholder.com/400x200?text=Project+1">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+1" alt="Project 1">
-        <div class="project-info">
-          <h2 class="project-title">Project 1</h2>
-          <p class="project-description">Short description about Project 1.</p>
+    <nav>
+        <div class="logo">DIPLOVISON</div>
+        <div class="hamburger-menu">
+            <div></div>
+            <div></div>
+            <div></div>
         </div>
-      </div>
-      <div class="project-card" data-title="Project 2" data-description="Short description about Project 2." data-image="https://via.placeholder.com/400x200?text=Project+2">
-        <img class="project-image" src="me.jpeg" alt="Project 2">
-        <div class="project-info">
-          <h2 class="project-title">Project 2</h2>
-          <p class="project-description">Short description about Project 2.</p>
+        <div class="nav-links">
+            <a href="#about">ABOUT US</a>
+            <a href="#">SUMMIT 2024</a>
+            <a href="#">DCS 2025</a>
+            <a href="#">SECRETARIAT</a>
+            <a href="#">REGISTER FOR DCS 2025 →</a>
         </div>
-      </div>
-      <div class="project-card" data-title="Project 3" data-description="Short description about Project 3." data-image="https://via.placeholder.com/400x200?text=Project+3">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+3" alt="Project 3">
-        <div class="project-info">
-          <h2 class="project-title">Project 3</h2>
-          <p class="project-description">Short description about Project 3.</p>
+    </nav>
+    <script>
+        const hamburger = document.querySelector('.hamburger-menu');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+        const founder = document.querySelector('.founder');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                        document.body.style.overflow = '';
+                        
+                        const offset = 100;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    </script>
+
+    <main class="hero">
+        <h1 class="main-heading">
+            DIPLOVISON<br>
+          EXPIRENCES THAT LAST A <span class="highlight">LIFETIME</span>
+        </h1>
+        <div class="location">
+            <div class="location-dot"></div>
+            <p>XXZ COLLEG,INDORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18TH-19TH-20TH JULY</p>
         </div>
-      </div>
-      <div class="project-card" data-title="Project 4" data-description="Short description about Project 4." data-image="https://via.placeholder.com/400x200?text=Project+4">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+4" alt="Project 4">
-        <div class="project-info">
-          <h2 class="project-title">Project 4</h2>
-          <p class="project-description">Short description about Project 4.</p>
+    </main>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <section id="about" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05);">        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem;">About Us</h2>
+            <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.8; max-width: 800px;">
+                DIPLOVISON is a premier platform dedicated to fostering diplomatic excellence and international understanding. Through our conferences and summits, we bring together future leaders to engage in meaningful dialogue and develop solutions for global challenges.
+            </p>
         </div>
-      </div>
-      <div class="project-card" data-title="Project 5" data-description="Short description about Project 5." data-image="https://via.placeholder.com/400x200?text=Project+5">
-        <img class="project-image" src="kabeer.jpeg" alt="Project 5">
-        <div class="project-info">
-          <h2 class="project-title">Project 5</h2>
-          <p class="project-description">Short description about Project 5.</p>
+    </section>
+
+    <div style="height: 4rem;"></div>
+
+    <section id="partners" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05); overflow: hidden;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem; text-align: center;">Our Trusted Partners</h2>
+            <div class="logo-carousel">
+                <div class="logo-slide">
+                    <img src="me.jepg" alt="UpGrad Indore">
+                    <img src="me.jpeg" alt="Toprankers">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/kisna.png" alt="Kisna">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/shridhi.png" alt="Shridhi">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/logo.png" alt="Logo">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/upGrad%20Indore.png" alt="UpGrad Indore">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/toprankers.png" alt="Toprankers">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/kisna.png" alt="Kisna">
+                    <!-- Duplicate for seamless loop -->
+                    <img src="me.jepg" alt="UpGrad Indore">
+                    <img src="me.jpeg" alt="Toprankers">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/kisna.png" alt="Kisna">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/shridhi.png" alt="Shridhi">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/logo.png" alt="Logo">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/upGrad%20Indore.png" alt="UpGrad Indore">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/toprankers.png" alt="Toprankers">
+                    <img src="https://raw.githubusercontent.com/fatima-tuz-zhohra/Diplovision/main/kisna.png" alt="Kisna">
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="project-card" data-title="Project 6" data-description="Short description about Project 6." data-image="https://drive.google.com/thumbnail?id=1VUisWYX5yazpOcvaDI0K4EdK_lo8j659&sz=400">
-        <img class="project-image" src="https://drive.google.com/thumbnail?id=1VUisWYX5yazpOcvaDI0K4EdK_lo8j659&sz=400" alt="Project 6">
-        <div class="project-info">
-          <h2 class="project-title">Project 6</h2>
-          <p class="project-description">Short description about Project 6.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 7" data-description="Short description about Project 7." data-image="https://via.placeholder.com/400x200?text=Project+7">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+7" alt="Project 7">
-        <div class="project-info">
-          <h2 class="project-title">Project 7</h2>
-          <p class="project-description">Short description about Project 7.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 8" data-description="Short description about Project 8." data-image="https://via.placeholder.com/400x200?text=Project+8">
-        <img class="project-image" src="image.jpeg" alt="Project 8">
-        <div class="project-info">
-          <h2 class="project-title">Project 8</h2>
-          <p class="project-description">Short description about Project 8.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 9" data-description="Short description about Project 9." data-image="https://via.placeholder.com/400x200?text=Project+9">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+9" alt="Project 9">
-        <div class="project-info">
-          <h2 class="project-title">Project 9</h2>
-          <p class="project-description">Short description about Project 9.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 10" data-description="Short description about Project 10." data-image="https://via.placeholder.com/400x200?text=Project+10">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+10" alt="Project 10">
-        <div class="project-info">
-          <h2 class="project-title">Project 10</h2>
-          <p class="project-description">Short description about Project 10.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 11" data-description="Short description about Project 11." data-image="https://via.placeholder.com/400x200?text=Project+11">
-        <img class="project-image" src="me.jpeg" alt="Project 11">
-        <div class="project-info">
-          <h2 class="project-title">Project 11</h2>
-          <p class="project-description">Short description about Project 11.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 12" data-description="Short description about Project 12." data-image="https://via.placeholder.com/400x200?text=Project+12">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+12" alt="Project 12">
-        <div class="project-info">
-          <h2 class="project-title">Project 12</h2>
-          <p class="project-description">Short description about Project 12.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 13" data-description="Short description about Project 13." data-image="https://via.placeholder.com/400x200?text=Project+13">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+13" alt="Project 13">
-        <div class="project-info">
-          <h2 class="project-title">Project 13</h2>
-          <p class="project-description">Short description about Project 13.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 14" data-description="Short description about Project 14." data-image="https://via.placeholder.com/400x200?text=Project+14">
-        <img class="project-image" src="me.jpeg" alt="Project 14">
-        <div class="project-info">
-          <h2 class="project-title">Project 14</h2>
-          <p class="project-description">Short description about Project 14.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 15" data-description="Short description about Project 15." data-image="https://via.placeholder.com/400x200?text=Project+15">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+15" alt="Project 15">
-        <div class="project-info">
-          <h2 class="project-title">Project 15</h2>
-          <p class="project-description">Short description about Project 15.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 16" data-description="Short description about Project 16." data-image="https://via.placeholder.com/400x200?text=Project+16">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+16" alt="Project 16">
-        <div class="project-info">
-          <h2 class="project-title">Project 16</h2>
-          <p class="project-description">Short description about Project 16.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 17" data-description="Short description about Project 17." data-image="https://via.placeholder.com/400x200?text=Project+17">
-        <img class="project-image" src="me.jpeg" alt="Project 17">
-        <div class="project-info">
-          <h2 class="project-title">Project 17</h2>
-          <p class="project-description">Short description about Project 17.</p>
-        </div>
-      </div>
-      <div class="project-card" data-title="Project 18" data-description="Short description about Project 18." data-image="https://via.placeholder.com/400x200?text=Project+18">
-        <img class="project-image" src="https://via.placeholder.com/400x200?text=Project+18" alt="Project 18">
-        <div class="project-info">
-          <h2 class="project-title">Project 18</h2>
-          <p class="project-description">Short description about Project 18.</p>
-        </div>
-      </div>
+        <style>
+            .logo-carousel {
+                width: 100%;
+                overflow: hidden;
+                padding: 3rem 0;
+                background: rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(10px);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .logo-slide {
+                display: flex;
+                animation: scroll 20s linear infinite;
+                gap: 3rem;
+                padding: 0 1.5rem;
+            }
+
+            .logo-slide:hover {
+                animation-play-state: paused;
+            }
+
+            .logo-slide img {
+                height: 70px;
+                object-fit: contain;
+                filter: grayscale(100%) brightness(180%);
+                transition: all 0.4s ease;
+                transform: scale(0.95);
+            }
+
+            .logo-slide img:hover {
+                filter: grayscale(0%) brightness(100%);
+                transform: scale(1.05);
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(0);
+                }
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+
+            @media (max-width: 768px) {
+                .logo-carousel {
+                    padding: 2rem 0;
+                }
+                .logo-slide {
+                    gap: 2rem;
+                }
+                .logo-slide img {
+                    height: 50px;
+                }
+            }
+        </style>
+    </section>
+      
+    </section>
+    <div class="founder">
+        <p>Founded by</p>
+        <a href="#">kids</a>
+        <p>in god we trust</p>
     </div>
-  </div>
-  
-  <!-- Modal Popup -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <div class="modal-image" id="modalImage" style="background-image: url('');"></div>
-      <div class="modal-text" id="modalText">
-        <h2 id="modalTitle"></h2>
-        <p id="modalDescription"></p>
-      </div>
-    </div>
-    <div class="modal-close" id="modalClose">&times;</div>
-  </div>
-  
-  <!-- Footer with Contact Information -->
-  <footer class="footer">
-    <hr>
-    <div class="footer-content">
-      <a href="https://www.instagram.com/diplomaticcentralsummit/" target="_blank" class="footer-item instagram">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
-        </svg>
-        OUR INSTAGRAM
-      </a>
-      <div class="footer-item contact">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 3 5.18 2 2 0 0 1 5 3h3a2 2 0 0 1 2 1.72 13 13 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11l-1.27 1.27a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 13 13 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-        </svg>
-        9755401680
-      </div>
-      <div class="footer-item email">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <polyline points="22,6 12,13 2,6"/>
-        </svg>
-        outreach@Diplovision.com
-      </div>
-    </div>
-  </footer>
-  
-  <script>
-    // Modal functionality
-    const projectCards = document.querySelectorAll('.project-card');
-    const modal = document.getElementById('modal');
-    const modalImage = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDescription = document.getElementById('modalDescription');
-    const modalClose = document.getElementById('modalClose');
-    
-    projectCards.forEach(card => {
-      card.addEventListener('click', () => {
-        const title = card.getAttribute('data-title');
-        const description = card.getAttribute('data-description');
-        const image = card.getAttribute('data-image');
-        
-        modalTitle.textContent = title;
-        modalDescription.textContent = description;
-        modalImage.style.backgroundImage = `url('${image}')`;
-        
-        modal.classList.add('active');
-      });
-    });
-    
-    modalClose.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-    
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) {
-        modal.classList.remove('active');
-      }
-    });
-    
-    // Scroll-based header zoom effect
-    window.addEventListener('scroll', () => {
-      const isMobile = window.innerWidth < 768;
-      const maxScroll = isMobile ? 300 : 600;
-      const progress = Math.min(window.scrollY / maxScroll, 1);
-      const scaleValue = 1 + progress * 9; // Scale from 1 to 10
-      const opacityValue = 1 - progress;
-      document.querySelectorAll('.group').forEach(group => {
-        group.style.transform = `scale(${scaleValue})`;
-        group.style.opacity = opacityValue;
-      });
-    });
-  </script>
+
+    <section id="about" class="about-us">
+        <div class="about-grid">
+            <div class="about-item">
+                <div id= about-image1 class="about-image">
+                    <iframe src="https://drive.google.com/file/d/1XtzhJ320zzXICcI-UxjtVBUcQDUigPvw/preview" width="640" height="480" allow="autoplay" style="width: 100%; height: 100%; pointer-events: none;" muted loop autoplay></iframe>
+                </div>
+                <div class="about-content">
+                    <h2>Our Mission</h2>
+                    <p>DIPLOVISON is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
+                </div>
+            </div>
+            <div class="about-item reverse">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80" alt="Our Vision">
+                </div>
+                <div class="about-content">
+                    <h2>Our Vision</h2>
+                    <p>We envision a world where young leaders are empowered to tackle global challenges through diplomatic dialogue, cultural understanding, and innovative problem-solving approaches.</p>
+                </div>
+            </div>
+            <div class="about-item">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80" alt="Our Impact">
+                </div>
+                <div class="about-content">
+                    <h2>Our Impact</h2>
+                    <p>Since our inception, we have empowered thousands of students across the globe, organizing successful diplomatic summits and creating lasting connections between future world leaders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .about-us {
+            padding: 20rem 2rem 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+        }
+
+        .about-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .about-item.reverse {
+            direction: rtl;
+        }
+
+        .about-item.reverse .about-content {
+            direction: ltr;
+        }
+
+        .about-image {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .about-item:hover .about-image img {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            padding: 2rem;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #4ADE80;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .about-item {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+
+            .about-item.reverse {
+                direction: ltr;
+            }
+
+            .about-content {
+                padding: 1rem 0;
+            }
+
+            .about-content h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+
+    <div class="giant-text">DIPLOMATIC CENTRAL SUMMIT</div>
 </body>
 </html>
-
