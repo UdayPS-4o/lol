@@ -512,7 +512,32 @@
         }
     </style>
 </head>
+<style>
+    .background-image {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.4;
+        z-index: -1;
+    }
+</style>
+<body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('https://i.imgur.com/Aq2Hy0E.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
 <body>
+    <img src="bg.png" alt="Concert Background" class="background-image">
     <nav>
         <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">DIPLOVISON</a></div>
         <div class="hamburger-menu">
@@ -522,7 +547,7 @@
         </div>
         <div class="nav-links">
             <a href="#about">ABOUT US</a>
-            <a href="#">SUMMIT 2024</a>
+            <a href="#summit-iframe">SUMMIT 2024</a>
             <a href="#">DCS 2025</a>
             <a href="secretariat.html">SECRETARIAT</a>
             <a href="#">REGISTER FOR DCS 2025 →</a>
@@ -580,7 +605,7 @@
         </h1>
         <div class="location">
             <div class="location-dot"></div>
-            <p>XXZ COLLEG,INDORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18TH-19TH-20TH JULY</p>
+            <p>XXZ COLLEG,INDORE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;18TH-19TH-20TH JULY</p>
         </div>
     </main>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -689,7 +714,7 @@
         <div class="about-grid">
             <div class="about-item">
                 <div id= about-image1 class="about-image">
-                    <iframe src="https://drive.google.com/file/d/1XtzhJ320zzXICcI-UxjtVBUcQDUigPvw/preview" width="640" height="480" allow="autoplay" style="width: 100%; height: 100%; pointer-events: none;" muted loop autoplay></iframe>
+                    <iframe id="summit-iframe" src="https://drive.google.com/file/d/1XtzhJ320zzXICcI-UxjtVBUcQDUigPvw/preview" width="640" height="480" allow="autoplay" style="width: 100%; height: 100%; pointer-events: none;" muted loop autoplay></iframe>
                 </div>
                 <div class="about-content">
                     <h2>Our Mission</h2>
