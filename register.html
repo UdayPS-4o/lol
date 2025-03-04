@@ -233,6 +233,8 @@
         }
 
         input[type="text"],
+        input[type="email"],
+        input[type="tel"],
         select,
         textarea {
             width: 100%;
@@ -246,6 +248,8 @@
         }
 
         input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
         select:focus,
         textarea:focus {
             outline: none;
@@ -406,6 +410,16 @@
             </div>
 
             <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-group">
                 <label for="class">Class</label>
                 <select id="class" name="class" required>
                     <option value="" disabled selected>Select your class</option>
@@ -434,17 +448,7 @@
                 <textarea id="motivation" name="motivation" required placeholder="Share your motivation and what you can bring to the team..."></textarea>
             </div>
 
-            <div class="form-group">
-                <label for="delegates">How many delegates could you bring to the conference?</label>
-                <select id="delegates" name="delegates" required>
-                    <option value="" disabled selected>Select range</option>
-                    <option value="0-5">0-5 delegates</option>
-                    <option value="5-10">5-10 delegates</option>
-                    <option value="10-15">10-15 delegates</option>
-                    <option value="15-20">15-20 delegates</option>
-                    <option value="20+">20+ delegates</option>
-                </select>
-            </div>
+
 
             <button type="submit" class="submit-btn">Submit Application</button>
         </form>
