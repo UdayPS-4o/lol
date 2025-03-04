@@ -45,15 +45,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            position: relative;
+            padding: 2.5rem 5%; /* Increased padding for bigger height */
+            position: fixed;
             width: 100%;
-            max-width: 1600px;
-            height: 400px;
-            margin: 0 auto;
+            top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
             overflow: hidden;
+            min-height: 120px; /* Set minimum height for the nav bar */
         }
         
         .nav-bg-image {
@@ -77,26 +77,6 @@
             z-index: -1;
         }
 
-        .logo {
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            margin-top: 2rem;
-            margin-left: 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .logo a {
-            color: #ffffff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .logo a:hover {
-            color: #4a90e2;
-        }
-
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -104,9 +84,6 @@
             align-items: center;
             flex: 2;
             margin-right: 2rem;
-            margin-top: 2rem;
-            position: relative;
-            z-index: 2;
         }
 
         .nav-links a {
