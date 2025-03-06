@@ -32,7 +32,7 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('') no-repeat center center fixed;
+            background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('https://i.imgur.com/Aq2Hy0E.jpg') no-repeat center center fixed;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -66,6 +66,20 @@
             font-weight: 600;
             flex: 1;
         }
+        
+        @media (max-width: 768px) {
+            .logo {
+                position: fixed;
+                top: 1.5rem;
+                left: 1.5rem;
+                z-index: 100000;
+            }
+            
+            /* Add padding to the top of the content to prevent it from being hidden behind the fixed navbar */
+            .hero {
+                padding-top: 6rem;
+            }
+        }
 
         .nav-links {
             display: flex;
@@ -74,24 +88,47 @@
             align-items: center;
             flex: 2;
             margin: 0 auto;
-        }
-
-        .close-menu-btn {
-            display: none;
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 1.5rem;
-            cursor: pointer;
+            position: relative;
             z-index: 10000;
         }
 
         @media (max-width: 768px) {
-            .close-menu-btn {
-                display: block;
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                height: 100vh;
+                gap: 1.5rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: rgba(15, 15, 15, 0.98);
+                padding: 10rem 2rem 2rem;
+                z-index: 10000;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px);
+            }
+            
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+            }
+            
+            body.menu-active .logo {
+                position: relative;
+                z-index: 100001;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            body.menu-active .hamburger-menu {
+                z-index: 100001;
             }
         }
         .nav-links a {
@@ -252,11 +289,8 @@
                 position: fixed;
                 right: 1.5rem;
                 top: 1.5rem;
-                z-index: 1000;
-                background: rgba(15, 15, 15, 0.9);
-                border-radius: 50%;
-                padding: 1rem;
-                backdrop-filter: blur(10px);
+                z-index: 100000;
+                padding: 0.5rem;
             }
 
             .hamburger-menu.active div:nth-child(1) {
@@ -275,6 +309,12 @@
                 flex-direction: column;
                 gap: 1.5rem;
                 padding: 1.5rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 15, 0.9);
+                z-index: 999;
             }
 
             .logo {
@@ -296,12 +336,16 @@
                 align-items: center;
                 justify-content: flex-start;
                 gap: 2rem;
-                z-index: 999;
+                z-index: 99999;
+                pointer-events: none;
             }
 
             .nav-links.active {
                 display: flex;
                 animation: slideIn 0.3s ease-out forwards;
+                pointer-events: auto;
+                z-index: 99999;
+                visibility: visible;
             }
 
             @keyframes slideIn {
@@ -514,11 +558,8 @@
                 position: fixed;
                 right: 1.5rem;
                 top: 1.5rem;
-                z-index: 1000;
-                background: rgba(15, 15, 15, 0.9);
-                border-radius: 50%;
-                padding: 1rem;
-                backdrop-filter: blur(10px);
+                z-index: 100000;
+                padding: 0.5rem;
             }
 
             .hamburger-menu.active div:nth-child(1) {
@@ -537,6 +578,12 @@
                 flex-direction: column;
                 gap: 1.5rem;
                 padding: 1.5rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 15, 0.9);
+                z-index: 999;
             }
 
             .logo {
@@ -547,26 +594,274 @@
 
             .nav-links {
                 display: none;
-                flex-direction: column;
-                width: 100%;
-                height: 100vh;
-                gap: 1.5rem;
                 position: fixed;
                 top: 0;
                 left: 0;
-                right: 0;
+                width: 100%;
+                height: 100vh;
                 background: rgba(15, 15, 15, 0.98);
-                padding: 10rem 2rem 2rem;
-                z-index: 9999;
+                padding: 5rem 2rem 2rem;
+                flex-direction: column;
+                z-index: 99999;
                 opacity: 0;
+                visibility: hidden;
                 transform: translateY(-100%);
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 backdrop-filter: blur(20px);
             }
-            
+
             .nav-links.active {
                 display: flex;
                 opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+            }
+            
+            body.menu-active .logo {
+                position: relative;
+                z-index: 100001;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            body.menu-active .hamburger-menu {
+                z-index: 100001;
+            }
+        }
+
+        .close-menu-btn {
+            display: none;
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        @media (max-width: 768px) {
+            .close-menu-btn {
+                display: block;
+            }
+        }
+        .nav-links a {
+            color: #0F0F0F;
+            text-decoration: none;
+            font-size: 0.75rem;
+            background: #ffffff;
+            padding: 0.3rem 0.6rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links a:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .hero {
+            padding: 3rem .75rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .main-heading {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 500;
+            line-height: 1.1;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+
+        .highlight {
+            color: #4ADE80;
+        }
+
+        .location {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
+            font-size: clamp(1.5rem, 4vw, 2.3rem);
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-delay: 0.6s;
+            margin-top: 1rem;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .location p {
+            font-weight: 600;
+            letter-spacing: 1px;
+            line-height: 1.4;
+            text-align: center;
+            margin: 0;
+        }
+
+        .location-dot {
+            width: 12px;
+            height: 12px;
+            background: #FF4545;
+            border-radius: 50%;
+            margin-top: 2px;
+        }
+
+        .founder {
+            position: absolute;
+            top: 8.5rem;
+            right: 2rem;
+            text-align: right;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 0.8s;
+        }
+
+        .founder p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .founder a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .giant-text {
+            font-size: clamp(2rem, 8vw, 6rem);
+            font-weight: 500;
+            opacity: 0;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: -1;
+            width: 100%;
+            text-align: center;
+            line-height: 1.2;
+            animation: giantTextReveal 1.5s ease-out forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes giantTextReveal {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 100px);
+            }
+            to {
+                opacity: 0.3;
+                transform: translate(-50%, 0);
+            }
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: block;
+                position: fixed;
+                right: 1.5rem;
+                top: 1.5rem;
+                z-index: 100000;
+                padding: 0.5rem;
+            }
+
+            .hamburger-menu.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger-menu.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger-menu.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 15, 15, 0.9);
+                z-index: 999;
+            }
+
+            .logo {
+                font-size: 1.8rem;
+                position: relative;
+                z-index: 1000;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(15, 15, 15, 0.98);
+                padding: 5rem 2rem 2rem;
+                flex-direction: column;
+                z-index: 99999;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px);
+            }
+
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+                visibility: visible;
                 transform: translateY(0);
             }
 
@@ -590,7 +885,10 @@
             }
 
             .hero {
-                padding: 2rem 1.5rem;
+                padding: 6rem 1.5rem 2rem;
+                margin-top: 2rem;
+                position: relative;
+                z-index: 1;
             }
 
             .main-heading {
@@ -785,24 +1083,42 @@
     }
     
     body.menu-active .hero,
-    body.menu-active .location {
+    body.menu-active .location,
+    body.menu-active main,
+    body.menu-active section,
+    body.menu-active footer,
+    body.menu-active .background-image,
+    body.menu-active .giant-text,
+    body.menu-active .founder {
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
     .hero,
-    .location {
+    .location,
+    main,
+    section,
+    footer,
+    .background-image,
+    .giant-text,
+    .founder {
         opacity: 1;
         visibility: visible;
         transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    body.menu-active .nav-links {
+        opacity: 1;
+        visibility: visible;
+        z-index: 100000;
     }
 </style>
 <body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('') no-repeat center center fixed;
+    background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('https://i.imgur.com/Aq2Hy0E.jpg') no-repeat center center fixed;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -820,9 +1136,6 @@
             <div></div>
         </div>
         <div class="nav-links">
-            <button class="close-menu-btn" aria-label="Close menu">
-                <i class="fas fa-times"></i>
-            </button>
             <a href="#about">ABOUT US</a>
             <a href="#summit-iframe">SUMMIT 2024</a>
             <a href="dcs2025.html">DCS 2025</a>
@@ -841,15 +1154,19 @@
             navLinks.classList.toggle('active');
             document.body.classList.toggle('menu-active');
             document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            
+            // Force repaint to ensure transitions work properly
+            setTimeout(() => {
+                if (navLinks.classList.contains('active')) {
+                    navLinks.style.opacity = '1';
+                    navLinks.style.visibility = 'visible';
+                    navLinks.style.zIndex = '100000';
+                }
+            }, 10);
         });
 
-        const closeMenuBtn = document.querySelector('.close-menu-btn');
-        closeMenuBtn.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.classList.remove('menu-active');
-            document.body.style.overflow = '';
-        });
+        // Hamburger menu now handles both opening and closing
+        // through the toggle functionality
 
         links.forEach(link => {
             link.addEventListener('click', (e) => {
@@ -1135,7 +1452,7 @@
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-envelope"></i> Email: Diplomaticcentralsummit@gmail.com</p>
-                <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
+                <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
                 <p><i class="fas fa-map-marker-alt"></i> 45/1 Snehlataganj indore,near rajkumar brige</p>
             </div>
             
