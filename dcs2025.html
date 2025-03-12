@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DCS 2025 Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            background: rgba(15, 15, 15, 0.9);
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.95) 0%, rgba(30, 30, 50, 0.9) 100%);
             color: #ffffff;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
@@ -31,35 +31,53 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
-            opacity: 0.4;
+            opacity: 0.3;
+            filter: blur(2px);
         }
 
-        /* Rest of your CSS remains the same */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Enhanced styling for better visual appeal */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.5rem 5%;
-            background: transparent;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         nav::after {
             content: '';
             position: absolute;
-            bottom: 1rem;
+            bottom: 0;
             left: 0;
             width: 100%;
             height: 1px;
-            background-color: rgba(255, 255, 255, 0.2);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
         }
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
             color: #FFFFFF;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         .nav-links {
@@ -75,21 +93,110 @@
             color: #0F0F0F;
             text-decoration: none;
             font-size: 0.75rem;
-            background: #ffffff;
-            padding: 0.3rem 0.6rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.4rem 0.8rem;
             border-radius: 30px;
             transition: all 0.3s ease;
             letter-spacing: 0.3px;
-            font-weight: 400;
+            font-weight: 600;
             white-space: nowrap;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .nav-links a:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
+
+        .hamburger-menu {
+            display: none;
+            cursor: pointer;
+            position: fixed;
+            right: 1.5rem;
+            top: 1.5rem;
+            z-index: 100000;
+            padding: 0.75rem;
+            transition: all 0.3s ease;
         }
+
+        .hamburger-menu div {
+            width: 25px;
+            height: 2px;
+            background: #ffffff;
+            margin: 6px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .hamburger-menu.active div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger-menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: rgba(15, 15, 15, 0.98);
+                padding: 5rem 2rem 2rem;
+                flex-direction: column;
+                z-index: 99999;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px);
+            }
+
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+                animation: fadeInNav 0.5s ease-out forwards;
+            }
+            
+            @keyframes fadeInNav {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            body.menu-active .logo {
+                position: relative;
+                z-index: 100001;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            body.menu-active .hamburger-menu {
+                z-index: 100001;
+            }
+        }
+    
 
         .events-container {
             max-width: 1200px;
@@ -101,24 +208,36 @@
 
         .page-title {
             text-align: center;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: #FFFFFF;
             margin-bottom: 3rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             position: relative;
+            font-weight: 700;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .page-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #4568dc, #b06ab3);
+            margin: 15px auto 0;
+            border-radius: 2px;
         }
 
         .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
 
         .event-card {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 15px;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
             cursor: pointer;
@@ -126,6 +245,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
         }
 
         .event-card::before {
@@ -138,8 +259,9 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
             z-index: 0;
+            transform: scale(1.1);
         }
 
         .event-card:nth-child(1)::before { background-image: url('https://images.unsplash.com/photo-1599946347371-68eb71b16afc?auto=format&fit=crop&q=80'); }
@@ -151,14 +273,15 @@
         .event-card:nth-child(7)::before { background-image: url('https://images.unsplash.com/photo-1503428593586-e225b39bddfe?auto=format&fit=crop&q=80'); }
 
         .event-card:hover {
-            transform: translateY(-10px) rotate(1deg) scale(1.02);
+            transform: translateY(-15px) rotate(2deg) scale(1.03);
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
         .event-card:hover::before {
-            opacity: 0.2;
+            opacity: 0.25;
+            transform: scale(1);
         }
 
         .event-title, .event-description {
@@ -169,23 +292,42 @@
         .event-title {
             font-size: 1.8rem;
             color: #FFFFFF;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             transition: transform 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .event-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4568dc, #b06ab3);
+            transition: width 0.3s ease;
         }
 
         .event-card:hover .event-title {
             transform: scale(1.05);
         }
+        
+        .event-card:hover .event-title::after {
+            width: 100%;
+        }
 
         .event-description {
             font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
+            line-height: 1.7;
+            opacity: 0.85;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            font-weight: 300;
         }
 
         .event-card:hover .event-description {
             opacity: 1;
+            transform: translateY(5px);
         }
 
         .committees-container {
@@ -195,10 +337,17 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             padding: 80px 20px;
             overflow-y: auto;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .committees-grid {
@@ -216,40 +365,100 @@
         .committee-box {
             background: rgba(255, 255, 255, 0.08);
             border-radius: 15px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
+            padding: 1.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s ease;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .committee-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            transform: scale(0.5);
+            pointer-events: none;
         }
 
         .committee-box:hover {
-            transform: translateY(-5px);
-            border-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        .committee-box:hover::before {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .committee-title {
             color: #FFFFFF;
             font-size: 1.4rem;
             margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .committee-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4568dc, #b06ab3);
+            transition: width 0.3s ease;
+        }
+        
+        .committee-box:hover .committee-title::after {
+            width: 80%;
         }
 
         .committee-description {
             font-size: 1rem;
-            line-height: 1.5;
+            line-height: 1.6;
             color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+        }
+        
+        .committee-box:hover .committee-description {
+            color: rgba(255, 255, 255, 1);
         }
 
         .close-btn {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: none;
+            background: rgba(255, 255, 255, 0.1);
             border: none;
             color: #FFFFFF;
             font-size: 2rem;
             cursor: pointer;
             z-index: 2001;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
         }
 
         @media (max-width: 1024px) {
@@ -261,45 +470,183 @@
             .mun-grid, .pd-grid, .mc-grid, .socials-grid, .press-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .page-title {
+                font-size: 2.5rem;
+            }
         }
+        
         @media (max-width: 768px) {
+            .logo {
+                position: fixed;
+                top: 1.5rem;
+                left: 1.5rem;
+                z-index: 100001;
+                font-size: 1.2rem;
+            }
+            
             .hamburger-menu {
                 display: block;
-                cursor: pointer;
+                position: fixed;
+                right: 1.5rem;
+                top: 1.5rem;
+                z-index: 100000;
+                padding: 0.75rem;
+                background: rgba(10, 10, 20, 0.7);
+                backdrop-filter: blur(5px);
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .hamburger-menu:hover {
+                background: rgba(30, 30, 50, 0.8);
+            }
+            
+            .hamburger-menu.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
             }
 
+            .hamburger-menu.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger-menu.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
             .hamburger-menu div {
                 width: 25px;
-                height: 3px;
+                height: 2px;
                 background-color: #ffffff;
-                margin: 5px 0;
+                margin: 6px 0;
                 transition: 0.4s;
+                border-radius: 2px;
             }
-
+            
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                padding: 1rem;
                 flex-direction: column;
+                width: 100%;
+                height: 100vh;
+                gap: 2rem;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: rgba(10, 10, 20, 0.95);
+                padding: 10rem 2rem 2rem;
+                z-index: 10000;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px);
                 align-items: center;
+                justify-content: center;
+                margin-right: 0;
             }
-
+            
             .nav-links.active {
                 display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+                animation: fadeInNav 0.5s ease-out forwards;
+            }
+            
+            /* Add close button for mobile menu */
+            .mobile-close-btn {
+                display: none !important;
+                position: fixed;
+                top: 1.5rem;
+                right: 1.5rem;
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                color: #FFFFFF;
+                font-size: 2rem;
+                cursor: pointer;
+                z-index: 100002;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            @media (max-width: 768px) {
+                .mobile-close-btn {
+                    display: none !important;
+                }
+                
+                body.menu-active .mobile-close-btn,
+                .mobile-close-btn.active {
+                    display: flex !important;
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+            
+            @keyframes fadeInNav {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .nav-links a {
+                font-size: 1rem;
+                padding: 0.6rem 1.8rem;
+                width: 80%;
+                text-align: center;
+                margin: 0.3rem 0;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .nav-links a::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, rgba(69, 104, 220, 0.2), rgba(176, 106, 179, 0.2));
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .nav-links a:hover::before {
+                transform: translateX(0);
             }
 
             .page-title {
-                font-size: 2rem;
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .event-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .event-title {
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
     <img src="https://i.imgur.com/Aq2Hy0E.jpg" alt="Background" class="bg-image">
+    <div id="particles-js"></div>
     
     <nav>
         <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">DIPLOVISON</a></div>
@@ -308,52 +655,67 @@
             <div></div>
             <div></div>
         </div>
+        <button class="mobile-close-btn">&times;</button>
         <div class="nav-links">
-            <a href="index.html#about">ABOUT US</a>
-            <a href="index.html#summit-iframe">SUMMIT 2024</a>
+            <a href="#about">ABOUT US</a>
+            <a href="#summit-iframe">SUMMIT 2024</a>
             <a href="dcs2025.html">DCS 2025</a>
             <a href="secretariat.html">SECRETARIAT</a>
-            <a href="register.html">CA APPLICATIONS -></a>
+            <a href="register.html">CA APPLICATIONS →</a>
         </div>
     </nav>
-<br><br><br><br><br><br><br><br><br>
+
     <div class="events-container">
         <h1 class="page-title">DCS 2025 Events</h1>
         <div class="events-grid">
             <div class="event-card">
                 <h2 class="event-title">Model United Nations</h2>
-                <p class="event-description">Experience diplomacy at its finest in our Model United Nations simulation. Delegates will represent different countries, debate global issues, and work towards meaningful resolutions in an environment that mirrors the actual United Nations.</p>
+                <p class="event-description">Experience the thrill of debates on pressing issues worldwide with our model United Nations. Whether you want to contribute to world peace or talk about women's rights we’ve got you!
+                    .</p>
             </div>
 
             <div class="event-card">
                 <h2 class="event-title">Parliamentary Debate</h2>
-                <p class="event-description">Engage in high-level parliamentary style debates on pressing international issues. Develop your public speaking, critical thinking, and argumentation skills while competing against talented debaters from around the world.</p>
-            </div>
-
-            <div class="event-card">
-                <h2 class="event-title">Moot Court</h2>
-                <p class="event-description">Step into the shoes of international lawyers in our prestigious Moot Court competition. Present compelling arguments, analyze complex legal scenarios, and experience the thrill of international law in action.</p>
-            </div>
-
-            <div class="event-card">
-                <h2 class="event-title">Scavenger Hunt</h2>
-                <p class="event-description">Embark on an exciting diplomatic adventure! Our international scavenger hunt combines problem-solving, teamwork, and cultural knowledge in a race against time across various challenging scenarios.</p>
-            </div>
-
-            <div class="event-card">
-                <h2 class="event-title">Hackathon</h2>
-                <p class="event-description">Innovation meets diplomacy in our unique hackathon event. Work with fellow tech enthusiasts to develop solutions for global challenges, combining technology with international relations.</p>
-            </div>
-
-            <div class="event-card">
-                <h2 class="event-title">Socials</h2>
-                <p class="event-description">Network and build lasting connections at our exclusive social events. From formal galas to cultural nights, experience the lighter side of diplomacy while forming meaningful international friendships.</p>
+                <p class="event-description">Engage in heated discussions in our simulation of the Indian parliament or Commonly known as Indian committes. from bill reform to national security, participate in high-level debates with other members of parliament, to come to a consensus. 
+                </p>
             </div>
 
             <div class="event-card">
                 <h2 class="event-title">International Press</h2>
-                <p class="event-description">Be the voice of the summit as part of our International Press Corps. Cover events, conduct interviews, and create compelling content while learning about journalism in the context of international relations.</p>
+                <p class="event-description">Be the voice of truth with the international press! Whether you want to capture the days with photos, words, or caricatures, DCS offers you an array of options to serve as a bridge between global events and public awareness!</p>
             </div>
+
+            <div class="event-card">
+                <h2 class="event-title">Socials</h2>
+                <p class="event-description">An occasion to relax, interact, and build enduring relationships for the delegates. We, here at DCS have 2 trailblazing socials planned which are sure to add to the memories you take home!
+                </p>
+            </div>
+
+            <div class="event-card">
+                <h2 class="event-title">Moot Court</h2>
+                <p class="event-description">Learn how court proceedings work as if you are in a real court with our moot court! designed to help participants understand how legal systems work, improve their research, public speaking, and argumentation skills, participate in DCS’s moot court for an unforgettable experience!
+                </p>
+            </div>
+
+            <div class="event-card">
+                <h2 class="event-title">Scavenger Hunt</h2>
+                <p class="event-description">Connect the dots, solve clues, and test your teamwork skills with our scavenger hunt, Loot-era! The rush of searching for hidden objects or solving tricky riddles while racing against time keeps the excitement alive. Every clue brings a new challenge!
+                </p>
+            </div>
+
+            <div class="event-card">
+                <h2 class="event-title">COMING SOON </h2>
+                <p class="event-description"></p>
+            </div>
+            <div class="event-card">
+                <h2 class="event-title">COMING SOON </h2>
+                <p class="event-description"></p>
+            </div>
+            <div class="event-card">
+                <h2 class="event-title">COMING SOON </h2>
+                <p class="event-description"></p>
+            </div>
+         
         </div>
     </div>
 
@@ -361,9 +723,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.querySelector('.hamburger-menu');
             const navLinks = document.querySelector('.nav-links');
+            const closeBtn = document.querySelector('.mobile-close-btn');
 
             hamburger.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
+                hamburger.classList.toggle('active');
+                closeBtn.classList.toggle('active');
+                document.body.classList.toggle('menu-active');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                closeBtn.classList.remove('active');
+                document.body.classList.remove('menu-active');
             });
 
             // Add committee sections
@@ -372,36 +745,36 @@
                     <button class="close-btn">&times;</button>
                     <div class="committees-grid mun-grid">
                         <div class="committee-box">
-                            <h3 class="committee-title">UNGA DISEC</h3>
-                            <p class="committee-description">Disarmament and International Security Committee addressing global security challenges.</p>
+                            <h3 class="committee-title">SOMETHING</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">UNHRC</h3>
-                            <p class="committee-description">United Nations Human Rights Council promoting and protecting human rights worldwide.</p>
+                            <h3 class="committee-title">GOOD</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">UNSC</h3>
-                            <p class="committee-description">Security Council handling international peace and security matters.</p>
+                            <h3 class="committee-title">IS</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">ECOSOC</h3>
-                            <p class="committee-description">Economic and Social Council addressing sustainable development goals.</p>
+                            <h3 class="committee-title">COOKING</h3>
+                            <p class="committee-description"</p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">WHO</h3>
-                            <p class="committee-description">World Health Organization tackling global health challenges.</p>
+                            <h3 class="committee-title">FOR</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">UNESCO</h3>
-                            <p class="committee-description">Promoting international collaboration in education, sciences, and culture.</p>
+                            <h3 class="committee-title">YOU</h3>
+                            <p class="committee-description"></p>
                         </div>
-                        <div class="committee-box">
-                            <h3 class="committee-title">UNEP</h3>
-                            <p class="committee-description">Environmental Programme addressing climate change and ecological preservation.</p>
+                          <div class="committee-box">
+                            <h3 class="committee-title">STAY</h3>
+                            <p class="committee-description"></p>
                         </div>
-                        <div class="committee-box">
-                            <h3 class="committee-title">Crisis Committee</h3>
-                            <p class="committee-description">Dynamic committee handling rapid-response scenarios and international crises.</p>
+                          <div class="committee-box">
+                            <h3 class="committee-title">TUNED</h3>
+                            <p class="committee-description"></p>
                         </div>
                     </div>
                 </div>
@@ -410,28 +783,28 @@
                     <button class="close-btn">&times;</button>
                     <div class="committees-grid pd-grid">
                         <div class="committee-box">
-                            <h3 class="committee-title">Novice Division</h3>
-                            <p class="committee-description">Entry-level debates for newcomers to parliamentary style.</p>
+                            <h3 class="committee-title">SOMETHING</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Open Division</h3>
-                            <p class="committee-description">Advanced debates for experienced participants.</p>
+                            <h3 class="committee-title">GOOD</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">ESL Division</h3>
-                            <p class="committee-description">Dedicated division for non-native English speakers.</p>
+                            <h3 class="committee-title">IS</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Pro-Am Division</h3>
-                            <p class="committee-description">Mixed teams of experienced and novice debaters.</p>
+                            <h3 class="committee-title">COOKING</h3>
+                            <p class="committee-description"</p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Masters Division</h3>
-                            <p class="committee-description">Elite division for top-tier debaters.</p>
+                            <h3 class="committee-title">FOR</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Public Speaking</h3>
-                            <p class="committee-description">Individual oratory and impromptu speaking events.</p>
+                            <h3 class="committee-title">YOU</h3>
+                            <p class="committee-description"></p>
                         </div>
                     </div>
                 </div>
@@ -440,12 +813,12 @@
                     <button class="close-btn">&times;</button>
                     <div class="committees-grid mc-grid">
                         <div class="committee-box">
-                            <h3 class="committee-title">International Law</h3>
-                            <p class="committee-description">Cases focusing on international legal frameworks and precedents.</p>
+                            <h3 class="committee-title">COMING</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Human Rights Law</h3>
-                            <p class="committee-description">Cases centered on human rights violations and justice.</p>
+                            <h3 class="committee-title">SOON</h3>
+                            <p class="committee-description"></p>
                         </div>
                     </div>
                 </div>
@@ -454,12 +827,12 @@
                     <button class="close-btn">&times;</button>
                     <div class="committees-grid socials-grid">
                         <div class="committee-box">
-                            <h3 class="committee-title">Diplomatic Gala</h3>
-                            <p class="committee-description">Formal evening of networking and cultural exchange.</p>
+                            <h3 class="committee-title">COMING</h3>
+                            <p class="committee-description">THE BEST SOCIALS IN INDORE</p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Cultural Night</h3>
-                            <p class="committee-description">Celebration of global diversity through performances and traditions.</p>
+                            <h3 class="committee-title">SOON</h3>
+                            <p class="committee-description">ONLY AT DIPLOMATIC CENTRAL SUMMIT</p>
                         </div>
                     </div>
                 </div>
@@ -468,12 +841,12 @@
                     <button class="close-btn">&times;</button>
                     <div class="committees-grid press-grid">
                         <div class="committee-box">
-                            <h3 class="committee-title">Print Media</h3>
-                            <p class="committee-description">Daily newsletter and conference coverage team.</p>
+                            <h3 class="committee-title">COMING</h3>
+                            <p class="committee-description"></p>
                         </div>
                         <div class="committee-box">
-                            <h3 class="committee-title">Digital Media</h3>
-                            <p class="committee-description">Social media, photography, and video coverage team.</p>
+                            <h3 class="committee-title">SOON</h3>
+                            <p class="committee-description"></p>
                         </div>
                     </div>
                 </div>
@@ -553,15 +926,128 @@
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Particles.js for background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
     
     <style>
         /* Footer Styles */
         .site-footer {
-            background: rgba(15, 15, 15, 0.95);
+            background: rgba(10, 10, 20, 0.95);
             color: #ffffff;
             padding: 3rem 0 1rem;
             margin-top: 4rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
         }
         
         .footer-container {
@@ -584,6 +1070,8 @@
             margin-bottom: 1.5rem;
             position: relative;
             padding-bottom: 0.5rem;
+            letter-spacing: 1px;
+            font-weight: 600;
         }
         
         .footer-section h3::after {
@@ -593,7 +1081,7 @@
             bottom: 0;
             width: 50px;
             height: 2px;
-            background: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(90deg, #4568dc, #b06ab3);
         }
         
         .footer-section p {
@@ -602,6 +1090,11 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-section p:hover {
+            opacity: 1;
         }
         
         .social-links {
@@ -621,12 +1114,15 @@
             color: #ffffff;
             text-decoration: none;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .social-link:hover {
-            background: #ffffff;
-            color: #0F0F0F;
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, #4568dc, #b06ab3);
+            color: #ffffff;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: transparent;
         }
         
         .footer-links {
@@ -636,6 +1132,27 @@
         
         .footer-links li {
             margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-links li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .footer-links li:hover {
+            transform: translateX(5px);
+        }
+        
+        .footer-links li:hover::before {
+            color: #4568dc;
+            transform: translateX(3px);
         }
         
         .footer-links a {
@@ -647,7 +1164,6 @@
         
         .footer-links a:hover {
             color: #ffffff;
-            transform: translateX(5px);
         }
         
         .footer-bottom {
@@ -659,6 +1175,9 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             opacity: 0.7;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 0;
         }
         
         .footer-credit {
@@ -669,10 +1188,26 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-credit a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #4568dc, #b06ab3);
+            transition: width 0.3s ease;
         }
         
         .footer-credit a:hover {
             color: #ffffff;
+        }
+        
+        .footer-credit a:hover::after {
+            width: 100%;
         }
         
         @media (max-width: 768px) {
@@ -682,6 +1217,16 @@
             
             .footer-section {
                 margin-bottom: 2.5rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .footer-credit {
+                text-align: center;
             }
         }
     </style>
