@@ -117,6 +117,26 @@
             white-space: nowrap;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
+        
+        @media (max-width: 768px) {
+            .nav-links a {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                font-size: 1.1rem;
+                padding: 1rem;
+                margin: 0.5rem auto;
+                background: rgba(255, 255, 255, 0.05);
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+            }
+            
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: none;
+            }
+        }
 
         .nav-links a:hover {
             background: #f0f0f0;
@@ -143,6 +163,33 @@
 
             .nav-links.active {
                 display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+                animation: fadeInNav 0.5s ease-out forwards;
+            }
+            
+            @keyframes fadeInNav {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            body.menu-active .logo {
+                position: relative;
+                z-index: 100001;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            body.menu-active .hamburger-menu {
+                z-index: 100001;
             }
         }
         nav::after {
@@ -190,6 +237,26 @@
             transition: all 0.3s ease;
             white-space: nowrap;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links a {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+                font-size: 1.1rem;
+                padding: 1rem;
+                margin: 0.5rem auto;
+                background: rgba(255, 255, 255, 0.05);
+                color: #ffffff;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+            }
+            
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: none;
+            }
         }
 
         .nav-links a:hover {
@@ -526,11 +593,10 @@
                 display: none;
                 position: fixed;
                 top: 0;
-                right: 0;
-                bottom: 0;
-                width: 80%;
-                max-width: 320px;
-                background: rgba(15, 15, 15, 0.98);
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.97);
                 padding: 5rem 2rem 2rem;
                 flex-direction: column;
                 align-items: center;
@@ -538,16 +604,58 @@
 
             .nav-links.active {
                 display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+                animation: fadeInNav 0.5s ease-out forwards;
+            }
+            
+            @keyframes fadeInNav {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            body.menu-active .logo {
+                position: relative;
+                z-index: 100001;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            body.menu-active .hamburger-menu {
+                z-index: 100001;
             }
         }
 
         .hamburger-menu div {
             width: 25px;
-            height: 3px;
+            height: 2px;
             background: #ffffff;
-            margin: 5px 0;
+            margin: 6px 0;
             transition: all 0.3s ease;
+            border-radius: 2px;
         }
+        
+        .hamburger-menu.active div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger-menu.active div:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger-menu.active div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+
 
         @media (max-width: 768px) {
             .hamburger-menu {
@@ -557,19 +665,54 @@
             .nav-links {
                 display: none;
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: 0;
-                right: 0;
-                background: rgba(15, 15, 15, 0.95);
-                padding: 2rem;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(10, 10, 10, 0.97);
+                padding: 5rem 2rem 2rem;
                 flex-direction: column;
                 align-items: center;
-                gap: 1.5rem;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                justify-content: center;
+                gap: 2rem;
+                z-index: 99999;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-100%);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(10px);
+                overflow-y: auto;
             }
 
             .nav-links.active {
                 display: flex;
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
+                animation: fadeInNav 0.5s ease-out forwards;
+            }
+            
+            @keyframes fadeInNav {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            body.menu-active .logo {
+                position: relative;
+                z-index: 100001;
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            body.menu-active .hamburger-menu {
+                z-index: 100001;
             }
 
             .form-container {
@@ -605,7 +748,7 @@
 
     <div class="form-container">
         <h1 class="form-title">Campus Ambassador Application</h1>
-        <form id="ca-form">
+        <form id="ca-form" name="lala">
             <div class="form-group">
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -769,7 +912,12 @@
         .social-link:hover {
             background: #ffffff;
             color: #0F0F0F;
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-link {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .footer-links {
@@ -802,6 +950,22 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.9rem;
             opacity: 0.7;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 0;
+        }
+        
+        .footer-credit {
+            text-align: right;
+        }
+        
+        .footer-credit a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }        
+        .footer-credit a:hover {
+            color: #ffffff;
         }
 
         @media (max-width: 768px) {
@@ -811,6 +975,16 @@
             
             .footer-section {
                 margin-bottom: 2.5rem;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .footer-credit {
+                text-align: center;
             }
         }
     </style>
@@ -931,6 +1105,49 @@
             hamburger.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
                 hamburger.classList.toggle('active');
+                document.body.classList.toggle('menu-active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                
+                // Force repaint to ensure transitions work properly
+                setTimeout(() => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.style.opacity = '1';
+                        navLinks.style.visibility = 'visible';
+                        navLinks.style.zIndex = '100000';
+                    }
+                }, 10);
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            // Close button functionality
+            const closeMenuBtn = document.querySelector('.close-menu-btn');
+            if (closeMenuBtn) {
+                closeMenuBtn.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-active');
+                    document.body.style.overflow = '';
+                });
+            }
+            
+            // Close menu when clicking on nav links
+            const navLinksItems = document.querySelectorAll('.nav-links a');
+            navLinksItems.forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-active');
+                    document.body.style.overflow = '';
+                });
             });
 
             form.addEventListener('submit', (e) => {
@@ -975,34 +1192,19 @@
                 }
             });
         });
-         const scriptURL =                       
-      "https://script.google.com/macros/s/AKfycbwHvzoHJMpqDe0PnqIRFL_fCOwCg9f2iDl9PDyUIqWr_TG_Q0aIpUhCgzlnwTbyfqN5DA/exec";
-      const form = document.forms["submit-to-google-sheet"];
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        var formData = new FormData(form);
-        var ex = document.getElementById("ex").checked;
-        var age = document.getElementById("age").checked;
-
-        if (age) {
-          formData.append("age", "Yes");
-        } else {
-          formData.append("age", "No");
-        }
-        if (ex) {
-          formData.append("ex", "Yes");
-        } else {
-          formData.append("ex", "No");
-        }
-
-        fetch(scriptURL, { method: "POST", body: formData })
-          .then((response) => {
-            swal("Done", "Submitted Successfully.", "success");
-          })
-          .catch((error) => {
-            swal("Error", "Something went wrong. please try again!", "error");
-          });
-      });
+    </script>
+    <script>
+        const scriptURL =
+            'https://script.google.com/macros/s/AKfycbxfb0QAy4Ex92JbAnrEXsfrSdpXGZlRMeqb15stBXcnS3ofn22CfSj1GACAqt_vb1BVbA/exec';
+        
+        const form = document.forms['lala'];
+    
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+    
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            
+        });
     </script>
     
 </body>
