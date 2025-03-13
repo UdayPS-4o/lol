@@ -12,6 +12,30 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+
+        
+
+        
+        @media (max-width: 768px) {
+            .countdown-container {
+                padding: 1.5rem;
+                margin-top: 2rem;
+            }
+            
+            .countdown-timer {
+                gap: 1rem;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .countdown-label {
+                font-size: 0.8rem;
+            }
+        }
         .hamburger-menu {
             display: none;
             cursor: pointer;
@@ -32,12 +56,18 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('https://i.imgur.com/Aq2Hy0E.jpg') no-repeat center center fixed;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
         }
 
         nav {
@@ -64,22 +94,33 @@
         .logo {
             font-size: 2rem;
             font-weight: 600;
-            flex: 1;
+            position: relative;
+            transition: transform 0.3s ease;
         }
         
         @media (max-width: 768px) {
             .logo {
                 position: fixed;
-                top: 1.5rem;
-                left: 1.5rem;
+                left: 1rem;
+                top: 1rem;
+                font-size: 1.8rem;
+                font-weight: 600;
                 z-index: 100000;
+                padding: 0.5rem;
+                background: transparent;
+                transform-origin: left;
+                transition: transform 0.3s ease, opacity 0.3s ease;
             }
-            
+
+            .logo:hover {
+                transform: scale(1.05);
+            }
+        }
             /* Add padding to the top of the content to prevent it from being hidden behind the fixed navbar */
             .hero {
                 padding-top: 6rem;
             }
-        }
+        
 
         .nav-links {
             display: flex;
@@ -180,14 +221,15 @@
         }
 
         .highlight {
-            color: #4ADE80;
+            color: #1E3A8A;
         }
 
         .location {
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 1rem;
+            justify-content: center;
+            gap: 2rem;
             font-size: clamp(1.5rem, 4vw, 2.3rem);
             position: relative;
             opacity: 0;
@@ -198,6 +240,21 @@
             overflow: hidden;
         }
 
+        @media (max-width: 768px) {
+            .location {
+                background: rgba(15, 15, 15, 0.7);
+                backdrop-filter: blur(10px);
+                border-radius: 16px;
+                padding: 1.5rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                margin: 1rem;
+                width: calc(100% - 2rem);
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
         .location p {
             font-weight: 600;
             letter-spacing: 1px;
@@ -342,10 +399,10 @@
 
             .nav-links.active {
                 display: flex;
-                animation: slideIn 0.3s ease-out forwards;
-                pointer-events: auto;
-                z-index: 99999;
+                opacity: 1;
                 visibility: visible;
+                transform: translateY(0);
+                z-index: 100000;
             }
 
             @keyframes slideIn {
@@ -400,725 +457,134 @@
                 display: block;
             }
         }
-        .nav-links a {
-            color: #0F0F0F;
-            text-decoration: none;
-            font-size: 0.75rem;
-            background: #ffffff;
-            padding: 0.3rem 0.6rem;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-links a:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
-        }
-
-        .background-image {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            z-index: -1;
-        }
-
-        .hero {
-            padding: 3rem .75rem;
+        
+        /* Features Section Styles */
+        .features-section {
+            padding: 6rem 2rem;
             max-width: 1400px;
             margin: 0 auto;
-            min-height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
-
-        .main-heading {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 500;
-            line-height: 1.1;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.4s;
-        }
-
-        .highlight {
-            color: #4ADE80;
-        }
-
-        .location {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 1rem;
-            font-size: clamp(1.5rem, 4vw, 2.3rem);
-            position: relative;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.6s;
-            margin-top: 1rem;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .location p {
-            font-weight: 600;
-            letter-spacing: 1px;
-            line-height: 1.4;
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
             text-align: center;
-            margin: 0;
-        }
-
-        .location-dot {
-            width: 12px;
-            height: 12px;
-            background: #FF4545;
-            border-radius: 50%;
-            margin-top: 2px;
-        }
-
-        .founder {
-            position: absolute;
-            top: 8.5rem;
-            right: 2rem;
-            text-align: right;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-            animation-delay: 0.8s;
-        }
-
-        .founder p {
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
-        }
-
-        .founder a {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .giant-text {
-            font-size: clamp(2rem, 8vw, 6rem);
-            font-weight: 500;
-            opacity: 0;
-            position: fixed;
-            bottom: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
             left: 50%;
             transform: translateX(-50%);
-            white-space: nowrap;
-            z-index: -1;
-            width: 100%;
-            text-align: center;
-            line-height: 1.2;
-            animation: giantTextReveal 1.5s ease-out forwards;
-            animation-delay: 1s;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes giantTextReveal {
-            from {
-                opacity: 0;
-                transform: translate(-50%, 100px);
-            }
-            to {
-                opacity: 0.3;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .hamburger-menu {
-                display: block;
-                position: fixed;
-                right: 1.5rem;
-                top: 1.5rem;
-                z-index: 100000;
-                padding: 0.5rem;
-            }
-
-            .hamburger-menu.active div:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .hamburger-menu.active div:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger-menu.active div:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 1.5rem;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 15, 15, 0.9);
-                z-index: 999;
-            }
-
-            .logo {
-                font-size: 1.8rem;
-                position: relative;
-                z-index: 1000;
-            }
-
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(15, 15, 15, 0.98);
-                padding: 5rem 2rem 2rem;
-                flex-direction: column;
-                z-index: 99999;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-100%);
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                backdrop-filter: blur(20px);
-            }
-
-            .nav-links.active {
-                display: flex;
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                z-index: 100000;
-            }
-            
-            body.menu-active .logo {
-                position: relative;
-                z-index: 100001;
-                opacity: 1;
-                visibility: visible;
-            }
-            
-            body.menu-active .hamburger-menu {
-                z-index: 100001;
-            }
-        }
-
-        .close-menu-btn {
-            display: none;
+        
+        .section-title::after {
+            content: '';
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            color: #ffffff;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 10000;
-        }
-
-        @media (max-width: 768px) {
-            .close-menu-btn {
-                display: block;
-            }
-        }
-        .nav-links a {
-            color: #0F0F0F;
-            text-decoration: none;
-            font-size: 0.75rem;
-            background: #ffffff;
-            padding: 0.3rem 0.6rem;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-links a:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
-        }
-
-        .background-image {
-            position: fixed;
-            top: 0;
+            bottom: -10px;
             left: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            z-index: -1;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #1E3A8A, transparent);
         }
-
-        .hero {
-            padding: 3rem .75rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            min-height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .main-heading {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 500;
-            line-height: 1.1;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.4s;
-        }
-
-        .highlight {
-            color: #4ADE80;
-        }
-
-        .location {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 1rem;
-            font-size: clamp(1.5rem, 4vw, 2.3rem);
-            position: relative;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out forwards;
-            animation-delay: 0.6s;
-            margin-top: 1rem;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .location p {
-            font-weight: 600;
-            letter-spacing: 1px;
-            line-height: 1.4;
-            text-align: center;
-            margin: 0;
-        }
-
-        .location-dot {
-            width: 12px;
-            height: 12px;
-            background: #FF4545;
-            border-radius: 50%;
-            margin-top: 2px;
-        }
-
-        .founder {
-            position: absolute;
-            top: 8.5rem;
-            right: 2rem;
-            text-align: right;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-            animation-delay: 0.8s;
-        }
-
-        .founder p {
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
-        }
-
-        .founder a {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .giant-text {
-            font-size: clamp(2rem, 8vw, 6rem);
-            font-weight: 500;
-            opacity: 0;
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-            z-index: -1;
-            width: 100%;
-            text-align: center;
-            line-height: 1.2;
-            animation: giantTextReveal 1.5s ease-out forwards;
-            animation-delay: 1s;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes giantTextReveal {
-            from {
-                opacity: 0;
-                transform: translate(-50%, 100px);
-            }
-            to {
-                opacity: 0.3;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            .hamburger-menu {
-                display: block;
-                position: fixed;
-                right: 1.5rem;
-                top: 1.5rem;
-                z-index: 100000;
-                padding: 0.5rem;
-            }
-
-            .hamburger-menu.active div:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .hamburger-menu.active div:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger-menu.active div:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            nav {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 1.5rem;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 15, 15, 0.9);
-                z-index: 999;
-            }
-
-            .logo {
-                font-size: 1.8rem;
-                position: relative;
-                z-index: 1000;
-            }
-
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(15, 15, 15, 0.98);
-                padding: 5rem 2rem 2rem;
-                flex-direction: column;
-                z-index: 99999;
-                opacity: 0;
-                visibility: hidden;
-                transform: translateY(-100%);
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                backdrop-filter: blur(20px);
-            }
-
-            .nav-links.active {
-                display: flex;
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-            }
-
-            .nav-links a {
-                width: 100%;
-                max-width: 300px;
-                text-align: center;
-                font-size: 1.1rem;
-                padding: 1rem;
-                margin: 0 auto;
-                background: rgba(255, 255, 255, 0.05);
-                color: #ffffff;
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                transition: all 0.3s ease;
-            }
-
-            .nav-links a:hover {
-                background: rgba(255, 255, 255, 0.1);
-                transform: none;
-            }
-
-            .hero {
-                padding: 6rem 1.5rem 2rem;
-                margin-top: 2rem;
-                position: relative;
-                z-index: 1;
-            }
-
-            .main-heading {
-                font-size: clamp(1.8rem, 5vw, 2.5rem);
-            }
-
-            .founder {
-                display: none;
-            }
-
-            .giant-text {
-                font-size: clamp(2rem, 8vw, 4rem);
-                white-space: normal;
-                padding: 0 1rem;
-                text-align: center;
-                line-height: 1.2;
-            }
-        }
-
-        /* About Us Section */
-        .about-us {
-            padding: 20rem 2rem 8rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .about-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 6rem;
-        }
-
-        .about-item {
+        
+        .features-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease-out forwards;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-
-        .about-item.reverse {
-            direction: rtl;
-        }
-
-        .about-item.reverse .about-content {
-            direction: ltr;
-        }
-
-        .about-image {
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-            border-radius: 20px;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .about-item:hover .about-image img {
-            transform: scale(1.05);
-        }
-
-        .about-content {
-            padding: 2rem;
-        }
-
-        .about-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #4ADE80;
-        }
-
-        .about-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 768px) {
-            .about-item {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-image {
-                height: 300px;
-            }
-
-            .about-item.reverse {
-                direction: ltr;
-            }
-
-            .about-content {
-                padding: 1rem 0;
-            }
-
-            .about-content h2 {
-                font-size: 2rem;
-            }
-        }
-
-        /* Partners Section */
-        .logo-carousel {
-            width: 100%;
-            overflow: hidden;
-            padding: 3rem 0;
-            background: rgba(255, 255, 255, 0.03);
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo-slide {
-            display: flex;
-            animation: scroll 20s linear infinite;
-            gap: 2rem;
-            padding: 0 1.5rem;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        .logo-slide:hover {
-            animation-play-state: paused;
-        }
-
-        .logo-slide img {
-            height: 90px;
-            width: 90px;
-            object-fit: contain;
+            padding: 2rem;
             transition: all 0.4s ease;
-            transform: scale(0.95);
-            margin: 0 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: cardFadeIn 0.8s ease-out forwards;
+        }
+        
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.3s; }
+        .feature-card:nth-child(3) { animation-delay: 0.5s; }
+        .feature-card:nth-child(4) { animation-delay: 0.7s; }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(30, 58, 138, 0.2);
+            border-color: rgba(69, 104, 220, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: rgba(30, 58, 138, 0.1);
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
         }
-
-        .logo-slide img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        
+        .feature-card:hover .feature-icon::after {
+            width: 70px;
+            height: 70px;
+            background: rgba(69, 104, 220, 0.2);
         }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .feature-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
-            100% {
-                transform: translateX(-50%);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-
+        
         @media (max-width: 768px) {
-            .logo-carousel {
-                padding: 2rem 0;
+            .features-section {
+                padding: 4rem 1.5rem;
             }
-            .logo-slide {
+            
+            .features-grid {
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            .logo-slide img {
-                height: 70px;
-                width: 70px;
-            }
         }
-
-        /* Footer Styles */
-        .site-footer {
-            background: rgba(15, 15, 15, 0.95);
-            color: #ffffff;
-            padding: 3rem 0 1rem;
-            margin-top: 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
-</head>
-<style>
-    .background-image {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.4;
-        z-index: -1;
-    }
     
-    body.menu-active .hero,
-    body.menu-active .location,
-    body.menu-active main,
-    body.menu-active section,
-    body.menu-active footer,
-    body.menu-active .background-image,
-    body.menu-active .giant-text,
-    body.menu-active .founder {
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
 
-    .hero,
-    .location,
-    main,
-    section,
-    footer,
-    .background-image,
-    .giant-text,
-    .founder {
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    body.menu-active .nav-links {
-        opacity: 1;
-        visibility: visible;
-        z-index: 100000;
-    }
-</style>
-<body {
+body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('https://i.imgur.com/Aq2Hy0E.jpg') no-repeat center center fixed;
+    background: linear-gradient(135deg, rgba(10, 20, 50, 0.95) 0%, rgba(30, 40, 80, 0.9) 100%);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1126,10 +592,11 @@
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
 }
+</style>
 <body>
-    <img src="bg.png" alt="Concert Background" class="background-image">
+    <div id="particles-js"></div>
     <nav>
-        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">DIPLOVISON</a></div>
+        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">DiPLOViSiON</a></div>
         <div class="hamburger-menu">
             <div></div>
             <div></div>
@@ -1143,83 +610,244 @@
             <a href="register.html">CA APPLICATIONS →</a>
         </div>
     </nav>
+    <div class="giant-text">DIPLOMATIC CENTRAL SUMMIT</div>
     <script>
-        const hamburger = document.querySelector('.hamburger-menu');
-        const navLinks = document.querySelector('.nav-links');
-        const links = document.querySelectorAll('.nav-links a');
-        const founder = document.querySelector('.founder');
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            document.body.classList.toggle('menu-active');
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+            const links = document.querySelectorAll('.nav-links a');
+            const founder = document.querySelector('.founder');
             
-            // Force repaint to ensure transitions work properly
-            setTimeout(() => {
-                if (navLinks.classList.contains('active')) {
-                    navLinks.style.opacity = '1';
-                    navLinks.style.visibility = 'visible';
-                    navLinks.style.zIndex = '100000';
-                }
-            }, 10);
-        });
-
-        // Hamburger menu now handles both opening and closing
-        // through the toggle functionality
-
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                if (link.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        hamburger.classList.remove('active');
-                        navLinks.classList.remove('active');
-                        document.body.classList.remove('menu-active');
-                        document.body.style.overflow = '';
-                        
-                        const offset = 100;
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - offset;
-                        
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
+            // Summit 2024 Video Interaction
+            const videoOverlay = document.querySelector('.summit-video-overlay');
+            const videoWrapper = document.querySelector('.summit-video-wrapper');
+            
+            if (videoOverlay && videoWrapper) {
+                videoOverlay.addEventListener('click', function() {
+                    this.style.opacity = '0';
+                    this.style.pointerEvents = 'none';
+                    
+                    // Add a class to animate the video container
+                    videoWrapper.closest('.summit-video-container').classList.add('active');
+                });
+            }
+            
+            // Animate summit cards on scroll
+            const summitSection = document.querySelector('.summit-section');
+            const summitObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        summitObserver.unobserve(entry.target);
                     }
+                });
+            }, { threshold: 0.2 });
+            
+            if (summitSection) {
+                summitObserver.observe(summitSection);
+            }
+
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                document.body.classList.toggle('menu-active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+                
+                // Force repaint to ensure transitions work properly
+                setTimeout(() => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.style.opacity = '1';
+                        navLinks.style.visibility = 'visible';
+                        navLinks.style.zIndex = '100000';
+                    }
+                }, 10);
+            });
+
+            // Hamburger menu now handles both opening and closing
+            // through the toggle functionality
+
+            links.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = link.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            hamburger.classList.remove('active');
+                            navLinks.classList.remove('active');
+                            document.body.classList.remove('menu-active');
+                            document.body.style.overflow = '';
+                            
+                            const offset = 100;
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - offset;
+                            
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.classList.remove('menu-active');
+                    document.body.style.overflow = '';
                 }
             });
-        });
+            
+            // Testimonial Slider Functionality
+            const track = document.querySelector('.testimonial-track');
+            const slides = document.querySelectorAll('.testimonial-card');
+            const dots = document.querySelectorAll('.dot');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            
+            let currentIndex = 0;
+            const slideWidth = slides[0].getBoundingClientRect().width + 32; // Width + gap
+            
+            // Initialize slider
+            function updateSlider() {
+                track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+                
+                // Update active dot
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Event listeners for controls
+            prevBtn.addEventListener('click', () => {
+                currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+                updateSlider();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+                updateSlider();
+            });
+            
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateSlider();
+                });
+            });
+            
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+                updateSlider();
+            }, 5000);
+            
+            // Initialize slider on page load
+            updateSlider();
+            
+            // Partners Slider Functionality
+            const partnersTrack = document.querySelector('.partners-track');
+            const partnersSlides = document.querySelectorAll('.partners-slide');
+            const partnersDots = document.querySelectorAll('.partners-dots .dot');
+            
+            let partnersCurrentIndex = 0;
+            const partnersSlideWidth = partnersSlides[0].getBoundingClientRect().width;
+            
+            // Initialize partners slider
+            function updatePartnersSlider() {
+                partnersTrack.style.transform = `translateX(-${partnersCurrentIndex * partnersSlideWidth}px)`;
+                
+                // Update active dot
+                partnersDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === partnersCurrentIndex);
+                });
+            }
+            
+            // Dot navigation for partners
+            partnersDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    partnersCurrentIndex = index;
+                    updatePartnersSlider();
+                });
+            });
+            
+            // Auto slide partners every 3 seconds
+            setInterval(() => {
+                partnersCurrentIndex = partnersCurrentIndex < partnersSlides.length - 1 ? partnersCurrentIndex + 1 : 0;
+                updatePartnersSlider();
+            }, 3000);
+            
+            // Initialize partners slider on page load
+            updatePartnersSlider();
 
-        document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.classList.remove('menu-active');
-                document.body.style.overflow = '';
+            
+            // Statistics Counter Animation
+            const statValues = document.querySelectorAll('.stat-value');
+            let countersStarted = false;
+            
+            function startCounters() {
+                if (countersStarted) return;
+                
+                statValues.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-count'));
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 20); // Update every 20ms
+                    let current = 0;
+                    
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = target;
+                            clearInterval(counterInterval);
+                        } else {
+                            counter.textContent = Math.floor(current);
+                        }
+                    };
+                    
+                    const counterInterval = setInterval(updateCounter, 20);
+                });
+                
+                countersStarted = true;
+            }
+            
+            // Start counters when statistics section is in view
+            const statsSection = document.querySelector('.statistics-section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(startCounters, 500); // Slight delay for better effect
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            if (statsSection) {
+                observer.observe(statsSection);
             }
         });
     </script>
 
     <main class="hero">
         <h1 class="main-heading">
-            DIPLOVISON<br>
+            DIPLOVISION<br>
           EXPIRENCES THAT LAST A <span class="highlight">LIFETIME</span>
         </h1>
         <div class="location">
-            <div class="location-dot"></div>
-            <p>XXZ COLLEG,INDORE</p>
-            <div class="location-dot"></div>
-            <p>18TH-19TH-20TH JULY</p>
+            <p>📍 NARSEE MONJEE,INDORE</p>
+            <p>📅 18TH-19TH-20TH JULY</p>
         </div>
+        
+
     </main>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <section id="about" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05);">        <div style="max-width: 1400px; margin: 0 auto;">
             <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem;">About Us</h2>
             <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.8; max-width: 800px;">
-                DIPLOVISON is a premier platform dedicated to fostering diplomatic excellence and international understanding. Through our conferences and summits, we bring together future leaders to engage in meaningful dialogue and develop solutions for global challenges.
+                DIPLOVISION is a premier platform dedicated to fostering diplomatic excellence and international understanding. Through our conferences and summits, we bring together future leaders to engage in meaningful dialogue and develop solutions for global challenges.
             </p>
         </div>
     </section>
@@ -1227,94 +855,171 @@
     <div style="height: 4rem;"></div>
 
     <section id="partners" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05); overflow: hidden;">
-        <div style="max-width: 1400px; margin: 0 auto;">
-            <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem; text-align: center;">Our Trusted Partners</h2>
-            <div class="logo-carousel">
-                <div class="logo-slide">
+    <div style="max-width: 1400px; margin: 0 auto;">
+        <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem; text-align: center;">Our Trusted Partners</h2>
+        <div class="partners-slider">
+            <div class="partners-track">
+                <div class="partners-slide">
                     <img src="upgrad.png" alt="UpGrad Indore">
                     <img src="TOPR.png" alt="Toprankers">
                     <img src="kisna.png" alt="Kisna">
+                </div>
+                <div class="partners-slide">
                     <img src="shreedhi.png" alt="Shridhi">
                     <img src="sv.png" alt="Logo">
                     <img src="treasuire.png" alt="UpGrad Indore">
-                    <img src="bagline.png" alt="Toprankers">
-                    <img src="kalani_group_logo.jpeg" alt="Kisna">
-                    <!-- Duplicate for seamless loop -->
-                    <img src="upgrad.png" alt="UpGrad Indore">
-                    <img src="TOPR.png" alt="Toprankers">
-                    <img src="kisna.png" alt="Kisna">
-                    <img src="shreedhi.png" alt="Shridhi">
-                    <img src="sv.png" alt="Logo">
-                    <img src="treasuire.png" alt="UpGrad Indore">
+                </div>
+                <div class="partners-slide">
                     <img src="bagline.png" alt="Toprankers">
                     <img src="kalani_group_logo.jpeg" alt="Kisna">
                 </div>
             </div>
+            <div class="slider-controls partners-controls">
+                <div class="slider-dots partners-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
         </div>
-        <style>
-            .logo-carousel {
-                width: 100%;
-                overflow: hidden;
-                padding: 3rem 0;
-                background: rgba(255, 255, 255, 0.03);
-                backdrop-filter: blur(10px);
-                border-radius: 16px;
-                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+    </div>
+    <style>
+        .partners-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+            padding: 3rem 0;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .partners-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .partners-slide {
+            display: flex;
+            min-width: 100%;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+        
+        .partners-slide img {
+            height: 90px;
+            width: 90px;
+            object-fit: contain;
+            transition: all 0.4s ease;
+            transform: scale(0.95);
+            margin: 0 15px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+        }
+        
+        .partners-slide img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+        }
+        
+        .partners-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .partners-prev-btn, .partners-next-btn {
+            display: none; /* Hide the buttons */
+        }
+        
+        .partners-dots .dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .partners-dots .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+        
+        @media (max-width: 768px) {
+            .partners-slider {
+                padding: 2rem 0;
             }
-
-            .logo-slide {
-                display: flex;
-                animation: scroll 20s linear infinite;
-                gap: 2rem;
-                padding: 0 1.5rem;
-                align-items: center;
-                justify-content: space-around;
+            .partners-slide {
+                gap: 1.5rem;
+                flex-wrap: wrap;
             }
-
-            .logo-slide:hover {
-                animation-play-state: paused;
+            .partners-slide img {
+                margin: 10px;
             }
-
-            .logo-slide img {
-                height: 90px;
-                width: 90px;
-                object-fit: contain;
-                transition: all 0.4s ease;
-                transform: scale(0.95);
-                margin: 0 15px;
-                border-radius: 50%;
-                background-color: rgba(255, 255, 255, 0.1);
-                padding: 10px;
-            }
-
-            .logo-slide img:hover {
-                transform: scale(1.1);
-                box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-            }
-
-            @keyframes scroll {
-                0% {
-                    transform: translateX(0);
-                }
-                100% {
-                    transform: translateX(-50%);
-                }
-            }
-
-            @media (max-width: 768px) {
-                .logo-carousel {
-                    padding: 2rem 0;
-                }
-                .logo-slide {
-                    gap: 1.5rem;
-                }
-                .logo-slide img {
-                    height: 70px;
-                    width: 70px;
-                }
-            }
-        </style>
+        }
+    </style>
+</section>
+    
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose DIPLOVISION</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Global Network</h3>
+                    <p>Connect with like-minded individuals from around the world and build lasting relationships.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Expert Mentorship</h3>
+                    <p>Learn from seasoned diplomats and international relations experts through our mentorship programs.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Career Opportunities</h3>
+                    <p>Gain access to exclusive internships and job opportunities in diplomatic circles.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>Recognition</h3>
+                    <p>Earn certificates and accolades that are recognized by top institutions worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Statistics Section -->
+    <section id="statistics" class="statistics-section">
+        <div class="container">
+            <h2 class="section-title">Our Milestones</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" data-count="500">0</div>
+                    <div class="stat-label">Delegates</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-count="45">0</div>
+                    <div class="stat-label">Institutions</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-count="12">0</div>
+                    <div class="stat-label">Partners</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" data-count="70">0</div>
+                    <div class="stat-label">Interns</div>
+                </div>
+            </div>
+        </div>
     </section>
       
     </section>
@@ -1324,15 +1029,55 @@
         <p>in god we trust</p>
     </div>
 
+    <!-- Summit 2024 Section -->
+    <section id="summit-iframe" class="summit-section">
+        <div class="summit-container">
+            <h2 class="summit-title">SUMMIT 2024</h2>
+            <div class="summit-content">
+                <div class="summit-video-container">
+                    <div class="summit-video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+                        <div class="summit-video-overlay">
+                            <div class="summit-play-button">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="summit-info">
+                    <div class="summit-card">
+                        <div class="summit-icon">📅</div>
+                        <h3>July 18-20, 2024</h3>
+                        <p>Mark your calendar for three days of diplomatic excellence</p>
+                    </div>
+                    <div class="summit-card">
+                        <div class="summit-icon">🌎</div>
+                        <h3>Global Participation</h3>
+                        <p>Connect with delegates from over 45 institutions worldwide</p>
+                    </div>
+                    <div class="summit-card">
+                        <div class="summit-icon">🏆</div>
+                        <h3>Premier Committees</h3>
+                        <p>Engage in high-level diplomatic simulations and debates</p>
+                    </div>
+                </div>
+                <div class="summit-cta">
+                    <a href="register.html" class="summit-button">Register Now</a>
+                    <a href="#" class="summit-button secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="about" class="about-us">
         <div class="about-grid">
             <div class="about-item">
-                <div id= about-image1 class="about-image">
-                    <iframe id="summit-iframe" src="https://drive.google.com/file/d/1XtzhJ320zzXICcI-UxjtVBUcQDUigPvw/preview" width="640" height="480" allow="autoplay" style="width: 100%; height: 100%; pointer-events: none; border: none;" muted="muted" autoplay="autoplay" loop="loop" frameborder="0"></iframe>
+                <div id="about-image1" class="about-image">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" alt="Our Mission">
                 </div>
                 <div class="about-content">
                     <h2>Our Mission</h2>
-                    <p>DIPLOVISON is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
+                    <p>DIPLOVISION is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
                 </div>
             </div>
             <div class="about-item reverse">
@@ -1351,6 +1096,88 @@
                 <div class="about-content">
                     <h2>Our Impact</h2>
                     <p>Since our inception, we have empowered thousands of students across the globe, organizing successful diplomatic summits and creating lasting connections between future world leaders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">TESTIMONIALS</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-track">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"DIPLOVISION transformed my understanding of international relations. The connections I made and skills I developed have been invaluable to my career."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👤</div>
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Foreign Service Officer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The summit was incredibly well-organized and provided unique insights into global diplomacy that I couldn't have gained elsewhere."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👤</div>
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <p>International Relations Student</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"As a delegate at DIPLOVISION, I developed critical negotiation skills and made connections with peers from over 30 countries."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👤</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>UN Youth Ambassador</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The mentorship program at DIPLOVISION opened doors to incredible opportunities in the diplomatic world. I'm forever grateful for this experience."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👤</div>
+                            <div class="author-info">
+                                <h4>David Rodriguez</h4>
+                                <p>Diplomatic Attaché</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The simulation exercises at the summit challenged me to think critically about global issues and develop practical solutions."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">👤</div>
+                            <div class="author-info">
+                                <h4>Emma Wilson</h4>
+                                <p>Political Science Graduate</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="prev-btn">❮</button>
+                    <div class="slider-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="next-btn">❯</button>
                 </div>
             </div>
         </div>
@@ -1443,16 +1270,531 @@
                 font-size: 2rem;
             }
         }
-    </style>
-
-    <div class="giant-text">DIPLOMATIC CENTRAL SUMMIT</div>
+        
+        /* Testimonials Section Styles */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-card {
+            min-width: calc(33.333% - 1.33rem);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-content p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #ffffff;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 3rem;
+            gap: 2rem;
+        }
+        
+        .prev-btn, .next-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .prev-btn:hover, .next-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .slider-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background: #ffffff;
+            transform: scale(1.2);
+        }
+        
+        .statistics-section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+            background: rgba(15, 15, 15, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #1E3A8A, #000000);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, rgba(15, 15, 15, 0) 100%);
+            z-index: -1;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+            border-color: rgba(30, 58, 138, 0.5);
+        }
+        
+        .stat-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #ffffff, #1E3A8A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        @media (max-width: 768px) {
+            .statistics-section {
+                padding: 4rem 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .stat-card {
+                padding: 1.5rem;
+            }
+            
+            .stat-value {
+                font-size: 2.5rem;
+            }
+            
+            .stat-label {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .location {
+                background: rgba(15, 15, 15, 0.7);
+                backdrop-filter: blur(10px);
+                border-radius: 16px;
+                padding: 1.5rem;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                margin: 1rem;
+                width: calc(100% - 2rem);
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+        
+        /* Summit 2024 Section Styles */
+        .summit-section {
+            padding: 8rem 2rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .summit-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .summit-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffffff;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .summit-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #1E3A8A, transparent);
+        }
+        
+        .summit-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .summit-video-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            transform: translateY(0);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            background: #000;
+        }
+        
+        .summit-video-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 70px rgba(74, 222, 128, 0.2);
+        }
+        
+        .summit-video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .summit-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        .summit-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .summit-video-container:hover .summit-video-overlay {
+            opacity: 0;
+        }
+        
+        .summit-play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(30, 58, 138, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(69, 104, 220, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 15px rgba(69, 104, 220, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(69, 104, 220, 0);
+            }
+        }
+        
+        .summit-play-button i {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-left: 5px;
+        }
+        
+        .summit-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .summit-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            opacity: 0;
+            animation: cardFadeIn 0.8s ease-out forwards;
+        }
+        
+        .summit-card:nth-child(1) { animation-delay: 0.2s; }
+        .summit-card:nth-child(2) { animation-delay: 0.4s; }
+        .summit-card:nth-child(3) { animation-delay: 0.6s; }
+        
+        .summit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(30, 58, 138, 0.2);
+            border-color: rgba(69, 104, 220, 0.3);
+        }
+        
+        .summit-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .summit-icon::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(30, 58, 138, 0.1);
+            border-radius: 50%;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+        
+        .summit-card:hover .summit-icon::after {
+            width: 80px;
+            height: 80px;
+            background: rgba(69, 104, 220, 0.2);
+        }
+        
+        .summit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        
+        .summit-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .summit-cta {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .summit-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #1E3A8A;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #1E3A8A;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .summit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .summit-button:hover::before {
+            width: 100%;
+        }
+        
+        .summit-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
+        }
+        
+        .summit-button.secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+        
+        .summit-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #4ADE80;
+        }
+        
+        @media (max-width: 768px) {
+            .summit-section {
+                padding: 6rem 1.5rem 4rem;
+            }
+            
+            .summit-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .summit-cta {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .summit-button {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .summit-play-button {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .summit-play-button i {
+                font-size: 1.5rem;
+            }
+        }
+    
+</style>
     
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-section">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-envelope"></i> Email: Diplomaticcentralsummit@gmail.com</p>
-                <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
+                <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
                 <p><i class="fas fa-map-marker-alt"></i> 45/1 Snehlataganj indore,near rajkumar brige</p>
             </div>
             
@@ -1485,7 +1827,7 @@
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+
     <style>
         /* Footer Styles */
         .site-footer {
@@ -1558,7 +1900,12 @@
         .social-link:hover {
             background: #ffffff;
             color: #0F0F0F;
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-link {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .footer-links {
@@ -1604,13 +1951,51 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-credit a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #4568dc, #b06ab3);
+            transition: width 0.3s ease;
         }
         
         .footer-credit a:hover {
             color: #ffffff;
         }
         
+        .footer-credit a:hover::after {
+            width: 100%;
+        }
+        
         @media (max-width: 768px) {
+            .testimonial-card {
+                min-width: 100%;
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+            
+            .testimonial-content p {
+                font-size: 1rem;
+            }
+            
+            .testimonial-track {
+                gap: 1rem;
+            }
+            
+            .testimonials-section {
+                padding: 4rem 1rem;
+            }
+            
+            .slider-controls {
+                margin-top: 1.5rem;
+            }
+            
             .footer-container {
                 flex-direction: column;
             }
@@ -1630,5 +2015,66 @@
             }
         }
     </style>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS('particles-js', {
+    particles: {
+        number: {
+            value: 80,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        color: {
+            value: '#4a90e2'
+        },
+        shape: {
+            type: 'circle'
+        },
+        opacity: {
+            value: 0.3,
+            random: true
+        },
+        size: {
+            value: 3,
+            random: true
+        },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#6495ed',
+            opacity: 0.2,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'out',
+            bounce: false
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: {
+                enable: true,
+                mode: 'grab'
+            },
+            onclick: {
+                enable: true,
+                mode: 'push'
+            },
+            resize: true
+        }
+    },
+    retina_detect: true
+            });
+        });
+    </script>
 </body>
 </html>
