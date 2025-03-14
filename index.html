@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DIPLOVISION</title>
+    <link rel="stylesheet" href="scroll-sections.css">
     <style>
         * {
             margin: 0;
@@ -468,11 +469,12 @@
         .section-title {
             font-size: clamp(2rem, 5vw, 3rem);
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             position: relative;
             display: inline-block;
             left: 50%;
             transform: translateX(-50%);
+            z-index: 1;
         }
         
         .section-title::after {
@@ -483,13 +485,16 @@
             width: 100%;
             height: 3px;
             background: linear-gradient(90deg, transparent, #1E3A8A, transparent);
+            z-index: -1;
         }
         
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 0;
         }
         
         .feature-card {
@@ -841,14 +846,56 @@ body {
             <p>📅 18TH-19TH-20TH JULY</p>
         </div>
         
-
+        <br><br><br><br><br><br><br><br><br><br><br><br>
     </main>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <section id="about" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05);">        <div style="max-width: 1400px; margin: 0 auto;">
-            <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem;">About Us</h2>
-            <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.8; max-width: 800px;">
-                DIPLOVISION is a premier platform dedicated to fostering diplomatic excellence and international understanding. Through our conferences and summits, we bring together future leaders to engage in meaningful dialogue and develop solutions for global challenges.
-            </p>
+<!-- About Us Vertical Scroll Section -->
+    <section class="vertical-scroll-section" id="about">
+        <div class="vertical-scroll-container">
+            <div class="vertical-scroll-header">
+                <h2>About Us</h2>
+                <p>DIPLOVISION is a premier platform dedicated to fostering diplomatic excellence and international understanding.</p>
+   </div>
+   <br><br><br><br><br><br>
+            <div class="vertical-scroll-content">
+                <div class="vertical-scroll-card" id="mission-card">
+                    <div class="vertical-card-inner">
+                        <div class="vertical-card-image">
+                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" alt="Our Mission">
+                        </div>
+                        <div class="vertical-card-text">
+                            <h3>Our Mission</h3>
+                            <p>DIPLOVISION is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical-scroll-card" id="vision-card">
+                    <div class="vertical-card-inner">
+                        <div class="vertical-card-image">
+                            <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80" alt="Our Vision">
+                        </div>
+                        <div class="vertical-card-text">
+                            <h3>Our Vision</h3>
+                            <p>We envision a world where young leaders are empowered to tackle global challenges through diplomatic dialogue, cultural understanding, and innovative problem-solving approaches.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical-scroll-card" id="impact-card">
+                    <div class="vertical-card-inner">
+                        <div class="vertical-card-image">
+                            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80" alt="Our Impact">
+                        </div>
+                        <div class="vertical-card-text">
+                            <h3>Our Impact</h3>
+                            <p>Since our inception, we have empowered thousands of students across the globe, organizing successful diplomatic summits and creating lasting connections between future world leaders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vertical-scroll-indicator">
+                <div class="vertical-scroll-dot active" data-index="0"></div>
+                <div class="vertical-scroll-dot" data-index="1"></div>
+                <div class="vertical-scroll-dot" data-index="2"></div>
+            </div>
         </div>
     </section>
 
@@ -968,30 +1015,81 @@ body {
     </style>
 </section>
     
-    <!-- Features Section -->
-    <section id="features" class="features-section">
-        <div class="container">
-            <h2 class="section-title">Why Choose DIPLOVISION</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🌍</div>
-                    <h3>Global Network</h3>
-                    <p>Connect with like-minded individuals from around the world and build lasting relationships.</p>
+    <!-- Features Horizontal Scroll Section -->
+    <section class="features-scroll-section">
+        <div class="features-scroll-container">
+            <div class="features-scroll-bg"></div>
+            <div class="features-scroll-header">
+                <h2>Why Choose DIPLOVISION</h2>
+                <p class="features-subtitle">Discover the advantages that set us apart</p>
+            </div>
+            <div class="features-scroll-content">
+                <div class="features-scroll-track">
+                    <div class="features-scroll-cards">
+                        <div class="feature-scroll-card" data-index="0">
+                            <div class="feature-card-inner">
+                                <div class="feature-scroll-icon">🌍</div>
+                                <h3>Global Network</h3>
+                                <div class="feature-card-content">
+                                    <p>Connect with like-minded individuals from around the world and build lasting relationships that transcend borders and cultures.</p>
+                                    <div class="feature-card-number">01</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-scroll-card" data-index="1">
+                            <div class="feature-card-inner">
+                                <div class="feature-scroll-icon">🎓</div>
+                                <h3>Expert Mentorship</h3>
+                                <div class="feature-card-content">
+                                    <p>Learn from seasoned diplomats and international relations experts through our comprehensive mentorship programs.</p>
+                                    <div class="feature-card-number">02</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-scroll-card" data-index="2">
+                            <div class="feature-card-inner">
+                                <div class="feature-scroll-icon">💼</div>
+                                <h3>Career Opportunities</h3>
+                                <div class="feature-card-content">
+                                    <p>Gain access to exclusive internships and job opportunities in diplomatic circles and international organizations.</p>
+                                    <div class="feature-card-number">03</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-scroll-card" data-index="3">
+                            <div class="feature-card-inner">
+                                <div class="feature-scroll-icon">🏆</div>
+                                <h3>Recognition</h3>
+                                <div class="feature-card-content">
+                                    <p>Earn certificates and accolades that are recognized by top institutions worldwide, enhancing your academic profile.</p>
+                                    <div class="feature-card-number">04</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-scroll-card" data-index="4">
+                            <div class="feature-card-inner">
+                                <div class="feature-scroll-icon">🔍</div>
+                                <h3>Research Opportunities</h3>
+                                <div class="feature-card-content">
+                                    <p>Participate in cutting-edge research projects related to international relations and diplomacy with global impact.</p>
+                                    <div class="feature-card-number">05</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="feature-scroll-card" data-index="5">
+                            <div class="feature-card-inner">
+                                <div class="feature-scroll-icon">🌐</div>
+                                <h3>Cultural Exchange</h3>
+                                <div class="feature-card-content">
+                                    <p>Experience diverse cultures and perspectives through our international exchange programs and global initiatives.</p>
+                                    <div class="feature-card-number">06</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎓</div>
-                    <h3>Expert Mentorship</h3>
-                    <p>Learn from seasoned diplomats and international relations experts through our mentorship programs.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💼</div>
-                    <h3>Career Opportunities</h3>
-                    <p>Gain access to exclusive internships and job opportunities in diplomatic circles.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>Recognition</h3>
-                    <p>Earn certificates and accolades that are recognized by top institutions worldwide.</p>
+                <div class="features-progress-bar">
+                    <div class="features-progress-indicator"></div>
                 </div>
             </div>
         </div>
@@ -1069,37 +1167,7 @@ body {
         </div>
     </section>
     
-    <section id="about" class="about-us">
-        <div class="about-grid">
-            <div class="about-item">
-                <div id="about-image1" class="about-image">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" alt="Our Mission">
-                </div>
-                <div class="about-content">
-                    <h2>Our Mission</h2>
-                    <p>DIPLOVISION is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
-                </div>
-            </div>
-            <div class="about-item reverse">
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80" alt="Our Vision">
-                </div>
-                <div class="about-content">
-                    <h2>Our Vision</h2>
-                    <p>We envision a world where young leaders are empowered to tackle global challenges through diplomatic dialogue, cultural understanding, and innovative problem-solving approaches.</p>
-                </div>
-            </div>
-            <div class="about-item">
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80" alt="Our Impact">
-                </div>
-                <div class="about-content">
-                    <h2>Our Impact</h2>
-                    <p>Since our inception, we have empowered thousands of students across the globe, organizing successful diplomatic summits and creating lasting connections between future world leaders.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- About section replaced with vertical scroll section above -->
 
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials-section">
@@ -1445,6 +1513,7 @@ body {
             margin-bottom: 0.5rem;
             background: linear-gradient(90deg, #ffffff, #1E3A8A);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
@@ -1795,14 +1864,7 @@ body {
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-envelope"></i> Email: Diplomaticcentralsummit@gmail.com</p>
                 <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
-                <p><i class="fas fa-map-marker-alt"></i> 45/1 Snehlataganj indore,near rajkumar brige</p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Connect With Us</h3>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/diplomaticcentralsummit" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/diplovision/" class="social-link"><i class="fab fa-linkedin"></i></a>
+       class="social-link"><i class="fab fa-linkedin"></i></a>
                     <a href="https://www.youtube.com/channel/UCba467q_cBLX_IV4hO_S9eg" class="social-link"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
@@ -2016,6 +2078,7 @@ body {
         }
     </style>
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="scroll-sections.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             particlesJS('particles-js', {
