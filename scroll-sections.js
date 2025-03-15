@@ -11,6 +11,20 @@ function debounce(func, wait) {
     };
 }
 
+// Throttle function to limit the rate at which a function is executed
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const context = this;
+        const args = arguments;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Load GSAP and ScrollTrigger dynamically
@@ -45,20 +59,24 @@ document.addEventListener('DOMContentLoaded', function() {
         // Register plugins
         gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
         
-        // Add smooth scrolling to the entire page
+        // Add smooth scrolling to the entire page with optimized settings
         gsap.config({
             autoSleep: 60,
-            force3D: true
+            force3D: true,
+            autoKill: true
         });
         
         // Set default ease for all animations
         gsap.defaults({
-            ease: 'power2.out'
+            ease: 'power2.out',
+            overwrite: 'auto'
         });
         
         // Improve ScrollTrigger defaults
         ScrollTrigger.config({
-            ignoreMobileResize: true
+            ignoreMobileResize: true,
+            fastScrollEnd: true,
+            preventOverlaps: true
         });
         
         // Initialize About Scroll Section
@@ -233,8 +251,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Get elements
         const cards = gsap.utils.toArray('.vertical-scroll-card');
+        const aboutBoxes = gsap.utils.toArray('.about-box');
         const scrollContent = verticalScrollSection.querySelector('.vertical-scroll-content');
         const dots = verticalScrollSection.querySelectorAll('.vertical-scroll-dot');
+        
+        // Create simplified parallax effect for background with will-change optimization
+        const verticalBg = document.querySelector('.vertical-scroll-section');
+        if (verticalBg) {
+            verticalBg.style.willChange = 'background-position';
+            
+            gsap.to('.vertical-scroll-section', {
+                backgroundPosition: '0% 100%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.vertical-scroll-section',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 0.8
+                }
+            });
+        }
         
         // Pin the section
         ScrollTrigger.create({
@@ -256,63 +292,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Animate vertical scroll
+        // Animate vertical scroll with improved easing
         tl.to('.vertical-scroll-content', {
             y: () => -(scrollContent.scrollHeight - verticalScrollSection.offsetHeight),
-            ease: 'power1.inOut'
+            ease: 'power2.out'
         });
         
-        // Add animations for each card
+        // Animate each card as it comes into view
         cards.forEach((card, i) => {
-            // Set initial state
-            gsap.set(card.querySelector('.vertical-card-inner'), {
-                opacity: i === 0 ? 1 : 0.3,
-                scale: i === 0 ? 1 : 0.9
-            });
+            // Create a timeline for each card
+            gsap.set(card, { opacity: 0, y: 30 });
             
-            // Create scroll triggers for each card
             ScrollTrigger.create({
                 trigger: card,
-                start: 'top center',
-                end: 'bottom center',
-                scrub: true,
                 containerAnimation: tl,
-                onEnter: () => updateActiveCard(i),
-                onEnterBack: () => updateActiveCard(i)
+                start: 'top 80%',
+                end: 'bottom 20%',
+                toggleClass: 'active',
+                onEnter: () => updateActiveDot(i),
+                onEnterBack: () => updateActiveDot(i)
             });
         });
-        
-        // Update active card and dot indicator
-        function updateActiveCard(index) {
-            // Update card styles
-            cards.forEach((card, i) => {
-                const cardInner = card.querySelector('.vertical-card-inner');
-                gsap.to(cardInner, {
-                    opacity: i === index ? 1 : 0.3,
-                    scale: i === index ? 1 : 0.9,
-                    duration: 0.5,
-                    ease: 'power2.out',
-                    overwrite: 'auto'
-                });
-                card.classList.toggle('active', i === index);
-            });
-            
-            // Update dot indicators
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
-        }
         
         // Add click events to dots for navigation
         dots.forEach((dot, i) => {
             dot.addEventListener('click', () => {
                 // Calculate the scroll position
-                const scrollPosition = i * (scrollContent.scrollHeight / cards.length);
+                const scrollPos = i * (scrollContent.scrollHeight / cards.length);
                 
                 // Animate to the position
                 gsap.to(window, {
                     scrollTo: {
-                        y: verticalScrollSection.offsetTop + (scrollPosition / 3),
+                        y: verticalScrollSection.offsetTop + (scrollPos / 3),
                         autoKill: false
                     },
                     duration: 1,
@@ -320,6 +331,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         });
+        
+        // Function to update active dot
+        function updateActiveDot(index) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
     };
     
     // Start loading scripts
@@ -328,7 +346,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle window resize to refresh ScrollTrigger
     const handleResize = debounce(() => {
         ScrollTrigger.refresh(true);
-    }, 200);
+    }, 250);
+    
+    // Throttle scroll events for better performance
+    const handleScroll = throttle(() => {
+        // This empty function helps reduce the number of scroll events processed
+    }, 100);
     
     window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 });
