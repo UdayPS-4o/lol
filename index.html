@@ -366,7 +366,8 @@
             nav {
                 flex-direction: column;
                 gap: 1.5rem;
-                padding: 1.5rem;
+                padding: 2.5rem;
+                min-height: 80px;
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -623,19 +624,7 @@ body {
             const links = document.querySelectorAll('.nav-links a');
             const founder = document.querySelector('.founder');
             
-            // Summit 2024 Video Interaction
-            const videoOverlay = document.querySelector('.summit-video-overlay');
-            const videoWrapper = document.querySelector('.summit-video-wrapper');
-            
-            if (videoOverlay && videoWrapper) {
-                videoOverlay.addEventListener('click', function() {
-                    this.style.opacity = '0';
-                    this.style.pointerEvents = 'none';
-                    
-                    // Add a class to animate the video container
-                    videoWrapper.closest('.summit-video-container').classList.add('active');
-                });
-            }
+            // Summit 2024 section animations
             
             // Animate summit cards on scroll
             const summitSection = document.querySelector('.summit-section');
@@ -857,45 +846,39 @@ body {
    </div>
    <br><br><br><br><br><br>
             <div class="vertical-scroll-content">
-                <div class="vertical-scroll-card" id="mission-card">
-                    <div class="vertical-card-inner">
-                        <div class="vertical-card-image">
-                            <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80" alt="Our Mission">
+                <div class="about-box-container">
+                    <div class="about-box">
+                        <div class="about-box-image">
+                            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80" alt="Our Mission">
                         </div>
-                        <div class="vertical-card-text">
+                        <div class="about-box-content">
                             <h3>Our Mission</h3>
                             <p>DIPLOVISION is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
                         </div>
                     </div>
-                </div>
-                <div class="vertical-scroll-card" id="vision-card">
-                    <div class="vertical-card-inner">
-                        <div class="vertical-card-image">
-                            <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80" alt="Our Vision">
+                    
+                    <div class="about-box">
+                        <div class="about-box-image">
+                            <img src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?auto=format&fit=crop&q=80" alt="Our Vision">
                         </div>
-                        <div class="vertical-card-text">
+                        <div class="about-box-content">
                             <h3>Our Vision</h3>
-                            <p>We envision a world where young leaders are empowered to tackle global challenges through diplomatic dialogue, cultural understanding, and innovative problem-solving approaches.</p>
+                            <p>We envision a world where young diplomats are equipped with the skills, knowledge, and networks needed to address complex global challenges. Through our programs, we aim to build bridges across cultures and foster international cooperation.</p>
                         </div>
                     </div>
-                </div>
-                <div class="vertical-scroll-card" id="impact-card">
-                    <div class="vertical-card-inner">
-                        <div class="vertical-card-image">
-                            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80" alt="Our Impact">
+                    
+                    <div class="about-box">
+                        <div class="about-box-image">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" alt="Our Values">
                         </div>
-                        <div class="vertical-card-text">
-                            <h3>Our Impact</h3>
-                            <p>Since our inception, we have empowered thousands of students across the globe, organizing successful diplomatic summits and creating lasting connections between future world leaders.</p>
+                        <div class="about-box-content">
+                            <h3>Our Values</h3>
+                            <p>Excellence, integrity, and inclusivity form the foundation of our approach. We are committed to providing high-quality diplomatic training that respects diverse perspectives and promotes ethical leadership in the global arena.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="vertical-scroll-indicator">
-                <div class="vertical-scroll-dot active" data-index="0"></div>
-                <div class="vertical-scroll-dot" data-index="1"></div>
-                <div class="vertical-scroll-dot" data-index="2"></div>
-            </div>
+            <!-- Removed scroll indicator dots as boxes were removed -->
         </div>
     </section>
 
@@ -1129,19 +1112,15 @@ body {
 
     <!-- Summit 2024 Section -->
     <section id="summit-iframe" class="summit-section">
+        <div class="summit-background-video">
+            <video autoplay loop muted playsinline>
+                <source src="aboutvid.mp4" type="video/mp4">
+            </video>
+            <div class="summit-video-overlay-bg"></div>
+        </div>
         <div class="summit-container">
             <h2 class="summit-title">SUMMIT 2024</h2>
             <div class="summit-content">
-                <div class="summit-video-container">
-                    <div class="summit-video-wrapper">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1" allow="autoplay; encrypted-media" frameborder="0"></iframe>
-                        <div class="summit-video-overlay">
-                            <div class="summit-play-button">
-                                <i class="fas fa-play"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="summit-info">
                     <div class="summit-card">
                         <div class="summit-icon">📅</div>
@@ -1280,6 +1259,111 @@ body {
 
         .about-item.reverse .about-content {
             direction: ltr;
+        }
+        
+        /* About Box Styles */
+        .about-box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem; /* Increased gap between boxes */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 50px; /* Added padding at the bottom */
+        }
+        
+        .about-box {
+            display: flex;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            opacity: 0.75;
+        }
+        
+        .about-box:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(69, 104, 220, 0.5), 0 0 20px rgba(176, 106, 179, 0.3);
+            border-color: rgba(69, 104, 220, 0.6);
+            background: rgba(20, 30, 60, 0.9);
+            opacity: 1;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .about-box-image {
+            flex: 0 0 40%;
+            overflow: hidden;
+        }
+        
+        .about-box-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-box:hover .about-box-image img {
+            transform: scale(1.05);
+            filter: brightness(1.1) contrast(1.1);
+        }
+        
+        .about-box-content {
+            flex: 0 0 60%;
+            padding: 2rem;
+        }
+        
+        .about-box-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+        
+        .about-box-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #1E3A8A, transparent);
+            transition: all 0.4s ease;
+        }
+        
+        .about-box:hover .about-box-content h3 {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        
+        .about-box:hover .about-box-content h3::after {
+            background: linear-gradient(90deg, #4568DC, rgba(176, 106, 179, 0.5), transparent);
+            height: 4px;
+        }
+        
+        .about-box-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.4s ease;
+        }
+        
+        .about-box:hover .about-box-content p {
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        @media (max-width: 768px) {
+            .about-box {
+                flex-direction: column;
+            }
+            
+            .about-box-image,
+            .about-box-content {
+                flex: 0 0 100%;
+            }
         }
 
         .about-image {
@@ -1573,14 +1657,49 @@ body {
         /* Summit 2024 Section Styles */
         .summit-section {
             padding: 8rem 2rem 6rem;
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
             position: relative;
+            overflow: hidden;
+            background-color: transparent;
+        }
+        
+        .summit-background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .summit-background-video video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+        
+        .summit-video-overlay-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.8), rgba(15, 15, 15, 0.6));
+            z-index: 1;
+            backdrop-filter: blur(2px);
         }
         
         .summit-container {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         
         .summit-title {
@@ -1607,9 +1726,11 @@ body {
         }
         
         .summit-content {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .summit-video-container {
@@ -1702,6 +1823,9 @@ body {
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .summit-card {
