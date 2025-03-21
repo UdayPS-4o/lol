@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,6 +43,14 @@
             display: none;
             cursor: pointer;
             padding: 10px;
+            position: fixed;
+            right: 1.5rem;
+            top: 1.5rem;
+            z-index: 100000;
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 50%;
+            padding: 1rem;
+            backdrop-filter: blur(10px);
         }
 
         .hamburger-menu div {
@@ -72,31 +82,34 @@
         }
 
         nav {
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
             opacity: 0;
             animation: fadeIn 0.8s ease-out forwards;
             animation-delay: 0.2s;
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.95), rgba(15, 15, 15, 0.85));
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         nav::after {
-            content: '';
-            position: absolute;
-            bottom: 1rem;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.2);
+            display: none;
         }
 
         .logo {
-            font-size: 2rem;
-            font-weight: 600;
+            font-size: 1.8rem;
+            font-weight: 700;
             position: relative;
             transition: transform 0.3s ease;
+            color: #ffffff;
+            letter-spacing: -0.5px;
         }
         
         @media (max-width: 768px) {
@@ -125,7 +138,7 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             justify-content: center;
             align-items: center;
             flex: 2;
@@ -140,16 +153,17 @@
                 flex-direction: column;
                 width: 100%;
                 height: 100vh;
-                gap: 1.5rem;
+                gap: 2rem;
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 background: rgba(15, 15, 15, 0.98);
-                padding: 10rem 2rem 2rem;
-                z-index: 10000;
+                padding: 8rem 2rem 2rem;
+                z-index: 99999;
                 opacity: 0;
-                transform: translateY(-100%);
+                visibility: hidden;
+                transform: translateY(-10px);
                 transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 backdrop-filter: blur(20px);
             }
@@ -159,7 +173,6 @@
                 opacity: 1;
                 visibility: visible;
                 transform: translateY(0);
-                z-index: 100000;
             }
             
             body.menu-active .logo {
@@ -174,20 +187,40 @@
             }
         }
         .nav-links a {
-            color: #0F0F0F;
+            color: #ffffff;
             text-decoration: none;
-            font-size: 0.75rem;
-            background: #ffffff;
-            padding: 0.3rem 0.6rem;
-            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
             transition: all 0.3s ease;
             white-space: nowrap;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links a {
+                color: #ffffff;
+                background: transparent;
+                font-size: 1.2rem;
+                padding: 0.5rem 1rem;
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                width: 100%;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.1);
+                transform: translateY(-2px);
+            }
         }
 
         .nav-links a:hover {
-            background: #f0f0f0;
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
         }
 
         .background-image {
@@ -201,45 +234,47 @@
             z-index: -1;
         }
 
-        .hero {
-            padding: 3rem .75rem;
-            max-width: 1400px;
+        .dcs-section {
+            padding: 8rem 2rem 3rem;
+            max-width: 1200px;
             margin: 0 auto;
             min-height: 40vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            z-index: 1;
         }
 
-        .main-heading {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 500;
-            line-height: 1.1;
-            margin-bottom: 3rem;
+        .dcs-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+            text-align: center;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.4s;
         }
 
-        .highlight {
-            color: #1E3A8A;
-        }
-
-        .location {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            font-size: clamp(1.5rem, 4vw, 2.3rem);
-            position: relative;
+        .dcs-content {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
             opacity: 0;
             animation: fadeInUp 0.8s ease-out forwards;
             animation-delay: 0.6s;
-            margin-top: 1rem;
-            width: 100%;
-            overflow: hidden;
         }
+
+        .dcs-highlight {
+            color: #1E3A8A;
+            font-weight: 600;
+        }
+
+
 
         @media (max-width: 768px) {
             .location {
@@ -353,6 +388,7 @@
 
             .hamburger-menu.active div:nth-child(1) {
                 transform: rotate(-45deg) translate(-5px, 6px);
+                background: #ffffff;
             }
 
             .hamburger-menu.active div:nth-child(2) {
@@ -361,6 +397,7 @@
 
             .hamburger-menu.active div:nth-child(3) {
                 transform: rotate(45deg) translate(-5px, -6px);
+                background: #ffffff;
             }
 
             nav {
@@ -493,7 +530,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
+            margin-top: 5rem;
             position: relative;
             z-index: 0;
         }
@@ -602,15 +639,15 @@ body {
 <body>
     <div id="particles-js"></div>
     <nav>
-        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">DiPLOViSiON</a></div>
+        <div class="logo"><a href="index.html" style="color: inherit; text-decoration: none;">DIPLOVISION</a></div>
         <div class="hamburger-menu">
             <div></div>
             <div></div>
             <div></div>
         </div>
         <div class="nav-links">
-            <a href="#about">ABOUT US</a>
-            <a href="#summit-iframe">SUMMIT 2024</a>
+            <a href="index.html">HOME</a>
+            <a href="news.html">NEWS</a>
             <a href="dcs2025.html">DCS 2025</a>
             <a href="secretariat.html">SECRETARIAT</a>
             <a href="register.html">CA APPLICATIONS →</a>
@@ -733,9 +770,9 @@ body {
                 });
             });
             
-            // Auto slide every 5 seconds
+            // Auto slide every 5 seconds with proper loop handling
             setInterval(() => {
-                currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+                currentIndex = (currentIndex + 1) % slides.length;
                 updateSlider();
             }, 5000);
             
@@ -749,10 +786,11 @@ body {
             
             let partnersCurrentIndex = 0;
             const partnersSlideWidth = partnersSlides[0].getBoundingClientRect().width;
+            const visibleSlides = 3; // Number of slides visible at once
             
             // Initialize partners slider
-            function updatePartnersSlider() {
-                partnersTrack.style.transform = `translateX(-${partnersCurrentIndex * partnersSlideWidth}px)`;
+            function updatePartnersSlider(slideWidth = partnersSlideWidth) {
+                partnersTrack.style.transform = `translateX(-${partnersCurrentIndex * slideWidth}px)`;
                 
                 // Update active dot
                 partnersDots.forEach((dot, index) => {
@@ -768,15 +806,46 @@ body {
                 });
             });
             
-            // Auto slide partners every 3 seconds
-            setInterval(() => {
-                partnersCurrentIndex = partnersCurrentIndex < partnersSlides.length - 1 ? partnersCurrentIndex + 1 : 0;
-                updatePartnersSlider();
-            }, 3000);
+            // Auto slide partners one by one every 2 seconds
+            const autoSlideInterval = setInterval(() => {
+                if (document.getElementById('partners-tab').classList.contains('active')) {
+                    partnersCurrentIndex = partnersCurrentIndex < partnersSlides.length - visibleSlides ? partnersCurrentIndex + 1 : 0;
+                    // Get the current width in case the window has been resized
+                    const currentWidth = partnersSlides[0].getBoundingClientRect().width;
+                    // Add smooth transition
+                    partnersTrack.style.transition = 'transform 0.5s ease';
+                    updatePartnersSlider(currentWidth);
+                }
+            }, 2000);
             
-            // Initialize partners slider on page load
+            // Initialize partners slider and start counters on page load
             updatePartnersSlider();
+            
+            // Start counters on page load since Milestones tab is active by default
+            setTimeout(startCounters, 500);
 
+            
+            // Tab Switching Functionality
+            const sectionTabs = document.querySelectorAll('.section-tab');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            sectionTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and panes
+                    sectionTabs.forEach(t => t.classList.remove('active'));
+                    tabPanes.forEach(p => p.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding pane
+                    tab.classList.add('active');
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                    
+                    // Start counters if milestones tab is active
+                    if (tabId === 'milestones') {
+                        setTimeout(startCounters, 300);
+                    }
+                });
+            });
             
             // Statistics Counter Animation
             const statValues = document.querySelectorAll('.stat-value');
@@ -794,7 +863,7 @@ body {
                     const updateCounter = () => {
                         current += increment;
                         if (current >= target) {
-                            counter.textContent = target;
+                            counter.textContent = target + '+';
                             clearInterval(counterInterval);
                         } else {
                             counter.textContent = Math.floor(current);
@@ -807,75 +876,92 @@ body {
                 countersStarted = true;
             }
             
-            // Start counters when statistics section is in view
-            const statsSection = document.querySelector('.statistics-section');
+            // Start counters when partners-milestones section is in view and milestones tab is active
+            const partnersMilestonesSection = document.querySelector('#partners-milestones');
             
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if (entry.isIntersecting && document.querySelector('.section-tab[data-tab="milestones"].active')) {
                         setTimeout(startCounters, 500); // Slight delay for better effect
                         observer.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.3 });
             
+            if (partnersMilestonesSection) {
+                observer.observe(partnersMilestonesSection);
+            }
+            
             if (statsSection) {
                 observer.observe(statsSection);
             }
         });
     </script>
-
-    <main class="hero">
-        <h1 class="main-heading">
-            DIPLOVISION<br>
-          EXPIRENCES THAT LAST A <span class="highlight">LIFETIME</span>
-        </h1>
-        <div class="location">
-            <p>📍 NARSEE MONJEE,INDORE</p>
-            <p>📅 18TH-19TH-20TH JULY</p>
+  <section id="summit-iframe" class="summit-section hero-section">
+    <div class="summit-background-video">
+        <video autoplay loop muted playsinline>
+            <source src="datesvid.mp4" type="video/mp4">
+        </video>
+        <div class="summit-video-overlay-bg"></div>
+    </div>
+    <div class="summit-container">
+        <div class="summit-content">
+            <h2 class="summit-title">DCS IS BACK</h2>
+            <div class="summit-info">
+                <div class="summit-dates">18TH-19TH-20TH JULY</div>
+                <div class="summit-location">NARSEE MONJEE, INDORE</div>
+            </div>
+            <div class="summit-cta">
+                <a href="register.html" class="summit-button">Register Now</a>
+                <a href="#" class="summit-button secondary">Learn More</a>
+            </div>
         </div>
-        
-        <br><br><br><br><br><br><br><br><br><br><br><br>
-    </main>
-<!-- About Us Vertical Scroll Section -->
-    <section class="vertical-scroll-section" id="about">
-        <div class="vertical-scroll-container">
-            <div class="vertical-scroll-header">
-                <h2>About Us</h2>
-                <p>DIPLOVISION is a premier platform dedicated to fostering diplomatic excellence and international understanding.</p>
-   </div>
-   <br><br><br><br><br><br>
-            <div class="vertical-scroll-content">
-                <div class="about-box-container">
-                    <div class="about-box">
-                        <div class="about-box-image">
-                            <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80" alt="Our Mission">
-                        </div>
-                        <div class="about-box-content">
-                            <h3>Our Mission</h3>
-                            <p>DIPLOVISION is dedicated to fostering the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities. We believe in the power of youth to shape international relations and create positive global change.</p>
-                        </div>
+    </div>
+</section>
+
+
+
+    <div class="dcs-section">
+        <h1 class="dcs-title reveal-text">Diplomatic Central Summit <span class="dcs-highlight">2025</span></h1>
+        <div class="dcs-content reveal-text">
+            <p>The Diplomatic Central Summit, Indore’s biggest high school regional conference, is an organization with the aim of creating a platform for teenagers to discuss, deliberate, and learn about real-world issues. We successfully organized a remarkable conference last year, hosting 500+ delegates, 9+ committees, and 2 events, all instilled with zeal to initiate change. DCS is a platform created for fostering global awareness, diplomacy, and leadership skills in young minds. Join us in shaping a world of dialogue, cooperation, and impactful change! 
+            </p>
+        </div>
+    </div>
+<!-- About Us Section -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-left">
+                <span class="about-tag">About Us</span>
+                <h2>DIPLOVISION</h2>
+                <p class="about-description">A premier platform dedicated to fostering diplomatic excellence and international understanding through innovative educational experiences.</p>
+            </div>
+            <div class="about-right">
+                <div class="scroll-cards">
+                    <div class="scroll-card">
+                        <span class="card-tag">Our Mission</span>
+                        <h3>Fostering Future Leaders</h3>
+                        <p>Dedicated to nurturing the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities.</p>
+                        <div class="card-icon">🌍</div>
                     </div>
+                    <div class="scroll-card">
+                        <span class="card-tag">Our Vision</span>
+                        <h3>Global Impact</h3>
+                        <p>Creating a network of empowered youth who will shape international relations and drive positive global change.</p>
+                        <div class="card-icon">⚡</div>
+                    </div>
+                    <div class="scroll-card">
+                        <span class="card-tag">Our Values</span>
+                        <h3>Excellence & Innovation</h3>
+                        <p>Committed to excellence in diplomatic education through innovative methods and cutting-edge learning experiences.</p>
+                        <div class="card-icon">💫</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
                     
-                    <div class="about-box">
-                        <div class="about-box-image">
-                            <img src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?auto=format&fit=crop&q=80" alt="Our Vision">
-                        </div>
-                        <div class="about-box-content">
-                            <h3>Our Vision</h3>
-                            <p>We envision a world where young diplomats are equipped with the skills, knowledge, and networks needed to address complex global challenges. Through our programs, we aim to build bridges across cultures and foster international cooperation.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="about-box">
-                        <div class="about-box-image">
-                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80" alt="Our Values">
-                        </div>
-                        <div class="about-box-content">
-                            <h3>Our Values</h3>
-                            <p>Excellence, integrity, and inclusivity form the foundation of our approach. We are committed to providing high-quality diplomatic training that respects diverse perspectives and promotes ethical leadership in the global arena.</p>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <!-- Removed scroll indicator dots as boxes were removed -->
@@ -884,119 +970,235 @@ body {
 
     <div style="height: 4rem;"></div>
 
-    <section id="partners" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05); overflow: hidden;">
-    <div style="max-width: 1400px; margin: 0 auto;">
-        <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem; text-align: center;">Our Trusted Partners</h2>
-        <div class="partners-slider">
-            <div class="partners-track">
-                <div class="partners-slide">
-                    <img src="upgrad.png" alt="UpGrad Indore">
-                    <img src="TOPR.png" alt="Toprankers">
-                    <img src="kisna.png" alt="Kisna">
-                </div>
-                <div class="partners-slide">
-                    <img src="shreedhi.png" alt="Shridhi">
-                    <img src="sv.png" alt="Logo">
-                    <img src="treasuire.png" alt="UpGrad Indore">
-                </div>
-                <div class="partners-slide">
-                    <img src="bagline.png" alt="Toprankers">
-                    <img src="kalani_group_logo.jpeg" alt="Kisna">
+    <!-- Combined Partners and Milestones Section -->
+    <section id="partners-milestones" style="padding: 4rem 2rem; background: rgba(255, 255, 255, 0.05); overflow: hidden;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div class="section-header">
+                <h2 style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 2rem; text-align: center;">Our Network</h2>
+                <div class="section-tabs">
+                    <button class="section-tab active" data-tab="milestones">Our Milestones</button>
+                    <button class="section-tab" data-tab="partners">Our Trusted Partners</button>
                 </div>
             </div>
-            <div class="slider-controls partners-controls">
-                <div class="slider-dots partners-dots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+            
+            <div class="tab-content">
+                <!-- Partners Tab Content -->
+                <div class="tab-pane" id="partners-tab">
+                    <div class="partners-slider">
+                        <div class="partners-track">
+                            <div class="partners-slide">
+                                <img src="upgrad.png" alt="UpGrad Indore">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="TOPR.png" alt="Toprankers">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="kisna.png" alt="Kisna">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="shreedhi.png" alt="Shridhi">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="sv.png" alt="Logo">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="treasuire.png" alt="UpGrad Indore">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="bagline.png" alt="Toprankers">
+                            </div>
+                            <div class="partners-slide">
+                                <img src="kalani_group_logo.jpeg" alt="Kisna">
+                            </div>
+                        </div>
+                        <div class="slider-controls partners-controls">
+                            <div class="slider-dots partners-dots">
+                                <span class="dot active"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Milestones Tab Content -->
+                <div class="tab-pane active" id="milestones-tab">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-value" data-count="500">0</div>
+                            <div class="stat-label">Delegates</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-count="45">0</div>
+                            <div class="stat-label">Institutions</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-count="12">0</div>
+                            <div class="stat-label">Partners</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" data-count="70">0</div>
+                            <div class="stat-label">Interns</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <style>
-        .partners-slider {
-            position: relative;
-            overflow: hidden;
-            margin-top: 3rem;
-            padding: 3rem 0;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
         
-        .partners-track {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-        
-        .partners-slide {
-            display: flex;
-            min-width: 100%;
-            justify-content: space-around;
-            align-items: center;
-            padding: 0 1.5rem;
-        }
-        
-        .partners-slide img {
-            height: 90px;
-            width: 90px;
-            object-fit: contain;
-            transition: all 0.4s ease;
-            transform: scale(0.95);
-            margin: 0 15px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 10px;
-        }
-        
-        .partners-slide img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
-        }
-        
-        .partners-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 2rem;
-        }
-        
-        .partners-prev-btn, .partners-next-btn {
-            display: none; /* Hide the buttons */
-        }
-        
-        .partners-dots .dot {
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .partners-dots .dot.active {
-            background: white;
-            transform: scale(1.2);
-        }
-        
-        @media (max-width: 768px) {
+        <style>
+            /* Section Tabs Styling */
+            .section-header {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+            
+            .section-tabs {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+            
+            .section-tab {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                padding: 0.75rem 1.5rem;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 1rem;
+            }
+            
+            .section-tab.active {
+                background: rgba(255, 255, 255, 0.2);
+                border-color: rgba(255, 255, 255, 0.4);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+            
+            .section-tab:hover {
+                background: rgba(255, 255, 255, 0.15);
+                transform: translateY(-2px);
+            }
+            
+            /* Tab Content Styling */
+            .tab-content {
+                position: relative;
+            }
+            
+            .tab-pane {
+                display: none;
+                opacity: 0;
+                transition: opacity 0.5s ease;
+            }
+            
+            .tab-pane.active {
+                display: block;
+                opacity: 1;
+            }
+            
+            /* Partners Styling */
             .partners-slider {
-                padding: 2rem 0;
+                position: relative;
+                overflow: hidden;
+                padding: 3rem 0;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(10px);
+                border-radius: 16px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.4s ease;
             }
+            
+            .partners-slider:hover {
+                border-color: rgba(255, 255, 255, 0.3);
+                box-shadow: 0 10px 40px rgba(30, 58, 138, 0.2);
+            }
+            
+            .partners-track {
+                display: flex;
+                transition: transform 0.5s ease;
+            }
+            
             .partners-slide {
-                gap: 1.5rem;
-                flex-wrap: wrap;
+                display: flex;
+                min-width: 33.33%;
+                justify-content: center;
+                align-items: center;
+                padding: 0 1.5rem;
             }
+            
             .partners-slide img {
-                margin: 10px;
+                height: 90px;
+                width: 90px;
+                object-fit: contain;
+                transition: all 0.4s ease;
+                transform: scale(0.95);
+                margin: 0 15px;
+                border-radius: 12px;
+                background-color: rgba(255, 255, 255, 0.1);
+                padding: 10px;
             }
-        }
-    </style>
-</section>
+            
+            .partners-slide img:hover {
+                transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+            }
+            
+            .partners-controls {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 2rem;
+            }
+            
+            .partners-prev-btn, .partners-next-btn {
+                display: none; /* Hide the buttons */
+            }
+            
+            .partners-dots .dot {
+                width: 10px;
+                height: 10px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                display: inline-block;
+                margin: 0 5px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .partners-dots .dot.active {
+                background: white;
+                transform: scale(1.2);
+            }
+            
+            @media (max-width: 768px) {
+                .section-tabs {
+                    flex-direction: column;
+                    gap: 0.5rem;
+                }
+                
+                .partners-slider {
+                    padding: 2rem 0;
+                }
+                
+                .partners-slide {
+                    gap: 1.5rem;
+                    flex-wrap: wrap;
+                }
+                
+                .partners-slide img {
+                    margin: 10px;
+                }
+            }
+        </style>
+    </section>
     
     <!-- Features Horizontal Scroll Section -->
     <section class="features-scroll-section">
@@ -1009,45 +1211,25 @@ body {
             <div class="features-scroll-content">
                 <div class="features-scroll-track">
                     <div class="features-scroll-cards">
-                        <div class="feature-scroll-card" data-index="0">
-                            <div class="feature-card-inner">
-                                <div class="feature-scroll-icon">🌍</div>
-                                <h3>Global Network</h3>
-                                <div class="feature-card-content">
-                                    <p>Connect with like-minded individuals from around the world and build lasting relationships that transcend borders and cultures.</p>
-                                    <div class="feature-card-number">01</div>
-                                </div>
-                            </div>
+                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #8A2BE2, #4B0082);">
+                            <div class="feature-scroll-icon">🌍</div>
+                            <h3>Network</h3>
+                            <p>Connect with like-minded individuals from around the world and build lasting relationships that transcend borders and cultures.</p>
                         </div>
-                        <div class="feature-scroll-card" data-index="1">
-                            <div class="feature-card-inner">
-                                <div class="feature-scroll-icon">🎓</div>
-                                <h3>Expert Mentorship</h3>
-                                <div class="feature-card-content">
-                                    <p>Learn from seasoned diplomats and international relations experts through our comprehensive mentorship programs.</p>
-                                    <div class="feature-card-number">02</div>
-                                </div>
-                            </div>
+                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #FF69B4, #FF1493);">
+                            <div class="feature-scroll-icon">👨‍🏫</div>
+                            <h3>Expert Mentorship</h3>
+                            <p>Learn from seasoned diplomats and international relations experts through our comprehensive mentorship programs.</p>
                         </div>
-                        <div class="feature-scroll-card" data-index="2">
-                            <div class="feature-card-inner">
-                                <div class="feature-scroll-icon">💼</div>
-                                <h3>Career Opportunities</h3>
-                                <div class="feature-card-content">
-                                    <p>Gain access to exclusive internships and job opportunities in diplomatic circles and international organizations.</p>
-                                    <div class="feature-card-number">03</div>
-                                </div>
-                            </div>
+                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #00CED1, #20B2AA);">
+                            <div class="feature-scroll-icon">💼</div>
+                            <h3>Career Opportunities</h3>
+                            <p>Gain access to exclusive internships and job opportunities in diplomatic circles and international organizations.</p>
                         </div>
-                        <div class="feature-scroll-card" data-index="3">
-                            <div class="feature-card-inner">
-                                <div class="feature-scroll-icon">🏆</div>
-                                <h3>Recognition</h3>
-                                <div class="feature-card-content">
-                                    <p>Earn certificates and accolades that are recognized by top institutions worldwide, enhancing your academic profile.</p>
-                                    <div class="feature-card-number">04</div>
-                                </div>
-                            </div>
+                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
+                            <div class="feature-scroll-icon">🏆</div>
+                            <h3>Recognition</h3>
+                            <p>Earn certificates and accolades recognized by top institutions, enhancing your academic and professional profile.</p>
                         </div>
                         <div class="feature-scroll-card" data-index="4">
                             <div class="feature-card-inner">
@@ -1078,73 +1260,12 @@ body {
         </div>
     </section>
     
-    <!-- Statistics Section -->
-    <section id="statistics" class="statistics-section">
-        <div class="container">
-            <h2 class="section-title">Our Milestones</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-value" data-count="500">0</div>
-                    <div class="stat-label">Delegates</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" data-count="45">0</div>
-                    <div class="stat-label">Institutions</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" data-count="12">0</div>
-                    <div class="stat-label">Partners</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-value" data-count="70">0</div>
-                    <div class="stat-label">Interns</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Statistics Section moved to combined Partners-Milestones section above -->
       
     </section>
-    <div class="founder">
-        <p>Founded by</p>
-        <a href="#">kids</a>
-        <p>in god we trust</p>
-    </div>
 
     <!-- Summit 2024 Section -->
-    <section id="summit-iframe" class="summit-section">
-        <div class="summit-background-video">
-            <video autoplay loop muted playsinline>
-                <source src="datesvid.mp4" type="video/mp4">
-            </video>
-            <div class="summit-video-overlay-bg"></div>
-        </div>
-        <div class="summit-container">
-            <h2 class="summit-title">SUMMIT 2024</h2>
-            <div class="summit-content">
-                <div class="summit-info">
-                    <div class="summit-card">
-                        <div class="summit-icon">📅</div>
-                        <h3>July 18-20, 2024</h3>
-                        <p>Mark your calendar for three days of diplomatic excellence</p>
-                    </div>
-                    <div class="summit-card">
-                        <div class="summit-icon">🌎</div>
-                        <h3>Global Participation</h3>
-                        <p>Connect with delegates from over 45 institutions worldwide</p>
-                    </div>
-                    <div class="summit-card">
-                        <div class="summit-icon">🏆</div>
-                        <h3>Premier Committees</h3>
-                        <p>Engage in high-level diplomatic simulations and debates</p>
-                    </div>
-                </div>
-                <div class="summit-cta">
-                    <a href="register.html" class="summit-button">Register Now</a>
-                    <a href="#" class="summit-button secondary">Learn More</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  
     
     <!-- About section replaced with vertical scroll section above -->
 
@@ -1262,13 +1383,152 @@ body {
         }
         
         /* About Box Styles */
-        .about-box-container {
+        .about-section {
+            padding: 6rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            position: relative;
+        }
+
+        .about-left {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .about-tag {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8B5CF6;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-left h2 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-description {
+            font-size: 1.5rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .about-right {
+            overflow: visible;
+        }
+
+        .scroll-cards {
             display: flex;
             flex-direction: column;
-            gap: 3rem; /* Increased gap between boxes */
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-bottom: 50px; /* Added padding at the bottom */
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .scroll-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scroll-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8B5CF6;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .scroll-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #8B5CF6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .scroll-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            opacity: 0.2;
+            transition: all 0.4s ease;
+        }
+
+        .scroll-card:hover .card-icon {
+            opacity: 0.4;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 1024px) {
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-left {
+                position: relative;
+                top: 0;
+                text-align: center;
+            }
+
+            .about-left h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-section {
+                padding: 4rem 1rem;
+            }
+
+            .scroll-card {
+                padding: 1.5rem;
+            }
+
+            .scroll-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .card-icon {
+                font-size: 2rem;
+            }
         }
         
         .about-box {
@@ -1434,7 +1694,7 @@ body {
         .testimonial-slider {
             position: relative;
             overflow: hidden;
-            margin-top: 3rem;
+            margin-top: 5rem;
         }
         
         .testimonial-track {
@@ -1503,7 +1763,7 @@ body {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 3rem;
+            margin-top: 5rem;
             gap: 2rem;
         }
         
@@ -1565,41 +1825,60 @@ body {
         }
         
         .stat-card {
-            background: linear-gradient(135deg, #1E3A8A, #000000);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 16px;
             padding: 2rem;
             text-align: center;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
         
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, rgba(15, 15, 15, 0) 100%);
-            z-index: -1;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            transform: scale(0.5);
+            pointer-events: none;
+            z-index: 0;
         }
         
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
-            border-color: rgba(30, 58, 138, 0.5);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(30, 58, 138, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .stat-card:hover::before {
+            opacity: 1;
+            transform: scale(1);
         }
         
         .stat-value {
             font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #ffffff, #1E3A8A);
+            background: linear-gradient(90deg, #ffffff, #4568dc);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover .stat-value {
+            transform: scale(1.05);
         }
         
         .stat-label {
@@ -1607,6 +1886,11 @@ body {
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        .stat-card:hover .stat-label {
+            color: rgba(255, 255, 255, 1);
         }
         
         @media (max-width: 768px) {
@@ -1662,6 +1946,10 @@ body {
             position: relative;
             overflow: hidden;
             background-color: transparent;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .summit-background-video {
@@ -1699,39 +1987,62 @@ body {
         }
         
         .summit-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
             position: relative;
-            z-index: 2;
+            z-index: 1;
+            text-align: center;
         }
-        
         .summit-title {
             font-size: clamp(2.5rem, 5vw, 4rem);
             text-align: center;
             margin-bottom: 3rem;
             color: #ffffff;
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
         
-        .summit-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #1E3A8A, transparent);
-        }
         
         .summit-content {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .summit-info {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 3rem;
+        }
+
+        .summit-dates,
+        .summit-location {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .summit-dates {
+            background: linear-gradient(90deg, #ffffff, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .summit-location {
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .summit-video-container {
@@ -1752,9 +2063,11 @@ body {
         
         .summit-video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 75%; /* Increased height ratio */
             height: 0;
             overflow: hidden;
+            max-width: 90%;
+            margin: 0 auto;
         }
         
         .summit-video-wrapper iframe {
@@ -1897,7 +2210,7 @@ body {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin-top: 3rem;
+            margin-top: 10rem;
             flex-wrap: wrap;
         }
         
@@ -1989,7 +2302,14 @@ body {
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-envelope"></i> Email: Diplomaticcentralsummit@gmail.com</p>
                 <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
-       class="social-link"><i class="fab fa-linkedin"></i></a>
+                <p><i class="fas fa-map-marker-alt"></i> 45/1 Snehlataganj indore,near rajkumar brige</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/diplomaticcentralsummit" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/diplovision/" class="social-link"><i class="fab fa-linkedin"></i></a>
                     <a href="https://www.youtube.com/channel/UCba467q_cBLX_IV4hO_S9eg" class="social-link"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
