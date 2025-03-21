@@ -87,6 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Initialize Features Scroll Section
         initFeaturesScrollSection();
+        
+        // Initialize Text Reveal Animations
+        initTextRevealAnimations();
     };
     
     // About Section Horizontal Scroll
@@ -277,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
             trigger: '.vertical-scroll-section',
             pin: true,
             start: 'top top',
-            end: '+=300%',
+            end: '+=250%',
             scrub: 0.5,
             anticipatePin: 1
         });
@@ -341,6 +344,91 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Start loading scripts
+    // Function to handle text reveal animations with enhanced smoothness
+    const initTextRevealAnimations = () => {
+        const revealElements = document.querySelectorAll('.reveal-text');
+        
+        // Group elements by their parent container for staggered animations
+        const containers = {};
+        revealElements.forEach(element => {
+            const parent = element.parentElement;
+            const parentId = 'default';
+            
+            if (!containers[parentId]) {
+                containers[parentId] = [];
+            }
+            containers[parentId].push(element);
+        });
+        
+        // Process each container group
+        Object.values(containers).forEach(elements => {
+            // Create a timeline for each group
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: elements[0].parentElement,
+                    start: 'top 85%',
+                    end: 'top 15%',
+                    toggleActions: 'play none none reverse',
+                    once: false,
+                    markers: false
+                }
+            });
+            
+            // Add each element to the timeline with staggered effect
+            tl.fromTo(elements, 
+                {
+                    opacity: 0,
+                    y: 40,
+                    scale: 0.95,
+                    filter: 'blur(5px)',
+                    transformOrigin: 'center bottom'
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: 'blur(0px)',
+                    duration: 1.2,
+                    ease: 'power2.out',
+                    stagger: {
+                        amount: 0.6, // Total stagger time for all elements
+                        ease: 'power1.in'
+                    }
+                }
+            );
+        });
+        
+        // For standalone elements not in containers
+        const standaloneElements = Array.from(revealElements);
+            
+        if (standaloneElements.length > 0) {
+            gsap.fromTo(standaloneElements,
+                {
+                    opacity: 0,
+                    y: 30,
+                    scale: 0.98,
+                    filter: 'blur(3px)'
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    filter: 'blur(0px)',
+                    duration: 1,
+                    ease: 'power2.out',
+                    stagger: 0.15,
+                    scrollTrigger: {
+                        trigger: standaloneElements[0],
+                        start: 'top 85%',
+                        end: 'top 15%',
+                        toggleActions: 'play none none reverse',
+                        once: false
+                    }
+                }
+            );
+        }
+    };
+    
     loadScripts();
     
     // Handle window resize to refresh ScrollTrigger
