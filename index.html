@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,23 +43,29 @@
         .hamburger-menu {
             display: none;
             cursor: pointer;
-            padding: 10px;
             position: fixed;
             right: 1.5rem;
             top: 1.5rem;
             z-index: 100000;
-            background: rgba(15, 15, 15, 0.9);
-            border-radius: 50%;
-            padding: 1rem;
-            backdrop-filter: blur(10px);
+            padding: 0.75rem;
+            background: rgba(10, 10, 20, 0.7);
+            backdrop-filter: blur(5px);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
+        .hamburger-menu:hover {
+            background: rgba(30, 30, 50, 0.8);
+        }
+        
         .hamburger-menu div {
             width: 25px;
-            height: 3px;
-            background: #ffffff;
-            margin: 5px 0;
-            transition: all 0.3s ease;
+            height: 2px;
+            background-color: #ffffff;
+            margin: 6px 0;
+            transition: 0.4s;
+            border-radius: 2px;
         }
 
         body {
@@ -82,21 +89,19 @@
         }
 
         nav {
-            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-            animation-delay: 0.2s;
-            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.95), rgba(15, 15, 15, 0.85));
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
         nav::after {
@@ -104,22 +109,23 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
-            position: relative;
-            transition: transform 0.3s ease;
+            letter-spacing: 1px;
+            flex: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
             color: #ffffff;
-            letter-spacing: -0.5px;
         }
         
         @media (max-width: 768px) {
             .logo {
                 position: fixed;
-                left: 1rem;
-                top: 1rem;
-                font-size: 1.8rem;
+                left: 1.5rem;
+                top: 1.5rem;
+                font-size: 1.2rem;
                 font-weight: 600;
-                z-index: 100000;
+                z-index: 100001;
                 padding: 0.5rem;
                 background: transparent;
                 transform-origin: left;
@@ -127,7 +133,8 @@
             }
 
             .logo:hover {
-                transform: scale(1.05);
+                transform: scale(1.02);
+                text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
             }
         }
             /* Add padding to the top of the content to prevent it from being hidden behind the fixed navbar */
@@ -138,11 +145,11 @@
 
         .nav-links {
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
+            gap: 2rem;
+            justify-content: flex-end;
             align-items: center;
             flex: 2;
-            margin: 0 auto;
+            margin-right: 2rem;
             position: relative;
             z-index: 10000;
         }
@@ -187,16 +194,18 @@
             }
         }
         .nav-links a {
-            color: #ffffff;
+            color: #0F0F0F;
             text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            font-size: 0.8rem;
+            background: #ffffff;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
             transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-weight: 500;
             white-space: nowrap;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
@@ -219,8 +228,9 @@
         }
 
         .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-1px);
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .background-image {
@@ -383,7 +393,16 @@
                 right: 1.5rem;
                 top: 1.5rem;
                 z-index: 100000;
-                padding: 0.5rem;
+                padding: 0.75rem;
+                background: rgba(10, 10, 20, 0.7);
+                backdrop-filter: blur(5px);
+                border-radius: 8px;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            
+            .hamburger-menu:hover {
+                background: rgba(30, 30, 50, 0.8);
             }
 
             .hamburger-menu.active div:nth-child(1) {
@@ -401,15 +420,14 @@
             }
 
             nav {
-                flex-direction: column;
-                gap: 1.5rem;
-                padding: 2.5rem;
+                padding: 2.5rem 5%;
                 min-height: 80px;
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
-                background: rgba(15, 15, 15, 0.9);
+                background: rgba(10, 10, 20, 0.9);
+                backdrop-filter: blur(10px);
                 z-index: 999;
             }
 
@@ -424,15 +442,20 @@
                 position: fixed;
                 top: 0;
                 left: 0;
+                right: 0;
                 width: 100%;
                 height: 100vh;
-                background: rgba(15, 15, 15, 0.95);
-                padding: 5rem 2rem 2rem;
+                background: rgba(10, 10, 20, 0.95);
+                padding: 10rem 2rem 2rem;
                 flex-direction: column;
                 align-items: center;
-                justify-content: flex-start;
+                justify-content: center;
                 gap: 2rem;
-                z-index: 99999;
+                z-index: 10000;
+                opacity: 0;
+                transform: translateY(-100%);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                backdrop-filter: blur(20px);
                 pointer-events: none;
             }
 
@@ -442,6 +465,19 @@
                 visibility: visible;
                 transform: translateY(0);
                 z-index: 100000;
+                animation: fadeInNav 0.5s ease-out forwards;
+                pointer-events: auto;
+            }
+            
+            @keyframes fadeInNav {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
 
             @keyframes slideIn {
@@ -457,9 +493,31 @@
 
             .nav-links a {
                 font-size: 1rem;
-                padding: 0.5rem 1.5rem;
+                padding: 0.6rem 1.8rem;
+                width: 80%;
+                text-align: center;
+                margin: 0.3rem 0;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+                position: relative;
+                overflow: hidden;
                 opacity: 0;
                 animation: fadeIn 0.3s ease-out forwards;
+            }
+            
+            .nav-links a::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, rgba(30, 58, 138, 0.2), rgba(69, 104, 220, 0.2));
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .nav-links a:hover::before {
+                transform: translateX(0);
             }
 
             .nav-links.active a {
@@ -912,8 +970,8 @@ body {
                 <div class="summit-location">NARSEE MONJEE, INDORE</div>
             </div>
             <div class="summit-cta">
-                <a href="register.html" class="summit-button">Register Now</a>
-                <a href="#" class="summit-button secondary">Learn More</a>
+                <a href="register.html" class="summit-button">Join Team<a>
+                <a href="dcs2025.html" class="summit-button secondary">Learn More</a>
             </div>
         </div>
     </div>
@@ -934,26 +992,32 @@ body {
             <div class="about-left">
                 <span class="about-tag">About Us</span>
                 <h2>DIPLOVISION</h2>
-                <p class="about-description">A premier platform dedicated to fostering diplomatic excellence and international understanding through innovative educational experiences.</p>
+                <p class="about-description">A platform dedicated to nurturing future leaders by providing them a place to learn, debate, and strive in their chosen fields. A beginner-friendly conference, for everyone who wants to change the world, one step at a time. 
+
+                </p>
             </div>
             <div class="about-right">
                 <div class="scroll-cards">
                     <div class="scroll-card">
-                        <span class="card-tag">Our Mission</span>
-                        <h3>Fostering Future Leaders</h3>
-                        <p>Dedicated to nurturing the next generation of diplomatic leaders through immersive experiences and transformative learning opportunities.</p>
+                        <span class="card-tag">Our Committees</span>
+                        <h3>Structure, Oversight, Efficiency</h3>
+                        <p>divided by different agendas but united by the zeal to change the world! 
+                        </p>
                         <div class="card-icon">🌍</div>
                     </div>
                     <div class="scroll-card">
-                        <span class="card-tag">Our Vision</span>
-                        <h3>Global Impact</h3>
-                        <p>Creating a network of empowered youth who will shape international relations and drive positive global change.</p>
+                        <span class="card-tag">The Socials</span>
+                        <h3>Where diplomacy meets networking
+                        </h3>
+                        <p>With dynamic lighting, immersive stage setups, and curated playlists to help delegates unwind, engage, and build lasting connections after saving the world!
+                        </p>
                         <div class="card-icon">⚡</div>
                     </div>
                     <div class="scroll-card">
-                        <span class="card-tag">Our Values</span>
-                        <h3>Excellence & Innovation</h3>
-                        <p>Committed to excellence in diplomatic education through innovative methods and cutting-edge learning experiences.</p>
+                        <span class="card-tag">Our Events</span>
+                        <h3>Where speed meets strategy.
+                        </h3>
+                        <p>are you ready to get your minds racing? at DCS we have events including The Loot-era, the ultimate treasure hunt, and the commerce fest, a shark tank-style pitch.</p>
                         <div class="card-icon">💫</div>
                     </div>
                 </div>
@@ -1211,43 +1275,74 @@ body {
             <div class="features-scroll-content">
                 <div class="features-scroll-track">
                     <div class="features-scroll-cards">
-                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #8A2BE2, #4B0082);">
-                            <div class="feature-scroll-icon">🌍</div>
-                            <h3>Network</h3>
-                            <p>Connect with like-minded individuals from around the world and build lasting relationships that transcend borders and cultures.</p>
-                        </div>
-                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #FF69B4, #FF1493);">
-                            <div class="feature-scroll-icon">👨‍🏫</div>
-                            <h3>Expert Mentorship</h3>
-                            <p>Learn from seasoned diplomats and international relations experts through our comprehensive mentorship programs.</p>
-                        </div>
-                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #00CED1, #20B2AA);">
-                            <div class="feature-scroll-icon">💼</div>
-                            <h3>Career Opportunities</h3>
-                            <p>Gain access to exclusive internships and job opportunities in diplomatic circles and international organizations.</p>
-                        </div>
-                        <div class="feature-scroll-card" style="background: linear-gradient(135deg, #FFD700, #FFA500);">
-                            <div class="feature-scroll-icon">🏆</div>
-                            <h3>Recognition</h3>
-                            <p>Earn certificates and accolades recognized by top institutions, enhancing your academic and professional profile.</p>
-                        </div>
+            <div class="feature-scroll-card">
+                <div class="feature-card-inner">
+                    <div class="feature-scroll-icon">🎓</div>
+                    <h3>Beginner-Friendly 
+                    </h3>
+                    <div class="feature-card-content">
+                        <p>At DCS, we welcome delegates of all experience levels! Our structured committees, expert chairs, and engaging discussions ensure that even first-time participants feel confident and empowered to voice their opinions, making learning and growth the heart of every session.
+                        </p>
+                        <div class="feature-card-number"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-scroll-card">
+                <div class="feature-card-inner">
+                    <div class="feature-scroll-icon">🔍</div>
+                    <h3>Unmatched experience
+                    </h3>
+                    <div class="feature-card-content">
+                        <p>With DCS, delegates enjoy an unforgettable experience! From an incredible venue to exciting socials, we offer a unique blend of learning and fun, ensuring every participant leaves with a basket of cherished memories.
+                        </p>
+                        <div class="feature-card-number"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-scroll-card">
+                <div class="feature-card-inner">
+                    <div class="feature-scroll-icon">🌍</div>
+                    <h3>Diverse events
+                    </h3>
+                    <div class="feature-card-content">
+                        <p>The Diplomatic Central Summit offers a variety of events, including simulations of the Indian Parliament, the United Nations, the International Press, and two special events, ensuring there’s something for everyone to enjoy.
+                        </p>
+                        <div class="feature-card-number"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="feature-scroll-card">
+                <div class="feature-card-inner">
+                    <div class="feature-scroll-icon">💼</div>
+                    <h3>Experienced chairs
+                    </h3>
+                    <div class="feature-card-content">
+                        <p>Our knowledgeable chairs ensure engaging debates, constructive discussions, and a rewarding experience. With expertise in global affairs, parliamentary procedures, and crisis management, they guide participants through thought-provoking sessions while fostering collaboration.
+                        </p>
+                        <div class="feature-card-number"></div>
+                    </div>
+                </div>
+            </div>
                         <div class="feature-scroll-card" data-index="4">
                             <div class="feature-card-inner">
-                                <div class="feature-scroll-icon">🔍</div>
-                                <h3>Research Opportunities</h3>
+                                <div class="feature-scroll-icon">🤝</div>
+                                <h3>Professionalism & Fun
+                                </h3>
                                 <div class="feature-card-content">
-                                    <p>Participate in cutting-edge research projects related to international relations and diplomacy with global impact.</p>
-                                    <div class="feature-card-number">05</div>
+                                    <p>We balance professionalism with fun! Delegates engage in meaningful debates while enjoying a lively and interactive environment. Creativity, camaraderie, and excitement make every moment at DCS both enriching and memorable.
+                                    </p>
+                                    <div class="feature-card-number"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="feature-scroll-card" data-index="5">
                             <div class="feature-card-inner">
-                                <div class="feature-scroll-icon">🌐</div>
-                                <h3>Cultural Exchange</h3>
+                                <div class="feature-scroll-icon">📚</div>
+                                <h3>Skill Development
+                                </h3>
                                 <div class="feature-card-content">
-                                    <p>Experience diverse cultures and perspectives through our international exchange programs and global initiatives.</p>
-                                    <div class="feature-card-number">06</div>
+                                    <p>DCS enhances critical thinking, public speaking, and diplomacy through dynamic discussions. Participants receive recognized certificates, boosting their academic and professional profiles while gaining valuable skills for the future.</p>
+                                    <div class="feature-card-number"></div>
                                 </div>
                             </div>
                         </div>
@@ -1277,37 +1372,38 @@ body {
                 <div class="testimonial-track">
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"DIPLOVISION transformed my understanding of international relations. The connections I made and skills I developed have been invaluable to my career."</p>
+                            <p>"I'm confident that these students will showcase innovative solutions and understand the true value of collaboration and international dialogue.
+                                "</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">👤</div>
                             <div class="author-info">
-                                <h4>Sarah Johnson</h4>
-                                <p>Foreign Service Officer</p>
+                                <h4>Pushyamitra Bhargawa</h4>
+                                <p>Mayor indore</p>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"The summit was incredibly well-organized and provided unique insights into global diplomacy that I couldn't have gained elsewhere."</p>
+                            <p>""I believe the three musketeers pulled off the conference amazingly and efficiency in every department was ensured by the secretariat"</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">👤</div>
                             <div class="author-info">
-                                <h4>Michael Chen</h4>
-                                <p>International Relations Student</p>
+                                <h4>Harshwardhan Choukse</h4>
+                                <p>Expert MUNER</p>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"As a delegate at DIPLOVISION, I developed critical negotiation skills and made connections with peers from over 30 countries."</p>
+                            <p>"The conference was impeccable,nothing short of a banger"</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">👤</div>
                             <div class="author-info">
-                                <h4>Priya Sharma</h4>
-                                <p>UN Youth Ambassador</p>
+                                <h4>Aariz Qureshi</h4>
+                                <p>Expert MUNER</p>
                             </div>
                         </div>
                     </div>
@@ -1325,13 +1421,13 @@ body {
                     </div>
                     <div class="testimonial-card">
                         <div class="testimonial-content">
-                            <p>"The simulation exercises at the summit challenged me to think critically about global issues and develop practical solutions."</p>
+                            <p>"The students pulled what many entrepreneurs couldnt.The expirience of the conference was like no other"</p>
                         </div>
                         <div class="testimonial-author">
                             <div class="author-avatar">👤</div>
                             <div class="author-info">
-                                <h4>Emma Wilson</h4>
-                                <p>Political Science Graduate</p>
+                                <h4>Deepa Kaushal</h4>
+                                <p>Principal at softvision college</p>
                             </div>
                         </div>
                     </div>
@@ -2005,6 +2101,7 @@ body {
             width: 100%;
             text-transform: uppercase;
             letter-spacing: 3px;
+            display: none;
         }
         
         
@@ -2033,6 +2130,7 @@ body {
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-bottom: 0.5rem;
+            display: none; /* Hide the date and location text */
         }
 
         .summit-dates {
@@ -2210,20 +2308,20 @@ body {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin-top: 10rem;
+            margin-top: 15rem;
             flex-wrap: wrap;
         }
         
         .summit-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: #1E3A8A;
+            background: transparent;
             color: #ffffff;
             text-decoration: none;
             border-radius: 30px;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: 2px solid #1E3A8A;
+            border: 2px solid #fefeff;
             text-transform: uppercase;
             letter-spacing: 1px;
             position: relative;
@@ -2249,7 +2347,7 @@ body {
         
         .summit-button:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(30, 58, 138, 0.3);
+            box-shadow: 0 10px 20px rgba(28, 70, 185, 0.3);
         }
         
         .summit-button.secondary {
@@ -2260,7 +2358,7 @@ body {
         
         .summit-button.secondary:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: #4ADE80;
+            border-color: #5387cb;
         }
         
         @media (max-width: 768px) {
