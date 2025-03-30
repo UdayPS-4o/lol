@@ -705,9 +705,8 @@ body {
         </div>
         <div class="nav-links">
             <a href="index.html">HOME</a>
-            <a href="news.html">NEWS</a>
             <a href="dcs2025.html">DCS 2025</a>
-            <a href="secretariat.html">SECRETARIAT</a>
+            <a href="secretariat.html">Secretariat</a>
             <a href="register.html">CA APPLICATIONS →</a>
         </div>
     </nav>
@@ -1368,81 +1367,45 @@ body {
     <section id="testimonials" class="testimonials-section">
         <div class="container">
             <h2 class="section-title">TESTIMONIALS</h2>
-            <div class="testimonial-slider">
-                <div class="testimonial-track">
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"I'm confident that these students will showcase innovative solutions and understand the true value of collaboration and international dialogue.
-                                "</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>Pushyamitra Bhargawa</h4>
-                                <p>Mayor indore</p>
-                            </div>
-                        </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I'm confident that these students will showcase innovative solutions and understand the true value of collaboration and international dialogue."</p>
                     </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>""I believe the three musketeers pulled off the conference amazingly and efficiency in every department was ensured by the secretariat"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>Harshwardhan Choukse</h4>
-                                <p>Expert MUNER</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"The conference was impeccable,nothing short of a banger"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>Aariz Qureshi</h4>
-                                <p>Expert MUNER</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"The mentorship program at DIPLOVISION opened doors to incredible opportunities in the diplomatic world. I'm forever grateful for this experience."</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>David Rodriguez</h4>
-                                <p>Diplomatic Attaché</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="testimonial-content">
-                            <p>"The students pulled what many entrepreneurs couldnt.The expirience of the conference was like no other"</p>
-                        </div>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">👤</div>
-                            <div class="author-info">
-                                <h4>Deepa Kaushal</h4>
-                                <p>Principal at softvision college</p>
-                            </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <h4>Pushyamitra Bhargawa</h4>
+                            <p>Mayor indore</p>
                         </div>
                     </div>
                 </div>
-                <div class="slider-controls">
-                    <button class="prev-btn">❮</button>
-                    <div class="slider-dots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The level of professionalism and attention to detail at DIPLOVISION was outstanding. It truly sets the standard for student-led diplomatic conferences."</p>
                     </div>
-                    <button class="next-btn">❯</button>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <p>International Relations Expert</p>
+                        </div>
+                    </div>
                 </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"DIPLOVISION provided an exceptional platform for young diplomats to engage in meaningful dialogue. The organization was flawless."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👤</div>
+                        <div class="author-info">
+                            <h4>Michael Thompson</h4>
+                            <p>Foreign Policy Analyst</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                   
             </div>
         </div>
     </section>
@@ -1827,12 +1790,48 @@ body {
             color: rgba(255, 255, 255, 0.9);
         }
         
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-content p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
         .testimonial-author {
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-top: auto;
         }
-        
+
         .author-avatar {
             width: 50px;
             height: 50px;
@@ -1843,63 +1842,16 @@ body {
             justify-content: center;
             font-size: 1.5rem;
         }
-        
+
         .author-info h4 {
             font-size: 1.1rem;
             margin-bottom: 0.3rem;
             color: #ffffff;
         }
-        
+
         .author-info p {
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 5rem;
-            gap: 2rem;
-        }
-        
-        .prev-btn, .next-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: #ffffff;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .prev-btn:hover, .next-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.1);
-        }
-        
-        .slider-dots {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .dot.active {
-            background: #ffffff;
-            transform: scale(1.2);
         }
         
         .statistics-section {
@@ -2394,41 +2346,41 @@ body {
     
 </style>
     
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-envelope"></i> Email: Diplomaticcentralsummit@gmail.com</p>
-                <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
-                <p><i class="fas fa-map-marker-alt"></i> 45/1 Snehlataganj indore,near rajkumar brige</p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Connect With Us</h3>
-                <div class="social-links">
-                    <a href="https://www.instagram.com/diplomaticcentralsummit" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/company/diplovision/" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://www.youtube.com/channel/UCba467q_cBLX_IV4hO_S9eg" class="social-link"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="secretariat.html">Secretariat</a></li>
-                    <li><a href="dcs2025.html">DCS 2025</a></li>
-                    <li><a href="register.html">Register</a></li>
-                </ul>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> Email: Diplomaticcentralsummit@gmail.com</p>
+            <p><i class="fas fa-phone"></i> Phone: +91 9755401680<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+91 9999553377</p>
+            <p><i class="fas fa-map-marker-alt"></i> 3rd Floor,Scan&Co Building,Behind C21 Mall.</p>
+        </div>
+        
+        <div class="footer-section">
+            <h3>Connect With Us</h3>
+            <div class="social-links">
+                <a href="https://www.instagram.com/diplomaticcentralsummit" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.linkedin.com/company/diplovision/" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.youtube.com/channel/UCba467q_cBLX_IV4hO_S9eg" class="social-link"><i class="fab fa-youtube"></i></a>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 DIPLOVISION. All rights reserved.</p>
-            <div class="footer-credit">
-                <p>Made by <a href="https://www.instagram.com/ab.kabeer.sheikh/" target="_blank">Abdul Kabeer Sheikh</a></p>
-            </div>
+        
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dcs2025.html">DCS 2025</a></li>
+                <li><a href="secretariat.html">Secretariat</a></li>
+                <li><a href="register.html">Register</a></li>
+            </ul>
         </div>
-    </footer>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 DIPLOVISION. All rights reserved.</p>
+        <div class="footer-credit">
+            <p>Made by <a href="https://www.instagram.com/ab.kabeer.sheikh/" target="_blank">Abdul Kabeer Sheikh</a></p>
+        </div>
+    </div>
+</footer>
 
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
