@@ -18,6 +18,9 @@
 
         
         @media (max-width: 768px) {
+            .dcs-section{
+                padding-top: 0!important;
+            }
             .countdown-container {
                 padding: 1.5rem;
                 margin-top: 2rem;
@@ -2024,7 +2027,7 @@ body {
         
         /* Summit 2024 Section Styles */
         .summit-section {
-            padding: 8rem 2rem 6rem;
+            /* padding: 8rem 2rem 6rem; */
             max-width: 100%;
             margin: 0 auto;
             position: relative;
@@ -2044,19 +2047,19 @@ body {
             height: 100%;
             z-index: 0;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+             /* Match the overlay color */
         }
         
         .summit-background-video video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: relative;
             width: 100%;
-            height: 100%;
-            transform: translateX(-50%) translateY(-50%);
-            object-fit: cover;
-            object-position: center;
-            max-width: none;
-            max-height: none;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+            transform: none;
         }
         
         .summit-video-overlay-bg {
@@ -2065,9 +2068,8 @@ body {
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.8), rgba(15, 15, 15, 0.6));
+            /* background: linear-gradient(to bottom, rgba(15, 15, 15, 0.8), rgba(15, 15, 15, 0.6)); */
             z-index: 1;
-            backdrop-filter: blur(2px);
         }
         
         .summit-container {
@@ -2351,7 +2353,8 @@ body {
         
         @media (max-width: 768px) {
             .summit-section {
-                padding: 6rem 1.5rem 4rem;
+                min-height: calc(100vh - 80px);
+                /* padding: 5rem 1.5rem 4rem; */
             }
             
             .summit-info {
@@ -2670,5 +2673,80 @@ body {
             });
         });
     </script>
+    
+    <!-- Additional responsive styles for video -->
+    <style>
+        @media (max-width: 1024px) {
+            .summit-section {
+                min-height: 80vh;
+                /* padding: 7rem 1.5rem 5rem; */
+            }
+            
+            .summit-background-video video {
+                min-width: 120%;
+                height: 100%;
+                width: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .summit-section {
+                min-height: 70vh;
+                /* padding: 6rem 1.5rem 4rem; */
+            }
+            
+            .summit-background-video video {
+                width: 100%;
+                height: auto;
+            }
+            
+            .summit-cta {
+                margin-top: 1rem;
+            }
+            
+            .summit-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .summit-section {
+                min-height: 60vh;
+                padding: 5rem 1rem 3rem;
+            }
+        }
+    </style>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function() {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function(msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			console.log('Live reload enabled.');
+		})();
+	}
+	// ]]>
+</script>
 </body>
 </html>
